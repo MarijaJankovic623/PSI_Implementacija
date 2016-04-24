@@ -23,7 +23,7 @@ class Welcome extends CI_Controller {
                 $this->load->model('entities/korisnik');
                 $kor = new Korisnik();
                 
-                $kor->setIme("Markonius");
+                $kor->setIme("Maricinijus");
                 
                 $em = $this->doctrine->em;
                 
