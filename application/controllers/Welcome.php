@@ -20,6 +20,16 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
+                $this->load->model('entities/korisnik');
+                $kor = new Korisnik();
+                
+                $kor->setIme("Markonius");
+                
+                $em = $this->doctrine->em;
+                
+                $em->persist($kor);
+                $em->flush();
+                
 		$this->load->view('welcome_message');
 	}
 }
