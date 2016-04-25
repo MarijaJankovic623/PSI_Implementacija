@@ -43,7 +43,7 @@
       <!--/.navbar-header-->
       <div id="main-nav" class="collapse navbar-collapse">
         <ul class="nav navbar-nav" id="mainNav">
-          <li class="active"><a href="" class="">Napusti registraciju</a></li>
+          <li class="active"><a href="<?php echo base_url(); ?>index.php/Home" class="">Napusti prijavljivanje</a></li>
         </ul>
       </div>
       <!--/.navbar-collapse--> 
@@ -81,9 +81,7 @@
         </div>
 	<!-- end slider -->
   </div>
-  <div class="container hero-text2">
-  <h3>Lorem ipsum dolor sit amet, ea eum labitur scsstie percipitoleat<br/> fabulas complectitur deterruisset at pro</h3>
-  </div>
+
 </section>
 
 <section>

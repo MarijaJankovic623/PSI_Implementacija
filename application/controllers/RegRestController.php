@@ -17,56 +17,56 @@ class RegRestController extends CI_Controller{
         $this->load->helper('url');
         $this->load->helper('form');
         $this->load->view('02-Registracija restorana');
-       
 
-     
    } 
    
    public function submit(){
        
-       $this->load->helper('form');
+        $this->load->helper('form');
+        $this->load->model('entities/restoran'); 
+
+        $korisnicko_ime = $this->input->post('kime');
+        $lozinka = $this->input->post('lozinka');
+        $ime_objekta = $this->input->post('iobj');
+        $ime_vlasnika = $this->input->post('ivlasnika');
+        $prezime_vlasnika = $this->input->post('pvlasnika');
+        $email = $this->input->post('email');
+
+
+        $restoran = new Restoran();
       
-      $this->load->model('entities/restoran'); 
+        $restoran->setKime($korisnicko_ime);
+        $restoran->setLozinka($lozinka);
+        $restoran->setImeobjekta($ime_objekta);
+        $restoran->setImevlasnika($ime_vlasnika);
+        $restoran->setPrezimevlasnika($prezime_vlasnika);
+        $restoran->setEmail($email);
+      
+
+        $this->load->library('form_validation');
+
+        $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+        
+        $this->load->database();
+
+        $this->form_validation->set_rules('kime', 'korisnicko ime','is_unique[Restoran.KIme]|trim|required');
+
+
+        $this->form_validation->set_rules('lozinka', 'lozinka', 'trim|required|min_length[4]|max_length[32]');
+
+        $this->form_validation->set_rules('iobj', 'ime objekta', 'required');
+
+        $this->form_validation->set_rules('ivlasnika', 'ime vlasnika', 'required|max_length[15]');
+
+        $this->form_validation->set_rules('pvlasnika', 'prezime vlasnika', 'required|max_length[15]');
+
+        $this->form_validation->set_rules('email', 'email', 'required|valid_email'); 
+
+if ($this->form_validation->run() == FALSE )
+{       
        
-      $kime = $this->input->post('kime');
-      $lozinka = $this->input->post('lozinka');
-      $imeobjekta = $this->input->post('iobj');
-      $imevlasnika = $this->input->post('ivlasnika');
-      $prezimevlasnika = $this->input->post('pvlasnika');
-      $email = $this->input->post('email');
-
-      
-      $restoran = new Restoran();
-      
-      $restoran->setKime($kime);
-      $restoran->setLozinka($lozinka);
-      $restoran->setImeobjekta($imeobjekta);
-      $restoran->setImevlasnika($imevlasnika);
-      $restoran->setPrezimevlasnika($prezimevlasnika);
-      $restoran->setEmail($email);
-      
-
-$this->load->library('form_validation');
-
-$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
-
-
-$this->form_validation->set_rules('kime', 'kime', 'is_unique[Restoran.KIme]|trim|required');
-
-$this->form_validation->set_rules('lozinka', 'lozinka', 'trim|required|min_length[4]|max_length[32]');
-
-$this->form_validation->set_rules('iobj', 'imeobjekta', 'required|min_length[5]|max_length[15]');
-
-$this->form_validation->set_rules('ivlasnika', 'imevlasnika', 'required|min_length[5]|max_length[15]');
-
-$this->form_validation->set_rules('pvlasnika', 'prezimevlasnika', 'required|min_length[5]|max_length[15]');
-
-$this->form_validation->set_rules('email', 'email', 'required|valid_email');
-
-if ($this->form_validation->run() == FALSE)
-{
- $this->load->helper('url');
-$this->load->view('02-Registracija restorana');
+        $this->load->helper('url');
+        $this->load->view('02-Registracija restorana');
 
 }
 else
@@ -79,5 +79,6 @@ else
 }      
 }
 
-   
+    
 }
+ 
