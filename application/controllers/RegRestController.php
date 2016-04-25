@@ -17,7 +17,6 @@ class RegRestController extends CI_Controller{
         $this->load->helper('url');
         $this->load->helper('form');
         $this->load->view('02-Registracija restorana');
-
    } 
    
    public function submit(){
@@ -50,24 +49,16 @@ class RegRestController extends CI_Controller{
         $this->load->database();
 
         $this->form_validation->set_rules('kime', 'korisnicko ime','is_unique[Restoran.KIme]|trim|required');
-
-
         $this->form_validation->set_rules('lozinka', 'lozinka', 'trim|required|min_length[4]|max_length[32]');
-
         $this->form_validation->set_rules('iobj', 'ime objekta', 'required');
-
         $this->form_validation->set_rules('ivlasnika', 'ime vlasnika', 'required|max_length[15]');
-
         $this->form_validation->set_rules('pvlasnika', 'prezime vlasnika', 'required|max_length[15]');
-
         $this->form_validation->set_rules('email', 'email', 'required|valid_email'); 
 
 if ($this->form_validation->run() == FALSE )
 {       
-       
         $this->load->helper('url');
         $this->load->view('02-Registracija restorana');
-
 }
 else
 {
@@ -78,7 +69,6 @@ else
         $this->load->view('05-Logovanje');
 }      
 }
-
     
 }
  
