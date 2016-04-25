@@ -20,7 +20,7 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-                $this->load->model('entities/korisnik');
+             /*   $this->load->model('entities/korisnik');
                 $kor = new Korisnik();
                 
                 $kor->setIme("Maricinijus");
@@ -30,6 +30,6 @@ class Welcome extends CI_Controller {
                 $em->persist($kor);
                 $em->flush();
                 
-		$this->load->view('welcome_message');
+		$this->load->view('welcome_message');*/
 	}
 }
