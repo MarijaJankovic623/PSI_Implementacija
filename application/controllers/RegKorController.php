@@ -15,29 +15,26 @@ class RegKorController extends CI_Controller{
     
     public function index(){
         $this->load->helper('url');
+         $this->load->helper('form');
         $this->load->view('01-Registracija korisnika');
         
     }
     
     public function submit(){
         
-        $this->load->model('entities/korisnik');
-        
-        $kor = new Korisnik();
-        $in = $this->input;
-        
-        $kor->setIme($in->post('name'));
-        $kor->setPrezime($in->post('lastname'));
-        $kor->setKime($in->post('username'));
-        $kor->setLozinka($in->post('password'));
-        $kor->setEmail($in->post('email'));
-        
-        $em = $this->doctrine->em;
-        $em->persist($kor);
-        $em->flush();
+        $this->load->model('registrationModel');
         
         $this->load->helper('url');
+  
+        if ( $this->registrationModel->read_validate_make_Korisnik())
+        {           
+        $this->load->view('05-Logovanje');
+        }
+    else
+        {
         $this->load->view('01-Registracija korisnika');
+
+        }  
         
     }
 

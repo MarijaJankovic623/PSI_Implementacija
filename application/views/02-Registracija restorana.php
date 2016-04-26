@@ -119,20 +119,16 @@
                             <div class="col-sm-6">
                         
                                 <label for="">Raspoloživih stolova za:</label></br>
+                                <?php echo form_error('sto_2');?>
                                 <label for="" class="block" style="display:inline-block;">2</label>
-                                <input type="text" style="border:none;padding:5px 1px;outline:none;color:#5A5A5A;margin:0;width:150px;max-width:100%;margin-bottom:20px; display:inline-block;background:#F5F2ED;font-size:inherit;border-radius:0px !important;width:14%;"></br>
-                                <label for="" class="block" style="display:inline-block;">3</label>
-                                <input type="text" style="border:none;padding:5px 1px;outline:none;color:#5A5A5A;margin:0;width:150px;max-width:100%;margin-bottom:20px; display:inline-block;background:#F5F2ED;font-size:inherit;border-radius:0px !important;width:14%;"></br>
+                                <input type="number" min="0" step="1" name = "sto_2"  value = "<?php echo set_value('sto_2'); ?>" style="border:none;padding:5px 1px;outline:none;color:#5A5A5A;margin:0;width:150px;max-width:100%;margin-bottom:20px; display:inline-block;background:#F5F2ED;font-size:inherit;border-radius:0px !important;width:14%;"></br>
+                               <?php echo form_error('sto_4');?>
                                 <label for="" class="block" style="display:inline-block;">4</label>
-                                <input type="text" style="border:none;padding:5px 1px;outline:none;color:#5A5A5A;margin:0;width:150px;max-width:100%;margin-bottom:20px; display:inline-block;background:#F5F2ED;font-size:inherit;border-radius:0px !important;width:14%;"></br>
-                                <label for="" class="block" style="display:inline-block;">5</label>
-                                <input type="text" style="border:none;padding:5px 1px;outline:none;color:#5A5A5A;margin:0;width:150px;max-width:100%;margin-bottom:20px; display:inline-block;background:#F5F2ED;font-size:inherit;border-radius:0px !important;width:14%;"></br>
-                                <label for="" class="block" style="display:inline-block;">6</label>
-                                <input type="text" style="border:none;padding:5px 1px;outline:none;color:#5A5A5A;margin:0;width:150px;max-width:100%;margin-bottom:20px; display:inline-block;background:#F5F2ED;font-size:inherit;border-radius:0px !important;width:14%;"></br>
-                                <label for="" class="block" style="display:inline-block;">7</label>
-                                <input type="text" style="border:none;padding:5px 1px;outline:none;color:#5A5A5A;margin:0;width:150px;max-width:100%;margin-bottom:20px; display:inline-block;background:#F5F2ED;font-size:inherit;border-radius:0px !important;width:14%;"></br>
-                                <label for="" class="block" style="display:inline-block;">8</label>
-                                <input type="text" style="border:none;padding:5px 1px;outline:none;color:#5A5A5A;margin:0;width:150px;max-width:100%;margin-bottom:20px; display:inline-block;background:#F5F2ED;font-size:inherit;border-radius:0px !important;width:14%;"></br>
+                                <input type="number" min="0" step="1"  name = "sto_4" value = "<?php echo set_value('sto_4'); ?>" style="border:none;padding:5px 1px;outline:none;color:#5A5A5A;margin:0;width:150px;max-width:100%;margin-bottom:20px; display:inline-block;background:#F5F2ED;font-size:inherit;border-radius:0px !important;width:14%;"></br>
+                               <?php echo form_error('sto_6');?>
+                                <label for="" class="block" style="display:inline-block;">>6</label>
+                                <input type="number" min="0" step="1" name = "sto_6"  value = "<?php echo set_value('sto_6'); ?>"style="border:none;padding:5px 1px;outline:none;color:#5A5A5A;margin:0;width:150px;max-width:100%;margin-bottom:20px; display:inline-block;background:#F5F2ED;font-size:inherit;border-radius:0px !important;width:14%;"></br>
+                                
                             </div>
    
                             <div class="col-sm-6">

@@ -14,15 +14,9 @@
 class Home extends CI_Controller {
     
     public function index(){
-        $this->load->model("entities/restoran");
-        
-        $em = $this->doctrine->em;
-        $qb = $em->createQueryBuilder();
-        
-        $qb->select('r')
-        ->from('restoran', 'r');
-        
-        $data['restorani'] = $qb->getQuery()->getResult();
+        $this->load->model("businessLogic");
+     
+        $data['restorani'] = $this->businessLogic->getAllRestaurants();
         
         $this->load->view('17-Pogled gosta na sistem',$data);
         

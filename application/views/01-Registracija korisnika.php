@@ -90,19 +90,24 @@
         </div>
         <div class="row">
             <div class="col-sm-8 col-sm-offset-2" >
-                <form action="index.php/RegKorController/submit" method="POST" role="form">
+                <form action="<?php echo(base_url()); ?>index.php/RegKorController/submit" method="POST" role="form">
                     <div class="form-group">
                         <legend>Registracija korisnika</legend>
+                         <?php echo form_error('username');?>
                         <label for="">Korisničko ime</label>
-                        <input type="text" class="form-control" name="username" placeholder="Unesite korisničko ime">
+                        <input type="text" class="form-control" name="username" placeholder="Unesite korisničko ime" value = "<?php echo set_value('username'); ?>">
+                         <?php echo form_error('password');?>
                         <label for="">Lozinka</label>
-                        <input type="password" class="form-control" name="password" placeholder="Unesite lozinku">
+                        <input type="password" class="form-control" name="password" placeholder="Unesite lozinku" value = "<?php echo set_value('password'); ?>">
+                         <?php echo form_error('name');?>
                         <label for="">Ime</label>
-                        <input type="text" class="form-control" name="name" placeholder="Unesite vase ime ovde">
+                        <input type="text" class="form-control" name="name" placeholder="Unesite Vaše ime ovde" value = "<?php echo set_value('name'); ?>">
+                         <?php echo form_error('lastname');?>
                         <label for="">Prezime</label>
-                        <input type="text" class="form-control" name="lastname" placeholder="Unesite vase Prezime ovde">
+                        <input type="text" class="form-control" name="lastname" placeholder="Unesite Vaše prezime ovde" value = "<?php echo set_value('lastname'); ?>">
+                         <?php echo form_error('email');?>
                         <label for="">Email</label>
-                        <input type="text" class="form-control" name="email" placeholder="Unesite vas email ovde">
+                        <input type="text" class="form-control" name="email" placeholder="Unesite vas email ovde" value = "<?php echo set_value('email'); ?>">
                     
                         <button type="submit" class="btn btn-primary">Potvrdi</button>
                     </div>	                
