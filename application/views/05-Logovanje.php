@@ -1,5 +1,4 @@
-<!--Marija Jankovic-->
-<!--Impl:Marko Kastratovic-->
+<!-- Jovana Djunisijevic -->
 <!doctype html>
 <!--[if IE 7 ]>    <html lang="en-gb" class="isie ie7 oldie no-js"> <![endif]-->
 <!--[if IE 8 ]>    <html lang="en-gb" class="isie ie8 oldie no-js"> <![endif]-->
@@ -15,7 +14,7 @@
     <![endif]-->
 <title>Restooking - It's restaurants and booking.</title>
 <meta name="description" content="">
-<meta name="author" content="Marija Jankovic">
+<meta name="author" content="Jovana Djunisijevic">
 <!--[if lt IE 9]>
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -44,7 +43,7 @@
       <!--/.navbar-header-->
       <div id="main-nav" class="collapse navbar-collapse">
         <ul class="nav navbar-nav" id="mainNav">
-          <li class="active"><a href="<?php echo base_url(); ?>index.php/Home" class="">Napusti registraciju</a></li>
+          <li class="active"><a href="" class="">Napusti logovanje</a></li>
         </ul>
       </div>
       <!--/.navbar-collapse--> 
@@ -56,7 +55,7 @@
 <!--/.header-->
 <div id="#top"></div>
 <section id="home">
-        <div class="banner-container"> 
+  <div class="banner-container"> 
         <!-- Slider -->
                 <div id="myCarousel" class="carousel slide" data-ride="carousel">
                         <!-- Indicators -->
@@ -80,7 +79,7 @@
                         </div>
                 </div>
         <!-- end slider -->
-        </div>
+  </div>
 </section>
 
 <section>
@@ -90,19 +89,14 @@
         </div>
         <div class="row">
             <div class="col-sm-8 col-sm-offset-2" >
-                <form action="<?php echo base_url(); ?>index.php/RegKorController/submit" method="POST" role="form">
+                <form action="<?php echo base_url(); ?>index.php/LoginController/submit" method="POST" role="form">
                     <div class="form-group">
-                        <legend>Registracija korisnika</legend>
-                        <label for="">Korisničko ime</label>
+                        <legend>Prijavljivanje</legend>
+                         <label for="">Korisničko ime</label>
                         <input type="text" class="form-control" name="username" placeholder="Unesite korisničko ime">
-                        <label for="">Lozinka</label>
+                          <label for="">Lozinka</label>
                         <input type="password" class="form-control" name="password" placeholder="Unesite lozinku">
-                        <label for="">Ime</label>
-                        <input type="text" class="form-control" name="name" placeholder="Unesite vase ime ovde">
-                        <label for="">Prezime</label>
-                        <input type="text" class="form-control" name="lastname" placeholder="Unesite vase Prezime ovde">
-                        <label for="">Email</label>
-                        <input type="text" class="form-control" name="email" placeholder="Unesite vas email ovde">
+                        
                     
                         <button type="submit" class="btn btn-primary">Potvrdi</button>
                     </div>	                

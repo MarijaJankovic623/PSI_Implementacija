@@ -47,11 +47,9 @@
       <!--/.navbar-header-->
       <div id="main-nav" class="collapse navbar-collapse">
         <ul class="nav navbar-nav" id="mainNav">
-            <li><a href="<?php echo base_url(); ?>index.php/LoginController" class="scroll-link">Uloguj se  </a></li>
-            <li><a href="<?php echo base_url(); ?>index.php/RegKorController" class="scroll-link">Registruj se kao korisnik</a></li>
-            <li><a href="" class="scroll-link">Registruj se kao konobar</a></li>
-            <li><a href="" class="scroll-link">Registruj se kao restoran </a></li>
-            <li><a href="" class="scroll-link">Registruj se kao administrator </a></li>
+          <li><a href="" class="scroll-link">Moje rezervacije</a></li>
+          <li><a href="" class="scroll-link">Moj profil</a></li>
+          <li><a href="" class="scroll-link">Izloguj se </a></li>
         </ul>
       </div>
 
