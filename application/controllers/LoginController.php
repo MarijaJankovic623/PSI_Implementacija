@@ -14,8 +14,6 @@
 class LoginController extends CI_Controller {
 
     public function index() {
-
-
         $this->load->view('05-Logovanje');
     }
 
@@ -26,11 +24,11 @@ class LoginController extends CI_Controller {
         $qb = $em->createQueryBuilder();
 
         $qb->select('k')
-        ->from('korisnik', 'k')
-        ->where('k.kime = :user')
-        ->andWhere('k.lozinka = :pass')
-        ->setParameter('user',$this->input->post('username'))
-        ->setParameter('pass',$this->input->post('password'));
+                ->from('korisnik', 'k')
+                ->where('k.kime = :user')
+                ->andWhere('k.lozinka = :pass')
+                ->setParameter('user', $this->input->post('username'))
+                ->setParameter('pass', $this->input->post('password'));
 
 
         if ($qb->getQuery()->getResult()) {
@@ -38,12 +36,11 @@ class LoginController extends CI_Controller {
                 'username' => $this->input->post('username'),
                 'is_logged_in' => true
             );
-            
+
             $this->session->set_userdata($data);
             redirect('PreResController/index');
-            
         } else {
-           $this->load->view('05-Logovanje');
+            $this->load->view('05-Logovanje');
         }
     }
 
