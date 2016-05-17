@@ -11,33 +11,24 @@
  *
  * @author Marko
  */
-class RegKorController extends CI_Controller{
-    
-    public function index(){
-        $this->load->helper('url');
-         $this->load->helper('form');
+class RegKorController extends CI_Controller {
+
+    public function index() {
+
         $this->load->view('01-Registracija korisnika');
-        
     }
-    
-    public function submit(){
-        
-        $this->load->model('registrationModel');
-        
-        $this->load->helper('url');
-  
-        if ( $this->registrationModel->read_validate_make_Korisnik())
-        {           
-        $this->load->view('05-Logovanje');
+
+    public function submit() {
+
+        $this->load->model('UserValidationModel');
+
+
+
+        if ($this->UserValidationModel->read_validate_make_Korisnik()) {
+            $this->load->view('05-Logovanje');
+        } else {
+            $this->load->view('01-Registracija korisnika');
         }
-    else
-        {
-        $this->load->view('01-Registracija korisnika');
-
-        }  
-        
     }
 
-    
-    
 }

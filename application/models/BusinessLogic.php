@@ -11,23 +11,21 @@
  *
  * @author Marija
  */
-class businessLogic extends CI_Model{
+class BusinessLogic extends CI_Model {
+
     //put your code here
-    
-   public function getAllRestaurants(){
-       
-       $this->load->model("entities/restoran");
-        
+
+    public function getAllRestaurants() {
+
+        $this->load->model("entities/restoran");
+
         $em = $this->doctrine->em;
         $qb = $em->createQueryBuilder();
-        
-        $qb->select('r')
-        ->from('restoran', 'r');
-        
-       return  $qb->getQuery()->getResult();
 
-   } 
-    
-       
-    
+        $qb->select('r')
+                ->from('restoran', 'r');
+
+        return $qb->getQuery()->getResult();
+    }
+
 }
