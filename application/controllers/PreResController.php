@@ -14,26 +14,12 @@
 class PreResController extends CI_Controller {
 
     public function index() {
-        $this->checkSession();
-        $this->load->model("entities/restoran");
+        $this->load->model('UserValidationModel');
+        $this->UserValidationModel->checkSession();
+        $this->load->model('BusinessLogic');
 
-        $em = $this->doctrine->em;
-        $qb = $em->createQueryBuilder();
-
-        $qb->select('r')
-                ->from('restoran', 'r');
-
-        $data['restorani'] = $qb->getQuery()->getResult();
-
+        $data['restorani'] = $this->BusinessLogic->getAllRestaurants();
         $this->load->view('08-Prelistavanje restorana', $data);
-    }
-
-    private function checkSession() {
-        $is_logged_in = $this->session->userdata('is_logged_in');
-
-        if (!isset($is_logged_in) || $is_logged_in != true) {
-            redirect('home/index');
-        }
     }
 
 }

@@ -306,10 +306,10 @@
                                     </div>
                                     <div class="col-sm-8">
                                         <h2>
-                                            <?php echo $restoran->getImeobjekta(); ?>    
+                                            <?php echo $restoran['ImeObjekta']; ?>    
                                         </h2>
                                         <p>
-                                            Id restorana je : <?php echo $restoran->getIdrestoran(); ?><br/>
+                                            Id restorana je : <?php echo $restoran['IDRestoran']; ?><br/>
                                             bla bla bla bla blabla bla bla bla blabla bla bla bla bla
                                             bla bla bla bla blabla bla bla bla blabla bla bla bla blabla
                                             bla bla bla blabla bla bla bla blabla bla bla bla blabla bla

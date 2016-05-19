@@ -1,33 +1,25 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  * Description of business_logic
  *
  * @author Marija
  */
-class businessLogic extends CI_Model{
-    //put your code here
-    
-   public function getAllRestaurants(){
-       
-       $this->load->model("entities/restoran");
-        
-        $em = $this->doctrine->em;
-        $qb = $em->createQueryBuilder();
-        
-        $qb->select('r')
-        ->from('restoran', 'r');
-        
-       return  $qb->getQuery()->getResult();
+class BusinessLogic extends CI_Model {
 
-   } 
-    
-       
-    
+    public function __construct() {
+        parent::__construct();
+        $this->load->library("my_database");
+    }
+
+    /**
+     * 
+     * @return array array of asociative arrays of restoran
+     */
+    public function getAllRestaurants() {
+        $conn = $this->my_database->conn;
+        $result = $conn->query("SELECT * FROM restoran");
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
 }

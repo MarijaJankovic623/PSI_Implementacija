@@ -18,26 +18,9 @@ class LoginController extends CI_Controller {
     }
 
     public function submit() {
-        $this->load->model('entities/korisnik');
-
-        $em = $this->doctrine->em;
-        $qb = $em->createQueryBuilder();
-
-        $qb->select('k')
-                ->from('korisnik', 'k')
-                ->where('k.kime = :user')
-                ->andWhere('k.lozinka = :pass')
-                ->setParameter('user', $this->input->post('username'))
-                ->setParameter('pass', $this->input->post('password'));
-
-
-        if ($qb->getQuery()->getResult()) {
-            $data = array(
-                'username' => $this->input->post('username'),
-                'is_logged_in' => true
-            );
-
-            $this->session->set_userdata($data);
+        $this->load->model('UserValidationModel');
+        $in = $this->input;
+        if ($this->UserValidationModel->login($in->post('username'),$in->post('password'))) {
             redirect('PreResController/index');
         } else {
             $this->load->view('05-Logovanje');
