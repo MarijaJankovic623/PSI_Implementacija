@@ -20,8 +20,15 @@ class LoginController extends CI_Controller {
     public function submit() {
         $this->load->model('UserValidationModel');
         $in = $this->input;
-        if ($this->UserValidationModel->login($in->post('username'),$in->post('password'))) {
-            redirect('PreResController/index');
+        if ($this->UserValidationModel->login($in->post('username'), $in->post('password'))) {
+            if ($this->session->userdata('korisnik'))
+                redirect('PreResController/index');
+            
+            if ($this->session->userdata('konobar'))
+                redirect('OznOdrStlZauzController/index');
+            
+            //if ($this->session->userdata('restoran'))
+              //  redirect('PreResController/index');
         } else {
             $this->load->view('05-Logovanje');
         }
