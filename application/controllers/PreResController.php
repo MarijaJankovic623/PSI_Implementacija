@@ -22,4 +22,13 @@ class PreResController extends CI_Controller {
         $this->load->view('08-Prelistavanje restorana', $data);
     }
 
+    public function restoranDetails($id) {
+        $this->load->model('UserValidationModel');
+        $this->UserValidationModel->checkSession();
+        $this->load->model('BusinessLogic');
+        
+        $data['restoran'] = $this->BusinessLogic->getRestaurant($id);
+        $this->load->view('07-Rezervisanje stola- part1- Informacije o restoranu', $data);
+    }
+
 }

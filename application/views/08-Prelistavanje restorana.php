@@ -319,7 +319,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <button type="button" class="btn btn-warning btn-lg">Detaljnije i rezervacija</button>
+                                        <a href="<?php echo base_url().'index.php/PreResController/restoranDetails/'.$restoran['IDRestoran']; ?>" class="btn btn-warning btn-lg">Detaljnije i rezervacija</a>
                                     </div>
                                 </div>
                             </div>
