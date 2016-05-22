@@ -47,9 +47,11 @@
                     <!--/.navbar-header-->
                     <div id="main-nav" class="collapse navbar-collapse">
                         <ul class="nav navbar-nav" id="mainNav">
-                            <li><a href="" class="scroll-link">Moje rezervacije</a></li>
-                            <li><a href="" class="scroll-link">Moj profil</a></li>
-                            <li><a href="" class="scroll-link">Izloguj se </a></li>
+                            <li><a href="<?php echo base_url(); ?>index.php/LoginCtrl" class="scroll-link">Uloguj se  </a></li>
+                            <li><a href="<?php echo base_url(); ?>index.php/RegistracijaKorisnikaCtrl" class="scroll-link">Registruj se kao korisnik</a></li>
+                            <li><a href=""  class="scroll-link">Registruj se kao konobar</a></li>
+                            <li><a href="<?php echo base_url(); ?>index.php/RegistracijaRestoranaCtrl" class="scroll-link">Registruj se kao restoran </a></li>
+                            <li><a href="" class="scroll-link">Registruj se kao administrator </a></li>
                         </ul>
                     </div>
 
@@ -319,7 +321,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <a href="<?php echo base_url().'index.php/PreResController/restoranDetails/'.$restoran['IDRestoran']; ?>" class="btn btn-warning btn-lg">Detaljnije i rezervacija</a>
+                                        <button type="button" class="btn btn-warning btn-lg">Detaljnije i rezervacija</button>
                                     </div>
                                 </div>
                             </div>

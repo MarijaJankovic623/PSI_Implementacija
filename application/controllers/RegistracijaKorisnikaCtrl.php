@@ -1,14 +1,14 @@
 <?php
 /**
- * Description of RegKorController
+ * Description of RegistracijaKorisnikaCtrl
  *
  * @author Marko
  */
-class RegKorController extends CI_Controller {
+class RegistracijaKorisnikaCtrl extends CI_Controller {
 
     public function index() {
 
-        $this->load->view('01-Registracija korisnika');
+        $this->load->view('RegistracijaKorisnikaView');
     }
 
     public function submit() {
@@ -26,9 +26,9 @@ class RegKorController extends CI_Controller {
 
 
         if ($this->UserValidationModel->validateCreateKorisnik($korisnik)) {
-            $this->load->view('05-Logovanje');
+            $this->load->view('LoginView');
         } else {
-            $this->load->view('01-Registracija korisnika');
+            $this->load->view('RegistracijaKorisnikaView');
         }
     }
 

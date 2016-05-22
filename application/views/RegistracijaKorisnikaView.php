@@ -1,4 +1,5 @@
-<!-- Jovana Djunisijevic -->
+<!--Marija Jankovic-->
+<!--Impl:Marko Kastratovic-->
 <!doctype html>
 <!--[if IE 7 ]>    <html lang="en-gb" class="isie ie7 oldie no-js"> <![endif]-->
 <!--[if IE 8 ]>    <html lang="en-gb" class="isie ie8 oldie no-js"> <![endif]-->
@@ -14,7 +15,7 @@
             <![endif]-->
         <title>Restooking - It's restaurants and booking.</title>
         <meta name="description" content="">
-        <meta name="author" content="Jovana Djunisijevic">
+        <meta name="author" content="Marija Jankovic">
         <!--[if lt IE 9]>
                 <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
             <![endif]-->
@@ -43,7 +44,7 @@
                     <!--/.navbar-header-->
                     <div id="main-nav" class="collapse navbar-collapse">
                         <ul class="nav navbar-nav" id="mainNav">
-                            <li class="active"><a href="<?php echo base_url(); ?>index.php/Home" class="">Napusti logovanje</a></li>
+                            <li class="active"><a href="<?php echo base_url(); ?>index.php/HomeCtrl" class="">Napusti registraciju</a></li>
                         </ul>
                     </div>
                     <!--/.navbar-collapse--> 
@@ -89,14 +90,24 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-8 col-sm-offset-2" >
-                        <form action="<?php echo base_url(); ?>index.php/LoginController/submit" method="POST" role="form">
+                        <form action="<?php echo(base_url()); ?>index.php/RegistracijaKorisnikaCtrl/submit" method="POST" role="form">
                             <div class="form-group">
-                                <legend>Prijavljivanje</legend>
+                                <legend>Registracija korisnika</legend>
+                                <?php echo form_error('username'); ?>
                                 <label for="">Korisničko ime</label>
-                                <input type="text" class="form-control" name="username" placeholder="Unesite korisničko ime">
+                                <input type="text" class="form-control" name="username" placeholder="Unesite korisničko ime" value = "<?php echo set_value('username'); ?>">
+                                <?php echo form_error('password'); ?>
                                 <label for="">Lozinka</label>
-                                <input type="password" class="form-control" name="password" placeholder="Unesite lozinku">
-
+                                <input type="password" class="form-control" name="password" placeholder="Unesite lozinku" value = "<?php echo set_value('password'); ?>">
+                                <?php echo form_error('name'); ?>
+                                <label for="">Ime</label>
+                                <input type="text" class="form-control" name="name" placeholder="Unesite Vaše ime ovde" value = "<?php echo set_value('name'); ?>">
+                                <?php echo form_error('lastname'); ?>
+                                <label for="">Prezime</label>
+                                <input type="text" class="form-control" name="lastname" placeholder="Unesite Vaše prezime ovde" value = "<?php echo set_value('lastname'); ?>">
+                                <?php echo form_error('email'); ?>
+                                <label for="">Email</label>
+                                <input type="text" class="form-control" name="email" placeholder="Unesite vas email ovde" value = "<?php echo set_value('email'); ?>">
 
                                 <button type="submit" class="btn btn-primary">Potvrdi</button>
                             </div>	                

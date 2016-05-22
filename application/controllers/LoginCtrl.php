@@ -7,23 +7,23 @@
  */
 
 /**
- * Description of LoginController
+ * Description of LoginCtrl
  *
  * @author Marko
  */
-class LoginController extends CI_Controller {
+class LoginCtrl extends CI_Controller {
 
     public function index() {
-        $this->load->view('05-Logovanje');
+        $this->load->view('LoginView');
     }
 
     public function submit() {
         $this->load->model('UserValidationModel');
         $in = $this->input;
         if ($this->UserValidationModel->login($in->post('username'),$in->post('password'))) {
-            redirect('PreResController/index');
+            redirect('PrelistavanjeRestoranaCtrl/index');
         } else {
-            $this->load->view('05-Logovanje');
+            $this->load->view('LoginView');
         }
     }
 

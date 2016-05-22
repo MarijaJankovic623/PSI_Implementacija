@@ -7,19 +7,18 @@
  */
 
 /**
- * Description of Home
+ * Description of HomeCtrl
  *
  * @author Marko
  */
-class Home extends CI_Controller {
+class HomeCtrl extends CI_Controller {
 
     public function index() {
         $this->load->model("BusinessLogic");
 
         $data['restorani'] = $this->BusinessLogic->getAllRestaurants();
 
-        $this->load->view('17-Pogled gosta na sistem', $data);
+        $this->load->view('HomeView', $data);
     }
-
 
 }

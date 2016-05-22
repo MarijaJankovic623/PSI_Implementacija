@@ -7,11 +7,11 @@
  */
 
 /**
- * Description of PreResController
+ * Description of PrelistavanjeRestoranaCtrl
  *
  * @author Marko
  */
-class PreResController extends CI_Controller {
+class PrelistavanjeRestoranaCtrl extends CI_Controller {
 
     public function index() {
         $this->load->model('UserValidationModel');
@@ -19,7 +19,7 @@ class PreResController extends CI_Controller {
         $this->load->model('BusinessLogic');
 
         $data['restorani'] = $this->BusinessLogic->getAllRestaurants();
-        $this->load->view('08-Prelistavanje restorana', $data);
+        $this->load->view('PrelistavanjeRestoranaView', $data);
     }
 
     public function restoranDetails($id) {
@@ -28,7 +28,7 @@ class PreResController extends CI_Controller {
         $this->load->model('BusinessLogic');
         
         $data['restoran'] = $this->BusinessLogic->getRestaurant($id);
-        $this->load->view('07-Rezervisanje stola- part1- Informacije o restoranu', $data);
+        $this->load->view('RezervisanjeStolaView', $data);
     }
 
 }

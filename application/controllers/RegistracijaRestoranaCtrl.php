@@ -1,13 +1,13 @@
 <?php
 /**
- * Description of RegRestController
+ * Description of RegistracijaRestoranaCtrl
  *
  * @author Marija
  */
-class RegRestController extends CI_Controller {
+class RegistracijaRestoranaCtrl extends CI_Controller {
 
     public function index() {
-        $this->load->view('02-Registracija restorana');
+        $this->load->view('RegistracijaRestoranaView');
     }
 
     public function submit() {
@@ -27,9 +27,9 @@ class RegRestController extends CI_Controller {
         );
 
         if ($this->UserValidationModel->validateCreateRestoran($restoran)) {
-            $this->load->view('05-Logovanje');
+            $this->load->view('LoginView');
         } else {
-            $this->load->view('02-Registracija restorana');
+            $this->load->view('RegistracijaRestoranaView');
         }
     }
 

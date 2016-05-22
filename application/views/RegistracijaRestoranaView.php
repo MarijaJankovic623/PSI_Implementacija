@@ -44,7 +44,7 @@
                     <!--/.navbar-header-->
                     <div id="main-nav" class="collapse navbar-collapse">
                         <ul class="nav navbar-nav" id="mainNav">
-                            <li class="active"><a href="<?php echo base_url(); ?>index.php/Home" class="">Napusti registraciju</a></li>
+                            <li class="active"><a href="<?php echo base_url(); ?>index.php/HomeCtrl" class="">Napusti registraciju</a></li>
                         </ul>
                     </div>
                     <!--/.navbar-collapse--> 
@@ -94,7 +94,7 @@
                     <div class="col-sm-8 col-sm-offset-2" >
 
 
-                        <form action="<?php echo(base_url()); ?>index.php/RegRestController/submit" method="POST" role="form">
+                        <form action="<?php echo(base_url()); ?>index.php/RegistracijaRestoranaCtrl/submit" method="POST" role="form">
                             <div class="form-group">
                                 <legend>Registracija restorana</legend>
                                 <?php echo form_error('kime'); ?>

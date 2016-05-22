@@ -11,7 +11,8 @@ class BusinessLogic extends CI_Model {
         parent::__construct();
         $this->load->library("my_database");
     }
-
+      
+    
     /**
      * 
      * @return array array of asociative arrays of restoran
