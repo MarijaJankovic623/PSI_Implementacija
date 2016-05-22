@@ -11,8 +11,7 @@ class BusinessLogic extends CI_Model {
         parent::__construct();
         $this->load->library("my_database");
     }
-      
-    
+
     /**
      * 
      * @return array array of asociative arrays of restoran
@@ -22,6 +21,7 @@ class BusinessLogic extends CI_Model {
         $result = $conn->query("SELECT * FROM restoran");
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+
     /**
      * 
      * @param string $id represents restaurants primary key 
@@ -29,8 +29,34 @@ class BusinessLogic extends CI_Model {
      */
     public function getRestaurant($id) {
         $conn = $this->my_database->conn;
-        $result = $conn->query("SELECT * FROM restoran WHERE IDRestoran = ".$id);
+        $result = $conn->query("SELECT * FROM restoran WHERE IDRestoran = " . $id);
         return $result->fetch_assoc();
+    }
+
+    public function reserveTable($idRestorana, $brLjudi, $vremeOd, $vremeDo) {
+        $vremeOd = date("Y-m-d h:i", strtotime($vremeOd));
+        $vremeDo = date("Y-m-d h:i", strtotime($vremeDo));
+        $conn = $this->my_database->conn;
+        $stmt = $conn->stmt_init();
+        $stmt->prepare("CALL slobodni_stolovi(?,?,?,?)");
+        $stmt->bind_param("iiss", $idRestorana, $brLjudi, $vremeOd, $vremeDo);
+        $stmt->execute();
+
+        $sto = $stmt->get_result()->fetch_assoc();
+        if (isset($sto['IDSto'])) {
+            $userid = $this->session->userdata('userid');
+            
+            $conn = $this->my_database->conn;
+            $stmt = $conn->stmt_init();
+            $stmt->prepare("INSERT INTO rezervacija(IDStoFK,IDKorisnikFK,VremeOd,VremeDo) VALUES(?,?,?,?)");
+            $stmt->bind_param("iiss", $sto['IDSto'], $userid, $vremeOd, $vremeDo);
+            $stmt->execute();
+
+
+            return true;
+        }
+
+        return false;
     }
 
 }

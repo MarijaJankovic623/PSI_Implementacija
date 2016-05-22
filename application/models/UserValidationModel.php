@@ -27,8 +27,10 @@ class UserValidationModel extends CI_Model {
         $stmt->bind_param("ss", $kime, $lozinka); //vezivanej parametara 
         $stmt->execute();
 
-        if ($stmt->get_result()->num_rows > 0) {
+        $kor = $stmt->get_result()->fetch_assoc();
+        if (isset($kor['IDKorisnik'])) {
             $data = array(
+                'userid' => $kor['IDKorisnik'],
                 'username' => $kime,
                 'loggedIn' => true
             );

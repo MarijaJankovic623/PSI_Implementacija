@@ -90,7 +90,8 @@
         </section>
 
         <section>
-            <div clas="container">
+            <div class="container">
+                
                 <div class="row">
                     &nbsp;
                 </div>
@@ -298,6 +299,7 @@
 
                     </div>
                     <div class="col-sm-9">
+                        <?php if(isset($rezervisanje))  echo "<h1 align = 'center' style='color: #FF0000';>".$poruka."<h1/>"?>
                         <?php foreach ($restorani as $restoran) { ?>
                             <div class="jumbotron" style="background-color:rgba(237, 231, 227, 0.87)">
                                 <div class="row">

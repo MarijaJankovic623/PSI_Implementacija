@@ -84,7 +84,7 @@
         </section>
 
         <section>
-            <div clas="container">
+            <div class="container">
                 <div class="row">
                     &nbsp;
                 </div>
