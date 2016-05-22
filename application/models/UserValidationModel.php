@@ -118,8 +118,8 @@ class UserValidationModel extends CI_Model {
             $conn = $this->my_database->conn;
             $stmt = $conn->stmt_init();
             $stmt->prepare("INSERT INTO restoran(KIme,Lozinka,ImeObjekta,
-                            ImeVlasnika,PrezimeVlasnika,Email)VALUES(?,?,?,?,?,?)");
-            $stmt->bind_param("ssssss", $res['kime'], $res['lozinka'], $res['iobj'], $res['ivlasnika'], $res['pvlasnika'], $res['email']);
+                            ImeVlasnika,PrezimeVlasnika,Email,Opis,Kuhinja,Opstina)VALUES(?,?,?,?,?,?,?,?,?)");
+            $stmt->bind_param("sssssssss", $res['kime'], $res['lozinka'], $res['iobj'], $res['ivlasnika'], $res['pvlasnika'], $res['email'],$res['opis'],$res['kuhinje'],$res['opstina']);
             $stmt->execute();
             $restoranId = $stmt->insert_id;
 

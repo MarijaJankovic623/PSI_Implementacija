@@ -27,8 +27,8 @@ class LoginController extends CI_Controller {
             if ($this->session->userdata('konobar'))
                 redirect('OznOdrStlZauzController/index');
             
-            //if ($this->session->userdata('restoran'))
-              //  redirect('PreResController/index');
+            if ($this->session->userdata('restoran'))
+                redirect('PreResController/index');
         } else {
             $this->load->view('05-Logovanje');
         }
