@@ -20,7 +20,7 @@ class UserValidationModel extends CI_Model {
         }
     }
 
-    public function login($kime,$lozinka) {
+    public function loginKorisnik($kime, $lozinka) {
         $conn = $this->my_database->conn;
         $stmt = $conn->stmt_init(); //dohvatanje iskaza
         $stmt->prepare("SELECT * FROM korisnik WHERE KIme = ? AND Lozinka = ?"); //pravljenje istog
@@ -32,10 +32,69 @@ class UserValidationModel extends CI_Model {
             $data = array(
                 'userid' => $kor['IDKorisnik'],
                 'username' => $kime,
-                'loggedIn' => true
+                'loggedIn' => true,
+                'korisnik' => true,
+                'restoran' => false,
+                'konobar' => false
             );
 
             $this->session->set_userdata($data);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function loginRestoran($kime, $lozinka) {
+        $conn = $this->my_database->conn;
+        $stmt = $conn->stmt_init(); //dohvatanje iskaza
+        $stmt->prepare("SELECT * FROM restoran WHERE KIme = ? AND Lozinka = ?"); //pravljenje istog
+        $stmt->bind_param("ss", $kime, $lozinka); //vezivanej parametara 
+        $stmt->execute();
+
+        if ($stmt->get_result()->num_rows > 0) {
+            $data = array(
+                'username' => $kime,
+                'loggedIn' => true,
+                'restoran' => true,
+                'konobar' => false,
+                'korisnik' => false
+            );
+
+            $this->session->set_userdata($data);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function loginKonobar($kime, $lozinka) {
+        $conn = $this->my_database->conn;
+        $stmt = $conn->stmt_init(); //dohvatanje iskaza
+        $stmt->prepare("SELECT * FROM konobar WHERE KIme = ? AND Lozinka = ?"); //pravljenje istog
+        $stmt->bind_param("ss", $kime, $lozinka); //vezivanej parametara 
+        $stmt->execute();
+
+        if ($stmt->get_result()->num_rows > 0) {
+            $data = array(
+                'username' => $kime,
+                'loggedIn' => true,
+                'konobar' => true,
+                'korisnik' => false,
+                'restoran' => false
+            );
+
+            $this->session->set_userdata($data);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function login($kime, $lozinka) {
+
+
+        if ($this->loginKorisnik($kime, $lozinka) || $this->loginKonobar($kime, $lozinka) || $this->loginRestoran($kime, $lozinka)) {
             return true;
         } else {
             return false;
@@ -61,8 +120,8 @@ class UserValidationModel extends CI_Model {
             $conn = $this->my_database->conn;
             $stmt = $conn->stmt_init();
             $stmt->prepare("INSERT INTO restoran(KIme,Lozinka,ImeObjekta,
-                            ImeVlasnika,PrezimeVlasnika,Email)VALUES(?,?,?,?,?,?)");
-            $stmt->bind_param("ssssss", $res['kime'], $res['lozinka'], $res['iobj'], $res['ivlasnika'], $res['pvlasnika'], $res['email']); 
+                            ImeVlasnika,PrezimeVlasnika,Email,Opis,Kuhinja,Opstina)VALUES(?,?,?,?,?,?,?,?,?)");
+            $stmt->bind_param("sssssssss", $res['kime'], $res['lozinka'], $res['iobj'], $res['ivlasnika'], $res['pvlasnika'], $res['email'],$res['opis'],$res['kuhinje'],$res['opstina']);
             $stmt->execute();
             $restoranId = $stmt->insert_id;
 
@@ -98,7 +157,7 @@ class UserValidationModel extends CI_Model {
         $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
 
         $this->load->database();
-        $this->form_validation->set_rules('username', 'korisnicko ime', 'is_unique[Restoran.KIme]|trim|required');
+        $this->form_validation->set_rules('username', 'korisnicko ime', 'is_unique[Korisnik.KIme]|trim|required');
         $this->form_validation->set_rules('password', 'lozinka', 'trim|required|min_length[4]|max_length[32]');
         $this->form_validation->set_rules('name', 'ime vlasnika', 'required|max_length[15]');
         $this->form_validation->set_rules('lastname', 'prezime vlasnika', 'required|max_length[15]');
@@ -110,7 +169,44 @@ class UserValidationModel extends CI_Model {
             $conn = $this->my_database->conn;
             $stmt = $conn->stmt_init();
             $stmt->prepare("INSERT INTO korisnik(KIme,Lozinka,Ime,Prezime,Email)VALUES(?,?,?,?,?)");
-            $stmt->bind_param("sssss",$kor['username'],$kor['password'],$kor['name'],$kor['lastname'],$kor['email']); 
+            $stmt->bind_param("sssss", $kor['username'], $kor['password'], $kor['name'], $kor['lastname'], $kor['email']);
+            $stmt->execute();
+            return true;
+        }
+    }
+
+    public function validateCreateKonobar($konobar) {
+        $this->load->library('form_validation');
+        $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+
+        $this->load->database();
+        $this->form_validation->set_rules('username', 'korisnicko ime', 'is_unique[Konobar.KIme]|trim|required');
+        $this->form_validation->set_rules('password', 'lozinka', 'trim|required|min_length[4]|max_length[32]');
+        $this->form_validation->set_rules('name', 'ime vlasnika', 'required|max_length[15]');
+        $this->form_validation->set_rules('lastname', 'prezime vlasnika', 'required|max_length[15]');
+        $this->form_validation->set_rules('email', 'email', 'required|valid_email');
+        $this->form_validation->set_rules('kod', 'email', 'required|trim');
+
+
+        $conn = $this->my_database->conn;
+        $stmt = $conn->stmt_init();
+        $stmt->prepare("SELECT IDRestoran FROM restoran WHERE KodKonobara = ?");
+        $konobar['kod'] +=0;
+        $stmt->bind_param("i", $konobar['kod']);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_array();
+
+
+
+
+        if ($this->form_validation->run() == FALSE || $result == null) {
+            return false;
+        } else {
+            $konobar['IDRestoranFK'] = $result['IDRestoran'] + 0;
+            $conn = $this->my_database->conn;
+            $stmt = $conn->stmt_init();
+            $stmt->prepare("INSERT INTO konobar(KIme,Lozinka,Ime,Prezime,Email,IDRestoranFK)VALUES(?,?,?,?,?,?)");
+            $stmt->bind_param("sssssi", $konobar['username'], $konobar['password'], $konobar['name'], $konobar['lastname'], $konobar['email'], $konobar['IDRestoranFK']);
             $stmt->execute();
             return true;
         }

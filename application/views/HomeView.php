@@ -92,123 +92,14 @@
         </section>
 
         <section>
-            <div clas="container">
+            <div class="container">
                 <div class="row">
                     &nbsp;
                 </div>
                 <div class="row">
                     <div class="col-sm-3" style="background-color: hsla(35, 8%, 14%, 0.96); color: hsla(35, 84%, 51%, 0.96);"  >
 
-                        <div class="row">
 
-                            <div class="col-sm-12">
-
-                                <div class="form-group">
-                                    &nbsp;
-                                    <font size = '5'>Kuhinje:</font>
-
-                                    <div class="checkbox">
-
-
-                                        <label><input type="checkbox" value="">Srpska kuhinja</label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label><input type="checkbox" value="">Italijanska kuhinja</label>
-                                    </div>
-
-                                    <div class="checkbox">
-
-
-                                        <label><input type="checkbox" value="">Meksička kuhinja</label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label><input type="checkbox" value="">Američka kuhinja</label>
-                                    </div>
-
-                                    <div class="checkbox">
-
-                                        <label><input type="checkbox" value="">Kineska kuhinja</label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label><input type="checkbox" value="">Rumunska kuhinja</label>
-                                    </div>
-
-                                    <div class="checkbox">
-                                        <label><input type="checkbox" value="">Mediteranska kuhinja</label>
-                                    </div>
-
-
-
-                                </div>
-
-                            </div>
-
-                        </div>
-                        <hr />
-                        <div class="row">
-
-                            <div class="col-sm-12">
-
-                                <div class="form-group">
-                                    &nbsp;
-                                    <font size = '5'>Cene restorana:</font>
-
-                                    <div class="checkbox">
-
-
-                                        <label><input type="checkbox" value="">Jeftino</label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label><input type="checkbox" value="">Srednje</label>
-                                    </div>
-
-                                    <div class="checkbox">
-
-
-                                        <label><input type="checkbox" value="">Skupo</label>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-                        <hr/>
-
-
-                        <div class="row">
-
-                            <div class="cols-sm-12">
-
-                                <div class="form-group">
-                                    &nbsp;
-                                    <font size = '5'>Još u ponudi:</font>
-
-                                    <div class="checkbox">
-
-
-                                        <label><input type="checkbox" value="">Kafe</label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label><input type="checkbox" value="">Alkoholna pića</label>
-                                    </div>
-
-                                    <div class="checkbox">
-
-
-                                        <label><input type="checkbox" value="">Kolači</label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label><input type="checkbox" value="">Sendviči</label>
-                                    </div>
-
-
-
-                                </div>
-
-                            </div>
-                            <hr/>
-                        </div>
                         <div class="row">
 
                             <div class="col-sm-12">
@@ -246,6 +137,7 @@
                                     <font size = '5'>Odaberite opštinu:</font>
 
                                     <select class="form-group"  style="background-color: hsla(35, 8%, 14%, 0.96); color: hsla(35, 84%, 51%, 0.96);">
+                                        <option selected>Sve opštine</option>
                                         <option>Čukarica</option>
                                         <option>Novi Beograd</option>
                                         <option>Palilula</option>

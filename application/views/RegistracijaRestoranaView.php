@@ -99,10 +99,10 @@
                                 <legend>Registracija restorana</legend>
                                 <?php echo form_error('kime'); ?>
                                 <label for="" >Korisničko ime</label>
-                                <input type="text" name = "kime" class="form-control" id="" placeholder="Unesite korisničko ime" value = "<?php echo set_value('kime'); ?>">
+                                <input type="text" name = "kime" class="form-control"  placeholder="Unesite korisničko ime" value = "<?php echo set_value('kime'); ?>">
                                 <label for="" >Lozinka</label>
                                 <?php echo form_error('lozinka'); ?>
-                                <input type="password"  name ="lozinka" class="form-control" id="" placeholder="Unesite lozinku" value = "<?php echo set_value('loyinka'); ?>">
+                                <input type="password"  name ="lozinka" class="form-control"  placeholder="Unesite lozinku" value = "<?php echo set_value('loyinka'); ?>">
                                 <label for="">Ime objekta</label>
                                 <?php echo form_error('iobj'); ?>
                                 <input type="text" name = "iobj" class="form-control" id="" placeholder="Unesite ime objekta" value = "<?php echo set_value('iobj'); ?>">
@@ -115,6 +115,15 @@
                                 <label for="">Email</label>
                                 <?php echo form_error('email'); ?>
                                 <input type="text"name ="email" class="form-control" id="" placeholder="Unesite Vas email ovde" value = "<?php echo set_value('email'); ?>">
+                                <label for="">Kod za registraciju konobara</label>
+                                <?php echo form_error('kod'); ?>
+                                <input type="text"name ="kod" class="form-control" id="" placeholder="Unesite Vas kod za konobare ovde" value = "<?php echo set_value('kod'); ?>">
+                                <label for="">Opis kuhinja</label>
+                                <?php echo form_error('kuhinje'); ?>
+                                <input type="text" name = "kuhinje" class="form-control" id="" placeholder="Unesite nazive kuhinja koje Vaš restoran nudi" value = "<?php echo set_value('kuhinje'); ?>">
+                                <label for="">Opis objekta</label>
+                                <?php echo form_error('opis'); ?>
+                                <input type="text" name = "opis" class="form-control" id="" placeholder="Unesite opis objekta" value = "<?php echo set_value('opis'); ?>">
                                 <div class="row">
                                     <div class="col-sm-6">
 
@@ -131,67 +140,70 @@
 
                                     </div>
 
-                                    <div class="col-sm-6">
 
+                                </div>
 
-                                        <label for="">Kuhinja:</label></br>
-                                        <label for="" class="block" style="display:inline-block;">Srpska</label>
-                                        <input type="checkbox" style="border:none;padding:5px 1px;outline:none;color:#5A5A5A;margin:0;width:150px;max-width:100%;margin-bottom:20px; display:inline-block;background:#F5F2ED;font-size:inherit;border-radius:0px !important;width:8%;"></br>
-                                        <label for="" class="block" style="display:inline-block;">Italijanska</label>
-                                        <input type="checkbox" style="border:none;padding:5px 1px;outline:none;color:#5A5A5A;margin:0;width:150px;max-width:100%;margin-bottom:20px; display:inline-block;background:#F5F2ED;font-size:inherit;border-radius:0px !important;width:8%;"></br>
-                                        <label for="" class="block" style="display:inline-block;">Meksička</label>
-                                        <input type="checkbox" style="border:none;padding:5px 1px;outline:none;color:#5A5A5A;margin:0;width:150px;max-width:100%;margin-bottom:20px; display:inline-block;background:#F5F2ED;font-size:inherit;border-radius:0px !important;width:8%;"></br>
-                                        <label for="" class="block" style="display:inline-block;">Američka</label>
-                                        <input type="checkbox" style="border:none;padding:5px 1px;outline:none;color:#5A5A5A;margin:0;width:150px;max-width:100%;margin-bottom:20px; display:inline-block;background:#F5F2ED;font-size:inherit;border-radius:0px !important;width:8%;"></br>
-                                        <label for="" class="block" style="display:inline-block;">Kineska</label>
-                                        <input type="checkbox" style="border:none;padding:5px 1px;outline:none;color:#5A5A5A;margin:0;width:150px;max-width:100%;margin-bottom:20px; display:inline-block;background:#F5F2ED;font-size:inherit;border-radius:0px !important;width:8%;"></br>
-                                        <label for="" class="block" style="display:inline-block;">Rumunska</label>
-                                        <input type="checkbox" style="border:none;padding:5px 1px;outline:none;color:#5A5A5A;margin:0;width:150px;max-width:100%;margin-bottom:20px; display:inline-block;background:#F5F2ED;font-size:inherit;border-radius:0px !important;width:8%;"></br>
-                                        <label for="" class="block" style="display:inline-block;">Mediteranska</label>
-                                        <input type="checkbox" style="border:none;padding:5px 1px;outline:none;color:#5A5A5A;margin:0;width:150px;max-width:100%;margin-bottom:20px; display:inline-block;background:#F5F2ED;font-size:inherit;border-radius:0px !important;width:8%;"></br>
-                                        <label for="">Pića:</label></br>
-                                        <label for="" class="block" style="display:inline-block;">Kafa</label>
-                                        <input type="checkbox" style="border:none;padding:5px 1px;outline:none;color:#5A5A5A;margin:0;width:150px;max-width:100%;margin-bottom:20px; display:inline-block;background:#F5F2ED;font-size:inherit;border-radius:0px !important;width:8%;"></br>
-                                        <label for="" class="block" style="display:inline-block;">Alkoholna pića</label>
-                                        <input type="checkbox" style="border:none;padding:5px 1px;outline:none;color:#5A5A5A;margin:0;width:150px;max-width:100%;margin-bottom:20px; display:inline-block;background:#F5F2ED;font-size:inherit;border-radius:0px !important;width:8%;"></br>
-                                        <label for="">Ostalo:</label></br>
-                                        <label for="" class="block" style="display:inline-block;">Kolači</label>
-                                        <input type="checkbox" style="border:none;padding:5px 1px;outline:none;color:#5A5A5A;margin:0;width:150px;max-width:100%;margin-bottom:20px; display:inline-block;background:#F5F2ED;font-size:inherit;border-radius:0px !important;width:8%;"></br>
-                                        <label for="" class="block" style="display:inline-block;">Sendviči</label>
-                                        <input type="checkbox" style="border:none;padding:5px 1px;outline:none;color:#5A5A5A;margin:0;width:150px;max-width:100%;margin-bottom:20px; display:inline-block;background:#F5F2ED;font-size:inherit;border-radius:0px !important;width:8%;"></br>
+                                <div class = "row">
+                                    <div class = "col-sm-12">
+
+                                        <div class="form-group">
+                                            &nbsp;
+                                            <font size = '5'>Odaberite opštinu:</font>
+
+                                            <select name = "opstina" class="form-group"  style="background-color: hsla(35, 8%, 14%, 0.96); color: hsla(35, 84%, 51%, 0.96);">
+                                                <option selected>Sve opštine</option>
+                                                <option >Čukarica</option>
+                                                <option>Novi Beograd</option>
+                                                <option>Palilula</option>
+                                                <option>Rakovica</option>
+                                                <option>Savski venac</option>
+                                                <option>Stari grad</option>
+                                                <option>Voždovac</option>
+                                                <option>Vračar</option>
+                                                <option>Zemun</option>         
+                                                <option>Zvezdara</option>
+                                                <option>Barajevo</option>
+                                                <option>Grocka</option>
+                                                <option>Lazarevac</option>
+                                                <option>Mladenovac</option>
+                                                <option>Obrenovac</option>
+                                                <option>Sopot</option>
+                                                <option>Surčin</option>   
+                                            </select>
+
+                                        </div>
 
                                     </div>
+
                                 </div>
                                 <label for="" class="block" style="display:inline-block;">Dodajte slike</label></br>
                                 <button type="button" class="btn btn-primary" style="display:inline-block;">Učitaj</button></br>
                                 </br>
-                                <button type="submit" class="btn btn-primary">Potvrdi</button>
-                            </div>
-
-                    </div>	                
-                    </form>
+                                <button type="submit" class="btn btn-primary" >Potvrdi</button>
+                            </div>           
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
 
 
-    <!--/.page-section-->
-    <section class="copyright">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12 text-center"> Copyright 2016 <a href="http://etf.bg.ac.rs">ETF Belgrade</a> </div>
+        <!--/.page-section-->
+        <section class="copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 text-center"> Copyright 2016 <a href="http://etf.bg.ac.rs">ETF Belgrade</a> </div>
+                </div>
+                <!-- / .row --> 
             </div>
-            <!-- / .row --> 
-        </div>
-    </section>
-    <a href="#top" class="topHome"><i class="fa fa-chevron-up fa-2x"></i></a> 
+        </section>
+        <a href="#top" class="topHome"><i class="fa fa-chevron-up fa-2x"></i></a> 
 
 <!--[if lte IE 8]><script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script><![endif]--> 
 
-    <script src="<?php echo base_url(); ?>js/jquery-1.8.2.min.js" type="text/javascript"></script> 
-    <script src="<?php echo base_url(); ?>js/bootstrap.min.js" type="text/javascript"></script> 
+        <script src="<?php echo base_url(); ?>js/jquery-1.8.2.min.js" type="text/javascript"></script> 
+        <script src="<?php echo base_url(); ?>js/bootstrap.min.js" type="text/javascript"></script> 
 
-</body>
+    </body>
 </html>
