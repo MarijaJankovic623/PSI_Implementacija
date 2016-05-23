@@ -106,7 +106,7 @@ class UserValidationModel extends CI_Model {
         $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
         /* OZBILJNE PROVERE OVDE */
         $this->load->database();
-        $this->form_validation->set_rules('kime', 'korisnicko ime', 'is_unique[Restoran.KIme]|trim|required');
+        $this->form_validation->set_rules('kime', 'korisnicko ime', 'is_unique[Korisnik.KIme]|is_unique[Restoran.KIme]|is_unique[Konobar.KIme]|trim|required');
         /*
           $this->form_validation->set_rules('lozinka', 'lozinka', 'trim|required|min_length[4]|max_length[32]');
           $this->form_validation->set_rules('iobj', 'ime objekta', 'required');
@@ -120,8 +120,8 @@ class UserValidationModel extends CI_Model {
             $conn = $this->my_database->conn;
             $stmt = $conn->stmt_init();
             $stmt->prepare("INSERT INTO restoran(KIme,Lozinka,ImeObjekta,
-                            ImeVlasnika,PrezimeVlasnika,Email,Opis,Kuhinja,Opstina)VALUES(?,?,?,?,?,?,?,?,?)");
-            $stmt->bind_param("sssssssss", $res['kime'], $res['lozinka'], $res['iobj'], $res['ivlasnika'], $res['pvlasnika'], $res['email'],$res['opis'],$res['kuhinje'],$res['opstina']);
+                            ImeVlasnika,PrezimeVlasnika,Email,Opis,Kuhinja,Opstina,KodKonobara)VALUES(?,?,?,?,?,?,?,?,?,?)");
+            $stmt->bind_param("sssssssssi", $res['kime'], $res['lozinka'], $res['iobj'], $res['ivlasnika'], $res['pvlasnika'], $res['email'],$res['opis'],$res['kuhinje'],$res['opstina'],$res['kod']);
             $stmt->execute();
             $restoranId = $stmt->insert_id;
 
@@ -157,7 +157,7 @@ class UserValidationModel extends CI_Model {
         $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
 
         $this->load->database();
-        $this->form_validation->set_rules('username', 'korisnicko ime', 'is_unique[Korisnik.KIme]|trim|required');
+        $this->form_validation->set_rules('username', 'korisnicko ime', 'is_unique[Korisnik.KIme]|is_unique[Restoran.KIme]|is_unique[Konobar.KIme]|trim|required');
         $this->form_validation->set_rules('password', 'lozinka', 'trim|required|min_length[4]|max_length[32]');
         $this->form_validation->set_rules('name', 'ime vlasnika', 'required|max_length[15]');
         $this->form_validation->set_rules('lastname', 'prezime vlasnika', 'required|max_length[15]');
@@ -180,7 +180,7 @@ class UserValidationModel extends CI_Model {
         $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
 
         $this->load->database();
-        $this->form_validation->set_rules('username', 'korisnicko ime', 'is_unique[Konobar.KIme]|trim|required');
+        $this->form_validation->set_rules('username', 'korisnicko ime', 'is_unique[Korisnik.KIme]|is_unique[Restoran.KIme]|is_unique[Konobar.KIme]|trim|required');
         $this->form_validation->set_rules('password', 'lozinka', 'trim|required|min_length[4]|max_length[32]');
         $this->form_validation->set_rules('name', 'ime vlasnika', 'required|max_length[15]');
         $this->form_validation->set_rules('lastname', 'prezime vlasnika', 'required|max_length[15]');

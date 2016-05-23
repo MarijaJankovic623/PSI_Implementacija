@@ -14,7 +14,7 @@
 class RegistracijaKonobaraCtrl extends CI_Controller {
     public function index() {
 
-        $this->load->view('03-Registracija konobara');
+        $this->load->view('RegistracijaKonobaraView');
     }
 
     public function submit() {
@@ -34,9 +34,9 @@ class RegistracijaKonobaraCtrl extends CI_Controller {
 
 
         if ($this->UserValidationModel->validateCreateKonobar($konobar)) {
-            $this->load->view('05-Logovanje');
+            $this->load->view('LoginVIew');
         } else {
-            $this->load->view('03-Registracija konobara');
+            $this->load->view('RegistracijaKonobaraView');
         }
     }
 }

@@ -49,7 +49,7 @@
                         <ul class="nav navbar-nav" id="mainNav">
                             <li><a href="<?php echo base_url(); ?>index.php/LoginCtrl" class="scroll-link">Uloguj se  </a></li>
                             <li><a href="<?php echo base_url(); ?>index.php/RegistracijaKorisnikaCtrl" class="scroll-link">Registruj se kao korisnik</a></li>
-                            <li><a href=""  class="scroll-link">Registruj se kao konobar</a></li>
+                            <li><a href="<?php echo base_url(); ?>index.php/RegistracijaKonobaraCtrl"  class="scroll-link">Registruj se kao konobar</a></li>
                             <li><a href="<?php echo base_url(); ?>index.php/RegistracijaRestoranaCtrl" class="scroll-link">Registruj se kao restoran </a></li>
                             <li><a href="" class="scroll-link">Registruj se kao administrator </a></li>
                         </ul>
@@ -203,11 +203,8 @@
                                             <?php echo $restoran['ImeObjekta']; ?>    
                                         </h2>
                                         <p>
-                                            Id restorana je : <?php echo $restoran['IDRestoran']; ?><br/>
-                                            bla bla bla bla blabla bla bla bla blabla bla bla bla bla
-                                            bla bla bla bla blabla bla bla bla blabla bla bla bla blabla
-                                            bla bla bla blabla bla bla bla blabla bla bla bla blabla bla
-                                            bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
+                                           Opis: <?php echo $restoran['Opis']; ?><br/>
+                                            Kuhinje: <?php echo $restoran['Kuhinja']; ?><br/>
                                         </p>
                                     </div>
                                 </div>

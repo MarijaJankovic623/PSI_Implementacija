@@ -105,25 +105,25 @@
                                 <input type="password"  name ="lozinka" class="form-control"  placeholder="Unesite lozinku" value = "<?php echo set_value('loyinka'); ?>">
                                 <label for="">Ime objekta</label>
                                 <?php echo form_error('iobj'); ?>
-                                <input type="text" name = "iobj" class="form-control" id="" placeholder="Unesite ime objekta" value = "<?php echo set_value('iobj'); ?>">
+                                <input type="text" name = "iobj" class="form-control"  placeholder="Unesite ime objekta" value = "<?php echo set_value('iobj'); ?>">
                                 <label for="" >Ime vlasnika</label>
                                 <?php echo form_error('ivlasnika'); ?>
-                                <input type="text" name = "ivlasnika" class="form-control" id="" placeholder="Unesite Vaše ime ovde" value = "<?php echo set_value('ivlasnika'); ?>">
+                                <input type="text" name = "ivlasnika" class="form-control"  placeholder="Unesite Vaše ime ovde" value = "<?php echo set_value('ivlasnika'); ?>">
                                 <label for="">Prezime vlasnika</label>
                                 <?php echo form_error('pvlasnika'); ?>
-                                <input type="text" name = "pvlasnika" class="form-control" id="" placeholder="Unesite Vaše prezime ovde" value = "<?php echo set_value('pvlasnika'); ?>">
+                                <input type="text" name = "pvlasnika" class="form-control"  placeholder="Unesite Vaše prezime ovde" value = "<?php echo set_value('pvlasnika'); ?>">
                                 <label for="">Email</label>
                                 <?php echo form_error('email'); ?>
-                                <input type="text"name ="email" class="form-control" id="" placeholder="Unesite Vas email ovde" value = "<?php echo set_value('email'); ?>">
+                                <input type="text" name ="email" class="form-control"  placeholder="Unesite Vas email ovde" value = "<?php echo set_value('email'); ?>">
                                 <label for="">Kod za registraciju konobara</label>
                                 <?php echo form_error('kod'); ?>
-                                <input type="text"name ="kod" class="form-control" id="" placeholder="Unesite Vas kod za konobare ovde" value = "<?php echo set_value('kod'); ?>">
+                                <input type="text" name ="kod" class="form-control"  placeholder="Unesite Vas kod za konobare ovde" value = "<?php echo set_value('kod'); ?>">
                                 <label for="">Opis kuhinja</label>
                                 <?php echo form_error('kuhinje'); ?>
-                                <input type="text" name = "kuhinje" class="form-control" id="" placeholder="Unesite nazive kuhinja koje Vaš restoran nudi" value = "<?php echo set_value('kuhinje'); ?>">
+                                <input type="text" name = "kuhinje" class="form-control"  placeholder="Unesite nazive kuhinja koje Vaš restoran nudi" value = "<?php echo set_value('kuhinje'); ?>">
                                 <label for="">Opis objekta</label>
                                 <?php echo form_error('opis'); ?>
-                                <input type="text" name = "opis" class="form-control" id="" placeholder="Unesite opis objekta" value = "<?php echo set_value('opis'); ?>">
+                                <input type="text" name = "opis" class="form-control"  placeholder="Unesite opis objekta" value = "<?php echo set_value('opis'); ?>">
                                 <div class="row">
                                     <div class="col-sm-6">
 

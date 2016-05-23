@@ -202,11 +202,10 @@
                                             <?php echo $restoran['ImeObjekta']; ?>    
                                         </h2>
                                         <p>
-                                            Id restorana je : <?php echo $restoran['IDRestoran']; ?><br/>
-                                            bla bla bla bla blabla bla bla bla blabla bla bla bla bla
-                                            bla bla bla bla blabla bla bla bla blabla bla bla bla blabla
-                                            bla bla bla blabla bla bla bla blabla bla bla bla blabla bla
-                                            bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
+                                            
+                                            Opis: <?php echo $restoran['Opis']; ?><br/>
+                                            Kuhinje: <?php echo $restoran['Kuhinja']; ?><br/>
+                                            
                                         </p>
                                     </div>
                                 </div>

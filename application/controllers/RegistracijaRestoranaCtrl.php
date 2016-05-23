@@ -24,6 +24,7 @@ class RegistracijaRestoranaCtrl extends CI_Controller {
             "opis" =>$input->post('opis'),
             "kuhinje" => $input->post('kuhinje'),
             "opstina" =>$input->post('opstina'),
+            "kod" => $input->post('kod'),
             "sto2" => $input->post('sto_2'),
             "sto4" => $input->post('sto_4'),
             "sto6" => $input->post('sto_6'),

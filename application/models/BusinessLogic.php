@@ -34,6 +34,7 @@ class BusinessLogic extends CI_Model {
     }
 
     public function reserveTable($idRestorana, $brLjudi, $vremeOd, $vremeDo) {
+        $brLjudi = ($brLjudi <= 2)? 2:($brLjudi<=4)? 4: 6;//ovo je jer u bazi stoje 2 4 ili 6 za kapacitete stolova
         $vremeOd = date("Y-m-d h:i", strtotime($vremeOd));
         $vremeDo = date("Y-m-d h:i", strtotime($vremeDo));
         $conn = $this->my_database->conn;

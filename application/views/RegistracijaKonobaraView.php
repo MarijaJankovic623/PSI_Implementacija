@@ -44,7 +44,7 @@
                     <!--/.navbar-header-->
                     <div id="main-nav" class="collapse navbar-collapse">
                         <ul class="nav navbar-nav" id="mainNav">
-                            <li class="active"><a href =" <?php echo base_url(); ?>index.php/Home" class="">Napusti registraciju</a></li>
+                            <li class="active"><a href =" <?php echo base_url(); ?>index.php/HomeCtrl" class="">Napusti registraciju</a></li>
                         </ul>
                     </div>
                     <!--/.navbar-collapse--> 
@@ -85,7 +85,7 @@
         </section>
 
         <section>
-            <div clas="container">
+            <div class="container">
                 <div class="row">
                     &nbsp;
                 </div>
@@ -111,7 +111,7 @@
                                 <input type="text" class="form-control" name="email" placeholder="Unesite vas email ovde" value = "<?php echo set_value('email'); ?>">
                                 <?php echo form_error('kod'); ?>
                                 <label for="">Kod za registraciju</label>
-                                <input type="text" class="form-control" id="" placeholder="Unesite kod dobijen od poslodavca" name="kod" value = "<?php echo set_value('kod'); ?>">
+                                <input type="text" class="form-control"  placeholder="Unesite kod dobijen od poslodavca" name="kod" value = "<?php echo set_value('kod'); ?>">
                                 <button type="submit" class="btn btn-primary">Potvrdi</button>
                             </div>	                
                         </form>

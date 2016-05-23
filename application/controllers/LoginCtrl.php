@@ -30,7 +30,7 @@ class LoginCtrl extends CI_Controller {
             if ($this->session->userdata('restoran'))
                 redirect('nema/index');
         } else {
-            $this->load->view('05-Logovanje');
+            $this->load->view('LoginView');
         }
     }
 
