@@ -44,16 +44,18 @@ class UserValidationModel extends CI_Model {
             return false;
         }
     }
-
+    
     public function loginRestoran($kime, $lozinka) {
         $conn = $this->my_database->conn;
         $stmt = $conn->stmt_init(); //dohvatanje iskaza
         $stmt->prepare("SELECT * FROM restoran WHERE KIme = ? AND Lozinka = ?"); //pravljenje istog
         $stmt->bind_param("ss", $kime, $lozinka); //vezivanej parametara 
         $stmt->execute();
-
-        if ($stmt->get_result()->num_rows > 0) {
+        
+        $res = $stmt->get_result()->fetch_assoc();
+        if (isset($res['IDRestoran'])) {
             $data = array(
+                'userid' => $res['IDRestoran'],
                 'username' => $kime,
                 'loggedIn' => true,
                 'restoran' => true,
@@ -74,9 +76,11 @@ class UserValidationModel extends CI_Model {
         $stmt->prepare("SELECT * FROM konobar WHERE KIme = ? AND Lozinka = ?"); //pravljenje istog
         $stmt->bind_param("ss", $kime, $lozinka); //vezivanej parametara 
         $stmt->execute();
-
-        if ($stmt->get_result()->num_rows > 0) {
+        
+        $res = $stmt->get_result()->fetch_assoc();
+        if (isset($res['IDKonobar'])) {
             $data = array(
+                'userid' => $res['IDKonobar'],
                 'username' => $kime,
                 'loggedIn' => true,
                 'konobar' => true,

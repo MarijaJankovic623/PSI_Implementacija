@@ -21,7 +21,52 @@ class BusinessLogic extends CI_Model {
         $result = $conn->query("SELECT * FROM restoran");
         return $result->fetch_all(MYSQLI_ASSOC);
     }
-
+    
+    public function getUser($id) {
+        $conn=$this->my_database->conn;
+        $stmt=$conn->stmt_init();
+        if ($this->session->userdata('korisnik')) {
+            $stmt->prepare("SELECT * FROM korisnik WHERE IDKorisnik=?");
+        }
+        if ($this->session->userdata('restoran')) {
+            $stmt->prepare("SELECT * FROM restoran WHERE IDRestoran=?");
+        }
+        if ($this->session->userdata('konobar')) {
+            $stmt->prepare("SELECT * FROM konobar WHERE IDKonobar=?");
+        }
+        if ($this->session->userdata('admin')) {
+            $stmt->prepare("SELECT * FROM korisnik WHERE IDKorisnik=?");
+        }
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+    }
+    
+    public function getAllWaiters($id) {
+        $conn=$this->my_database->conn;
+        $result=$conn->query("SELECT * FROM konobar WHERE IDRestoranFK = ".$id);
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+    
+    public function deleteWaiter($id) {
+        $conn=$this->my_database->conn;
+        $stmt=$conn->stmt_init();
+        $stmt->prepare("DELETE FROM konobar WHERE IDKonobar=?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        
+        $test=$conn->stmt_init();
+        $test->prepare("SELECT * FROM konobar WHERE IDKonobar=?");
+        $test->bind_param("i", $id);
+        $test->execute();
+        
+        if($test->get_result()->num_rows>0) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+    
     /**
      * 
      * @param string $id represents restaurants primary key 
