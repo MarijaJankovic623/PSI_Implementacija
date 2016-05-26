@@ -51,7 +51,7 @@
                             <li><a href="<?php echo base_url(); ?>index.php/RegistracijaKorisnikaCtrl" class="scroll-link">Registruj se kao korisnik</a></li>
                             <li><a href="<?php echo base_url(); ?>index.php/RegistracijaKonobaraCtrl"  class="scroll-link">Registruj se kao konobar</a></li>
                             <li><a href="<?php echo base_url(); ?>index.php/RegistracijaRestoranaCtrl" class="scroll-link">Registruj se kao restoran </a></li>
-                            <li><a href="" class="scroll-link">Registruj se kao administrator </a></li>
+                            <li><a href="<?php echo base_url(); ?>index.php/RegistracijaAdminaCtrl" class="scroll-link">Registruj se kao administrator </a></li>
                         </ul>
                     </div>
 

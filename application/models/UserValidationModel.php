@@ -35,7 +35,8 @@ class UserValidationModel extends CI_Model {
                 'loggedIn' => true,
                 'korisnik' => true,
                 'restoran' => false,
-                'konobar' => false
+                'konobar' => false,
+                'admin'=> false
             );
 
             $this->session->set_userdata($data);
@@ -60,7 +61,8 @@ class UserValidationModel extends CI_Model {
                 'loggedIn' => true,
                 'restoran' => true,
                 'konobar' => false,
-                'korisnik' => false
+                'korisnik' => false,
+                'admin'=> false
             );
 
             $this->session->set_userdata($data);
@@ -85,7 +87,8 @@ class UserValidationModel extends CI_Model {
                 'loggedIn' => true,
                 'konobar' => true,
                 'korisnik' => false,
-                'restoran' => false
+                'restoran' => false,
+                'admin'=> false
             );
 
             $this->session->set_userdata($data);
@@ -95,10 +98,34 @@ class UserValidationModel extends CI_Model {
         }
     }
 
+    public function loginAdmin($kime, $lozinka){
+        $conn = $this->my_database->conn;
+        $stmt = $conn->stmt_init(); 
+        $stmt->prepare("SELECT * FROM admin WHERE KIme = ? AND Lozinka = ?"); 
+        $stmt->bind_param("ss", $kime, $lozinka); 
+        $stmt->execute();
+
+        if ($stmt->get_result()->num_rows > 0) {
+            $data = array(
+                'username' => $kime,
+                'loggedIn' => true,
+                'admin' => true,
+                'konobar' => false,
+                'korisnik' => false,
+                'restoran'=> false
+            );
+
+            $this->session->set_userdata($data);
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
     public function login($kime, $lozinka) {
 
 
-        if ($this->loginKorisnik($kime, $lozinka) || $this->loginKonobar($kime, $lozinka) || $this->loginRestoran($kime, $lozinka)) {
+        if ($this->loginKorisnik($kime, $lozinka) || $this->loginKonobar($kime, $lozinka) || $this->loginRestoran($kime, $lozinka) || $this->loginAdmin($kime, $lozinka)) {
             return true;
         } else {
             return false;
@@ -211,6 +238,39 @@ class UserValidationModel extends CI_Model {
             $stmt = $conn->stmt_init();
             $stmt->prepare("INSERT INTO konobar(KIme,Lozinka,Ime,Prezime,Email,IDRestoranFK)VALUES(?,?,?,?,?,?)");
             $stmt->bind_param("sssssi", $konobar['username'], $konobar['password'], $konobar['name'], $konobar['lastname'], $konobar['email'], $konobar['IDRestoranFK']);
+            $stmt->execute();
+            return true;
+        }
+    }
+    
+    public function validateCreateAdmin($admin){
+        
+        $this->load->library('form_validation');
+        $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+        $this->load->database();
+        
+        $this->form_validation->set_rules('username', 'korisnicko ime', 'is_unique[Korisnik.KIme]|is_unique[Restoran.KIme]|is_unique[Konobar.KIme]|is_unique[Admin.KIme]|trim|required');
+        $this->form_validation->set_rules('password', 'lozinka', 'trim|required|min_length[4]|max_length[32]');
+        $this->form_validation->set_rules('name', 'ime admina', 'required|max_length[15]');
+        $this->form_validation->set_rules('lastname', 'prezime admina', 'required|max_length[15]');
+        $this->form_validation->set_rules('mail', 'email', 'required|valid_email');
+        $this->form_validation->set_rules('code', 'kod', 'required|trim');
+        
+        $conn = $this->my_database->conn;
+        $stmt = $conn->stmt_init();
+        $stmt->prepare("SELECT IDAdmin FROM admin WHERE KodAdmina = ?");
+        $admin['kod'] +=0;
+        $stmt->bind_param("i", $admin['kod']);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_array();
+        
+        if ($this->form_validation->run()== FALSE || $result==NULL){
+            return false;
+        }else{
+            /*$conn=$this->my_database->conn;
+            $stmt=$this->stmt_init();*/
+            $stmt->prepare("INSERT INTO admin(KIme,Lozinka,Ime,Prezime,Email,KodAdmina)VALUES(?,?,?,?,?,?)");
+            $stmt->bind_param("sssssi", $admin['username'], $admin['password'], $admin['ime'], $admin['prezime'], $admin['email'], $admin['kod']);
             $stmt->execute();
             return true;
         }

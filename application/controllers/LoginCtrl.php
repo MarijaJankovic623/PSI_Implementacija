@@ -31,6 +31,9 @@ class LoginCtrl extends CI_Controller {
                 $id=$this->session->userdata('userid');
                 redirect("OtpustanjeKonobaraCtrl/profil/$id");
             }
+            if ($this->session->userdata('admin'))
+                redirect('BrisanjeKorisnikaCtrl/pogled');
+           
                
         } else {
             $this->load->view('LoginView');

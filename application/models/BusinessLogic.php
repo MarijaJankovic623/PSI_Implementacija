@@ -105,4 +105,30 @@ class BusinessLogic extends CI_Model {
         return false;
     }
 
+    public function getAllUsers(){
+        $conn = $this->my_database->conn;
+        $result = $conn->query("SELECT * FROM korisnik");
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+    
+    public function deleteUser($idUser){
+        $conn=$this->my_database->conn;
+        $stmt=$conn->stmt_init();
+        $stmt->prepare("DELETE FROM korisnik WHERE IDKorisnik=?");
+        $stmt->bind_param("i", $idUser);
+        $stmt->execute();
+        
+        $result=$conn->stmt_init();
+        $result->prepare("SELECT * FROM korisnik WHERE IDKorisnik=?");
+        $result->bind_param("i", $idUser);
+        $result->execute();
+        
+        if($result->get_result()->num_rows>0){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+    
 }
