@@ -29,6 +29,8 @@ class LoginCtrl extends CI_Controller {
             
             if ($this->session->userdata('restoran'))
                 redirect('nema/index');
+            if ($this->session->userdata('admin'))
+                redirect('BrisanjeKorisnikaCtrl/pogled');
         } else {
             $this->load->view('LoginView');
         }
