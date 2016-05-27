@@ -22,7 +22,7 @@
         <!--[if lte IE 8]>
                         <script type="text/javascript" src="http://explorercanvas.googlecode.com/svn/trunk/excanvas.js"></script>
                 <![endif]-->
-        <link rel="stylesheet" href="<?php echo base_url(); ?>css/bootstrap.min.css" />
+        <link rel="stylesheet" href="<?php /*echo base_url();*/ ?>css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>css/isotope.css" media="screen" />
         <link rel="stylesheet" href="<?php echo base_url(); ?>js/fancybox/jquery.fancybox.css" type="text/css" media="screen" />
         <link href="<?php echo base_url(); ?>css/animate.css" rel="stylesheet" media="screen">
