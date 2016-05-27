@@ -25,7 +25,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   |
  */
 //$config['base_url'] = 'http://localhost/PSI_Implementacija/';
-$config['base_url'] = 'http://restooking.azurewebsites.net/PSI_Implementacija/';
+$config['base_url'] = '';
 
 /*
   |--------------------------------------------------------------------------
