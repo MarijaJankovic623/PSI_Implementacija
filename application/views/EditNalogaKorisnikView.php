@@ -1,4 +1,5 @@
 <!--Ivana Djunisijevic-->
+<!--impl:Ivana Djunisijevic-->
 <!doctype html>
 <!--[if IE 7 ]>    <html lang="en-gb" class="isie ie7 oldie no-js"> <![endif]-->
 <!--[if IE 8 ]>    <html lang="en-gb" class="isie ie8 oldie no-js"> <![endif]-->
@@ -92,24 +93,24 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-8 col-sm-offset-2" >
-                        <form action="<?php echo(base_url()); ?>index.php/RegistracijaKorisnikaCtrl/submit" method="POST" role="form">
+                        <form action="<?php echo(base_url()); ?>index.php/EditovanjeNalogaCtrl/confirm" method="POST" role="form">
                             <div class="form-group">
-                                <legend>Registracija korisnika</legend>
+                                <legend>Izmena profila</legend>
                                 <?php echo form_error('username'); ?>
                                 <label for="">Korisničko ime</label>
-                                <input type="text" class="form-control" name="username" placeholder="Unesite korisničko ime" value = "<?php print $korisnik['KIme']; ?>">
+                                <input type="text" class="form-control" name="username" placeholder="Unesite korisničko ime" value = "<?php print $user['KIme']; ?>" disabled="">
                                 <?php echo form_error('password'); ?>
                                 <label for="">Lozinka</label>
-                                <input type="password" class="form-control" name="password" placeholder="Unesite lozinku" value = "<?php print $korisnik['Lozinka']; ?>">
+                                <input type="password" class="form-control" name="password" placeholder="Unesite lozinku" value = "<?php print $user['Lozinka']; ?>">
                                 <?php echo form_error('name'); ?>
                                 <label for="">Ime</label>
-                                <input type="text" class="form-control" name="name" placeholder="Unesite Vaše ime ovde" value = "<?php print $korisnik['Ime']; ?>">
+                                <input type="text" class="form-control" name="name" placeholder="Unesite Vaše ime ovde" value = "<?php print $user['Ime']; ?>">
                                 <?php echo form_error('lastname'); ?>
                                 <label for="">Prezime</label>
-                                <input type="text" class="form-control" name="lastname" placeholder="Unesite Vaše prezime ovde" value = "<?php print $korisnik['Prezime']; ?>">
+                                <input type="text" class="form-control" name="lastname" placeholder="Unesite Vaše prezime ovde" value = "<?php print $user['Prezime']; ?>">
                                 <?php echo form_error('email'); ?>
                                 <label for="">Email</label>
-                                <input type="text" class="form-control" name="email" placeholder="Unesite vas email ovde" value = "<?php print $korisnik['email']; ?>">
+                                <input type="text" class="form-control" name="email" placeholder="Unesite vas email ovde" value = "<?php print $user['Email']; ?>">
 
                                 <button type="submit" class="btn btn-primary">Potvrdi</button>
                             </div>	                

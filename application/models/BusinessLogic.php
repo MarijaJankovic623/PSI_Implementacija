@@ -39,6 +39,9 @@ class BusinessLogic extends CI_Model {
         }
         $stmt->bind_param("i", $id);
         $stmt->execute();
+        
+        $res=$stmt->get_result()->fetch_assoc();
+        return $res;
     }
     
     public function getAllWaiters($id) {
