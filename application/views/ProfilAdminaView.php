@@ -48,8 +48,7 @@
         <ul class="nav navbar-nav" id="mainNav">
 
           <li><a href="<?php echo base_url().'index.php/BrisanjeKorisnikaCtrl/index'?>" class="scroll-link">Brisi Korisnika</a></li>
-          
-           <li><a href="<?php echo base_url(); ?>" class="scroll-link">Brisi Restoran</a></li>
+          <li><a href="<?php echo base_url(); ?>" class="scroll-link">Moj profil </a></li>
           <li><a href="<?php echo base_url(); ?>" class="scroll-link">Izloguj se </a></li>
         </ul>
       </div>

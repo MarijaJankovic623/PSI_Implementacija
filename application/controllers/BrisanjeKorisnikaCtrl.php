@@ -25,7 +25,7 @@ class BrisanjeKorisnikaCtrl extends CI_Controller{
             $data['poruka'] = 'Korisnik nije uspesno uklonjen sa sistema';
         }
         $data['korisnici'] = $this->BusinessLogic->getAllUsers();
-        $this->load->view('BrisanjeKorisnika1View', $data);
+        $this->load->view('BrisanjeKorisnika3View', $data);
     }
     
     public function check($idUser){

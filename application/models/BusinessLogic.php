@@ -131,4 +131,49 @@ class BusinessLogic extends CI_Model {
         }
     }
     
+    
+    public function freeTables($id, $brLjudi, $vremeOd, $vremeDo, $korisnik){
+        
+        $conn=$this->my_database->conn;
+        $stmt=$conn->stmt_init();
+        $stmt->prepare("SELECT * FROM konobar WHERE IDKonobar=?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        
+        $result=$stmt->get_result()->fetch_assoc();
+        
+        $brLjudi = ($brLjudi <= 2)? 2:($brLjudi<=4)? 4: 6;
+        $vremeOd = date("Y-m-d h:i", strtotime($vremeOd));
+        $vremeDo = date("Y-m-d h:i", strtotime($vremeDo));
+        $conn = $this->my_database->conn;
+        $stmt = $conn->stmt_init();
+        $stmt->prepare("CALL slobodni_stolovi(?,?,?,?)");
+        $stmt->bind_param("iiss", $result['IDRestoranFK'], $brLjudi, $vremeOd, $vremeDo);
+        $stmt->execute();
+        
+        $sto = $stmt->get_result()->fetch_assoc();
+        if (isset($sto['IDSto'])) {
+            
+            $conn=$this->my_database->conn;
+            $stmt=$conn->stmt_init();
+            $stmt->prepare("SELECT * FROM korisnik WHERE KIme=?");
+            $stmt->bind_param("s", $korisnik['imeKorisnika']);
+            $stmt->execute();
+            
+            $idKorisnika=$stmt->get_result()->fetch_assoc();
+            
+            $conn = $this->my_database->conn;
+            $stmt = $conn->stmt_init();
+            $stmt->prepare("INSERT INTO rezervacija(IDStoFK,IDKorisnikFK,VremeOd,VremeDo) VALUES(?,?,?,?)");
+            $stmt->bind_param("iiss", $sto['IDSto'], $idKorisnika['IDKorisnik'], $vremeOd, $vremeDo);
+            $stmt->execute();
+            
+            return true;
+        }
+        else {
+            return false;
+        }
+       
+    }
+    
 }

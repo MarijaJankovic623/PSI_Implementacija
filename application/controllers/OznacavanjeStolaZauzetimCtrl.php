@@ -9,20 +9,33 @@
 /**
  * Description of OznOdrStlZauzController
  *
- * @author Marija
+ * @author Marija i Jovana
  */
 class OznacavanjeStolaZauzetimCtrl extends CI_Controller {
 
 
     public function index() {
+        
+        $this->load->view('OznacavanjeStolaZauzetimView');
+        
+}
+
+    public function reserve(){
+        
         $this->load->model('UserValidationModel');
         $this->UserValidationModel->checkSession();
         $this->load->model('BusinessLogic');
-
-        
-        
-        $this->load->view('OznacavanjeStolaZauzetimView');
-    
-
-}
+        $brLjudi = $this->input->post('brLjudi');
+        $vremeOd = $this->input->post('vremeOd');
+        $vremeDo = $this->input->post('vremeDo');
+        $id=$this->session->userdata('userid');
+        $korisnik['imeKorisnika']="gost";
+        if($this->BusinessLogic->freeTables($id, $brLjudi, $vremeOd, $vremeDo, $korisnik)){
+            $data['poruka']="Uspesno je rezervisan sto";
+        }
+        else {
+            $data['poruka']="Nije moguce napraviti rezervaciju";
+        }
+        $this->load->view('OznacavanjeStolaZauzetim2View', $data);
+    }
 }

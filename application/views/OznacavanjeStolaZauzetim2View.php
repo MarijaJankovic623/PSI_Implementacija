@@ -1,4 +1,4 @@
-<!-- Jovana Djunisijevic -->
+<!--Marija Jankovic-->
 <!doctype html>
 <!--[if IE 7 ]>    <html lang="en-gb" class="isie ie7 oldie no-js"> <![endif]-->
 <!--[if IE 8 ]>    <html lang="en-gb" class="isie ie8 oldie no-js"> <![endif]-->
@@ -14,7 +14,7 @@
     <![endif]-->
 <title>Restooking - It's restaurants and booking.</title>
 <meta name="description" content="">
-<meta name="author" content="Jovana Djunisijevic">
+<meta name="author" content="Marija Jankovic">
 <!--[if lt IE 9]>
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -22,17 +22,14 @@
 		<script type="text/javascript" src="http://explorercanvas.googlecode.com/svn/trunk/excanvas.js"></script>
 	<![endif]-->
 <link rel="stylesheet" href="<?php echo base_url(); ?>css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>css/isotope.css" media="screen" />
+<link rel="stylesheet" type="<?php echo base_url(); ?>text/css" href="css/isotope.css" media="screen" />
 <link rel="stylesheet" href="<?php echo base_url(); ?>js/fancybox/jquery.fancybox.css" type="text/css" media="screen" />
 <link href="<?php echo base_url(); ?>css/animate.css" rel="stylesheet" media="screen">
 <link href="<?php echo base_url(); ?>flexslider/flexslider.css" rel="stylesheet" />
 <link href="<?php echo base_url(); ?>js/owl-carousel/owl.carousel.css" rel="stylesheet">
 <link rel="stylesheet" href="<?php echo base_url(); ?>css/styles.css" />
-
-  
 <!-- Font Awesome -->
-   
-<link href="<?php echo base_url(); ?>font/css/font-awesome.min.css" rel="stylesheet">
+<link href="font/css/font-awesome.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -46,13 +43,11 @@
       <!--/.navbar-header-->
       <div id="main-nav" class="collapse navbar-collapse">
         <ul class="nav navbar-nav" id="mainNav">
-
-          <li><a href="<?php echo base_url(); ?>index.php/BrisanjeKorisnikaCtrl" class="scroll-link">Korisnici</a></li>
+           <li><a href="<?php echo base_url(); ?>index.php/OznacavanjeStolaZauzetimCtrl" class="scroll-link">Rezervisi</a></li>
           <li><a href="<?php echo base_url(); ?>" class="scroll-link">Moj profil</a></li>
           <li><a href="<?php echo base_url(); ?>" class="scroll-link">Izloguj se </a></li>
         </ul>
       </div>
-
       <!--/.navbar-collapse--> 
     </nav>
     <!--/.navbar--> 
@@ -64,7 +59,7 @@
 <section id="home">
   <div class="banner-container"> 
   <!-- Slider -->
-        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+         <div id="myCarousel" class="carousel slide" data-ride="carousel">
                     <!-- Indicators -->
                     <ol class="carousel-indicators">
                         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -92,27 +87,22 @@
   </div>
 </section>
 
-			<div class="col-sm-10">
-            <H1>     Da li ste sigurni da želite da obrišete izabranog korisnika? </H1>
-			</div>
-			<div class="row">
-			<div class="jumbotron" style="background-color:rgba(237, 231, 227, 0.87)">
-                        <div class="col-sm-4">
-                            <a href="<?php echo base_url().'index.php/BrisanjeKorisnikaCtrl/delete/'.$id ?>" class="btn btn-warning btn-lg btn-block" >DA</a>
-                        </div>
-						<div class="col-sm-4">
-                            <a href="<?php echo base_url().'index.php/BrisanjeKorisnikaCtrl/index' ?>" class="btn btn-warning btn-lg btn-block">NE</a>
-                        </div>
-						</div>
-                </div>
-            </div>
-        </div>    
-    </div>
-         <div class="row">
+<section>
+    <div clas="container">
+        <div class="row">
             &nbsp;
         </div>
-    
-
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2" >
+                <font size = '8'><b><?php echo $poruka ?></b></font> 
+                <!--/.Poruka je ovde napisana statički samo zbog slike za protitip, inače će dinamički ubacivati u zavisnosti od ishoda-->
+            </div>
+        </div>
+     <div class="row">
+            &nbsp;
+        </div> 
+    </div>
+</section>
  
 
 
