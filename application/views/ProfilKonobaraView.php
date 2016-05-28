@@ -48,8 +48,9 @@
       <div id="main-nav" class="collapse navbar-collapse">
         <ul class="nav navbar-nav" id="mainNav">
 
-          <li><a href="<?php echo base_url().'index.php/OtpustanjeKonobaraCtrl/index/'.$rest['IDRestoran']; ?>" class="scroll-link">Otpusti konobara</a></li>
-          <li class="active"><a href="<?php echo base_url().'index.php/OtpustanjeKonobaraCtrl/profil/'.$this->session->userdata('userid'); ?>" class="scroll-link">Moj profil</a></li>
+          <li><a href="<?php echo base_url(); ?>" class="scroll-link">Rezervisi</a></li>
+          <li><a href="<?php echo base_url(); ?>" class="scroll-link">Potvrdi</a></li>
+          <li class="active"><a href="<?php echo base_url().'index.php/EditovanjeNalogaCtrl/profileWaiter'; ?>" class="scroll-link">Moj profil</a></li>
           <li ><a href="<?php echo base_url().'index.php/EditovanjeNalogaCtrl'; ?>" class="scroll-link">Izmeni profil</a></li>
           <li><a href="<?php echo base_url(); ?>" class="scroll-link">Izloguj se </a></li>
         </ul>
@@ -107,15 +108,11 @@
                             <img src="<?php echo base_url(); ?>images/slides/1.jpg" class="img-circle" alt="Cinque Terre" width="304" height="236">
                         </div>
                         <div class="col-sm-8">
-                            <h2>
-                               <?php echo $rest['ImeObjekta']; ?>
-                            </h2>
-                            <h4>Vlasnik: <?php echo $rest['ImeVlasnika'].' '.$rest['PrezimeVlasnika'];?></h4>
-							<h4><?php echo $rest['Opis'];?></h4>
-							<h4>Kuhinja: <?php echo $rest['Kuhinja'] ?> </h4>
-                                                        <h4>Opstina: <?php echo $rest['Opstina'] ?> </h4>
-                                                        <h4>Broj posetilaca: <?php echo $rest['BrojPosetilaca'] ?> </h4>
-                                                        <h4>Kontakt email: <?php echo $rest['Email'] ?> </h4>
+                            
+                            <h4> <?php echo $user['Ime'].' '.$user['Prezime'];?></h4>
+							
+                                                        <h4>Kontakt email: <?php echo $user['Email'] ?> </h4>
+                                                        <h4>Restoran u kome radi: <?php $this->load->model('BusinessLogic'); $res=$this->BusinessLogic->getRestaurant($user['IDRestoranFK']); echo $res['ImeObjekta']; ?> </h4>
                             <b style="color:red">  </b>
                             <p>
                                

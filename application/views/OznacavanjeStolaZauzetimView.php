@@ -51,6 +51,7 @@
           <li><a href="" class="scroll-link">Potvrdi rezervaciju</a></li>  
           <li><a href="" class="scroll-link">Zauzmi sto</a></li>
           <li><a href="" class="scroll-link">Moj profil</a></li>
+          <li><a href="<?php echo base_url().'index.php/EditovanjeNalogaCtrl'; ?>" class="scroll-link">Izmeni profil</a></li>
           <li><a href="" class="scroll-link">Izloguj se </a></li>
         </ul>
       </div>

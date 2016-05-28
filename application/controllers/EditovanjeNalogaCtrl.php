@@ -41,7 +41,13 @@ class EditovanjeNalogaCtrl extends CI_Controller {
         $this->load->view('ProfilKorisnikaView', $data);
     }
 
-
+    public function profileWaiter() {
+        $this->load->model('UserValidationModel');
+        $this->UserValidationModel->checkSession();
+        $this->load->model('BusinessLogic');
+        $data['user']=$this->BusinessLogic->getUser($this->session->userdata('userid'));
+        $this->load->view('ProfilKonobaraView', $data);
+    }
     public function confirm() {
         $this->load->model('UserValidationModel');
         if ($this->session->userdata('korisnik')) {
@@ -86,6 +92,24 @@ class EditovanjeNalogaCtrl extends CI_Controller {
                 $this->load->model('BusinessLogic');
                 $data['user']=$this->BusinessLogic->getUser($this->session->userdata('userid'));
                 $this->load->view('EditNalogaRestoranView', $data);
+            }
+        }
+        if ($this->session->userdata('konobar')) {
+            $input = $this->input;
+            $konobar = array(
+                "name" => $input->post('name'),
+                "lastname" => $input->post('lastname'),
+                "password" => $input->post('password'),
+                "email" => $input->post('email')
+            );
+            $this->load->model('BusinessLogic');
+            $data['user']=$this->BusinessLogic->getUser($this->session->userdata('userid'));
+            $id=$this->session->userdata('userid');
+            if ($this->UserValidationModel->updateWaiter($konobar, $id)) {
+                $this->load->view('ProfilKonobaraView', $data);
+            }
+            else {
+                $this->load->view('EditNalogaKonobarView', $data);
             }
         }
     }

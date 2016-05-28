@@ -366,6 +366,28 @@ class UserValidationModel extends CI_Model {
         }
     }
     
+    public function updateWaiter($konobar, $id) {
+        $this->load->library('form_validation');
+        $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+        $this->load->database();
+        $this->form_validation->set_rules('password', 'lozinka', 'trim|required|min_length[4]|max_length[32]');
+        $this->form_validation->set_rules('name', 'ime vlasnika', 'required|max_length[15]');
+        $this->form_validation->set_rules('lastname', 'prezime vlasnika', 'required|max_length[15]');
+        $this->form_validation->set_rules('email', 'email', 'required|valid_email');
+        
+        if ($this->form_validation->run() == FALSE) {
+            return false;
+        } else {
+            $conn = $this->my_database->conn;
+            $stmt = $conn->stmt_init();
+            $stmt->prepare("UPDATE konobar SET Lozinka=?,Ime=?,Prezime=?,Email=? WHERE IDKonobar=?");
+            $stmt->bind_param("ssssi", $konobar['password'], $konobar['name'], $konobar['lastname'], $konobar['email'], $id);
+            $stmt->execute();
+            return true;
+        }
+    }
+
+
     public function validateCreateAdmin($admin){
         
         $this->load->library('form_validation');
