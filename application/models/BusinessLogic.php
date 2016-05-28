@@ -131,4 +131,16 @@ class BusinessLogic extends CI_Model {
         }
     }
     
+    
+    
+    public function getAllReservations($idUser){
+         $conn = $this->my_database->conn;
+        $stmt = $conn->stmt_init();
+         $result=$conn->query("CALL sve_rezervacije(".$idUser.")");
+        
+        return $result->fetch_all(MYSQLI_ASSOC);
+        
+        
+        
+    }
 }
