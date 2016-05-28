@@ -176,4 +176,54 @@ class BusinessLogic extends CI_Model {
        
     }
     
+    public function getReservations(){
+        
+        $conn=$this->my_database->conn;
+        $stmt=$conn->stmt_init();
+        $id=$this->session->userdata('userid');
+        $stmt->prepare("SELECT * FROM konobar WHERE IDKonobar=?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result=$stmt->get_result()->fetch_assoc();
+        
+        $conn=$this->my_database->conn;
+        $stol=$conn->query("SELECT * FROM sto WHERE IDRestoranFK=".$result['IDRestoranFK']);
+        $stolovi=$stol->fetch_all(MYSQLI_ASSOC);
+        
+        $conn=$this->my_database->conn;
+        $rezer=$conn->query("SELECT * FROM rezervacija");
+        $rezervacije=$rezer->fetch_all(MYSQLI_ASSOC);
+        $index=0;
+        foreach($stolovi as $sto){
+            foreach($rezervacije as $rez){
+                if($sto['IDSto']==$rez['IDStoFK']){
+                    $data[$index]=$rez;
+                    ++$index;
+                   }
+               }
+           }
+        return $data;
+    }
+    
+    
+    public function oslobodi($rez){
+        $conn=$this->my_database->conn;
+        $stmt=$conn->stmt_init();
+        $stmt->prepare("DELETE FROM rezervacija WHERE IDRezervacija=?");
+        $stmt->bind_param("i", $rez);
+        $stmt->execute();
+        
+        $stmt=$conn->stmt_init();
+        $stmt->prepare("SELECT * FROM rezervacija WHERE IDRezervacija=?");
+        $stmt->bind_param("i", $rez);
+        $stmt->execute();
+        if($stmt->get_result()->num_rows>0){
+            return false;
+        }
+        else {
+            return true;
+        }
+        
+    }
+    
 }

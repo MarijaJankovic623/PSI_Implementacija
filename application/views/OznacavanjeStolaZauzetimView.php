@@ -49,8 +49,9 @@
                     <div id="main-nav" class="collapse navbar-collapse">
                         <ul class="nav navbar-nav" id="mainNav">
                              <li><a href="<?php echo base_url(); ?>index.php/OznacavanjeStolaZauzetimCtrl" class="scroll-link">Rezervisi</a></li>
-                            <li><a href="" class="scroll-link">Moj profil</a></li>
-                            <li><a href="" class="scroll-link">Izloguj se </a></li>
+                            <li><a href="<?php echo base_url(); ?>index.php/PotvrdaIzvrseneRezervacijeCtrl" class="scroll-link">Potvrdi</a></li>
+                             <li><a href="<?php echo base_url(); ?>" class="scroll-link">Moj profil</a></li>
+                            <li><a href="<?php echo base_url(); ?>" class="scroll-link">Izloguj se </a></li>
                         </ul>
                     </div>
                     <!--/.navbar-collapse--> 
@@ -172,7 +173,7 @@
 <section class="copyright">
     <div class="container">
         <div class="row">
-            <div class="col-sm-12 text-center"> Copyright 2016 <a href="http://etf.bg.ac.rs">ETF Belgrade</a> </div>
+            <div class="col-sm-12 text-center"> Copyright 2016 <a href="<?php echo base_url(); ?>http://etf.bg.ac.rs">ETF Belgrade</a> </div>
         </div>
         <!-- / .row --> 
     </div>
