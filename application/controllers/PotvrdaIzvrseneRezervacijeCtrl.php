@@ -14,6 +14,7 @@ class PotvrdaIzvrseneRezervacijeCtrl extends CI_Controller{
        
         $this->load->model('BusinessLogic');
         $data['rezervacije']=$this->BusinessLogic->getReservations();
+        $data['restoran']=$this->BusinessLogic->getNameRestaurant();
         $this->load->view('PotvrdaIzvrseneRezervacijeView', $data);
     }
    

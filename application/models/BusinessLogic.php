@@ -79,7 +79,9 @@ class BusinessLogic extends CI_Model {
     }
 
     public function reserveTable($idRestorana, $brLjudi, $vremeOd, $vremeDo) {
-        $brLjudi = ($brLjudi <= 2)? 2:($brLjudi<=4)? 4: 6;//ovo je jer u bazi stoje 2 4 ili 6 za kapacitete stolova
+        if($brLjudi<=2) $brljudi=2;
+        else if($brLjudi>2 && $brLjudi<=4) $brLjudi=4;
+            else if($brLjudi>4 && $brLjudi<=6) $brLjudi=6;
         $vremeOd = date("Y-m-d h:i", strtotime($vremeOd));
         $vremeDo = date("Y-m-d h:i", strtotime($vremeDo));
         $conn = $this->my_database->conn;
@@ -142,7 +144,10 @@ class BusinessLogic extends CI_Model {
         
         $result=$stmt->get_result()->fetch_assoc();
         
-        $brLjudi = ($brLjudi <= 2)? 2:($brLjudi<=4)? 4: 6;
+        if($brLjudi<=2) $brljudi=2;
+        else if($brLjudi>2 && $brLjudi<=4) $brLjudi=4;
+            else if($brLjudi>4 && $brLjudi<=6) $brLjudi=6;
+       
         $vremeOd = date("Y-m-d h:i", strtotime($vremeOd));
         $vremeDo = date("Y-m-d h:i", strtotime($vremeDo));
         $conn = $this->my_database->conn;
@@ -197,6 +202,14 @@ class BusinessLogic extends CI_Model {
         foreach($stolovi as $sto){
             foreach($rezervacije as $rez){
                 if($sto['IDSto']==$rez['IDStoFK']){
+                    
+                    $conn=$this->my_database->conn;
+                    $stmt=$conn->stmt_init();
+                    $stmt->prepare("SELECT * FROM sto WHERE IDSto=?");
+                    $stmt->bind_param("i", $rez['IDStoFK']);
+                    $stmt->execute();
+                    $table=$stmt->get_result()->fetch_assoc();
+                    $rez['brojLjudi']=$table['BrojOsoba'];
                     $data[$index]=$rez;
                     ++$index;
                    }
@@ -224,6 +237,25 @@ class BusinessLogic extends CI_Model {
             return true;
         }
         
+    }
+    
+    public function getNameRestaurant(){
+        $conn=$this->my_database->conn;
+        $stmt=$conn->stmt_init();
+        $idKonobar=$this->session->userdata('userid');
+        $stmt->prepare("SELECT * FROM konobar WHERE IDKonobar=?");
+        $stmt->bind_param("i", $idKonobar);
+        $stmt->execute();
+        
+        $konobar=$stmt->get_result()->fetch_assoc();
+        $conn=$this->my_database->conn;
+        $stmt=$conn->stmt_init();
+        $stmt->prepare("SELECT * FROM restoran WHERE IDRestoran=?");
+        $stmt->bind_param("i", $konobar['IDRestoranFK']);
+        $stmt->execute();
+        
+        $restoran=$stmt->get_result()->fetch_assoc();
+        return $restoran['ImeObjekta'];
     }
     
 }

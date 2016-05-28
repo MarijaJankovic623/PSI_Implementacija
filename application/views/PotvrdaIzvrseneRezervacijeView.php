@@ -109,11 +109,11 @@
                         </div>
                         <div class="col-sm-8">
                             <h2>
-                                <?php echo $rez['IDStoFK']; ?>
+                                <?php echo $restoran; ?>
                             </h2>
 							<h3>Pocetak rezervacije: <?php echo $rez['VremeOd']; ?></h3>
 							<h3>Kraj rezervacije: <?php echo $rez['VremeDo']; ?></h3> 
-                            <h3>Broj ljudi:</h3>
+                            <h3>Broj ljudi: <?php echo $rez['brojLjudi']; ?> </h3>
                             <div class="row">
                                 <div class="col-sm-4">
                                     <a href="<?php echo base_url().'index.php/PotvrdaIzvrseneRezervacijeCtrl/potvrdi/'.$rez['IDRezervacija']; ?>" class="btn btn-warning btn-lg btn-block" >Rezervacija ostvarena</a>
