@@ -44,8 +44,8 @@
                     <!--/.navbar-header-->
                     <div id="main-nav" class="collapse navbar-collapse">
                         <ul class="nav navbar-nav" id="mainNav">
-                            <li class="active"><a href="<?php echo base_url(); ?>index.php/HomeCtrl" class="">Napusti izmenu</a></li>
-                            <li ><a href="<?php echo base_url(); ?>index.php/HomeCtrl" class="">Moj profil</a></li>
+                            <li class="active"><a href="<?php echo base_url(); ?>index.php/EditovanjeNalogaCtrl/profileUser" class="">Napusti izmenu</a></li>
+                            <li ><a href="<?php echo base_url(); ?>index.php/EditovanjeNalogaCtrl/profileUser" class="">Moj profil</a></li>
                             <li ><a href="<?php echo base_url(); ?>index.php/HomeCtrl" class="">Moje rezervacije</a></li>
                             <li ><a href="<?php echo base_url(); ?>index.php/HomeCtrl" class="">Izloguj se</a></li>
                         </ul>

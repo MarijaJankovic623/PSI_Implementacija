@@ -33,6 +33,15 @@ class EditovanjeNalogaCtrl extends CI_Controller {
         }
     }
     
+    public function profileUser() {
+        $this->load->model('UserValidationModel');
+        $this->UserValidationModel->checkSession();
+        $this->load->model('BusinessLogic');
+        $data['user']=$this->BusinessLogic->getUser($this->session->userdata('userid'));
+        $this->load->view('ProfilKorisnikaView', $data);
+    }
+
+
     public function confirm() {
         $this->load->model('UserValidationModel');
         if ($this->session->userdata('korisnik')) {
