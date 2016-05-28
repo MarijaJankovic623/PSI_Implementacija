@@ -101,32 +101,43 @@
                     <div class="col-sm-12">
                         <?php foreach ($rezervacije as $rezervacija) { ?>
                             <div class="jumbotron" style="background-color:rgba(237, 231, 227, 0.87)">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <img src="<?php echo base_url(); ?>images/slides/1.jpg" class="img-circle" alt="Cinque Terre" width="304" height="236">
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <h2>
-                                            <?php echo $rezervacija['ImeObjekta']; ?>
-                                        </h2>
+                                <form action="<?php echo(base_url().'index.php/PrelistavanjeOcenjivanjeOtkazivanjeRezervacijaCtrl/rezervacijaCancelGrade/'.$rezervacija['IDRezervacija']); ?>" method="POST" role="form">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <img src="<?php echo base_url(); ?>images/slides/1.jpg" class="img-circle" alt="Cinque Terre" width="304" height="236">
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <h2>
+                                                <?php echo "Ime restorana: ".$rezervacija['ImeObjekta']; ?>
+                                            </h2>
 
-                                        <h5> <?php echo $rezervacija['VremeOd']; ?></h5>
-                                        <h5> <?php echo $rezervacija['VremeDo']; ?>:</h5>
-                                        <b style="color:red"> status </b>
-                                        <p>
-                                            <?php echo $rezervacija['Opis']; ?>
-                                        </p>
+                                            <h5> <?php echo "Vreme početka rezervacije: ".$rezervacija['VremeOd']; ?></h5>
+                                            <h5> <?php echo "Vreme kraja rezervacije: ".$rezervacija['VremeDo']; ?></h5>
+                                            <h5> <?php echo "Status rezervacije: ". $rezervacija['Status']; ?></h5>
+                                            <p>
+                                            <?php echo "Opis resotrana: ". $rezervacija['Opis']; ?>
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <button type="button" class="btn btn-warning btn-lg btn-block" >Otkaži</button>
+                                    <div class="row">
+
+                                            <?php
+                                            if (!strcmp($rezervacija['Status'], "Nadolazeca")) {
+                                                $ispis = " 
+                                        <div class='col-sm-12'>
+                                        <button type='submit' class='btn btn-warning btn-lg btn-block' name = 'otkaziDugme' >Otkaži</button>
+                                         </div>";
+                                            }
+                                            if (!strcmp($rezervacija['Ocena'], "0") && !strcmp($rezervacija['Status'], "Ostvarena")) {
+                                                $ispis = " 
+                                     <div class='col-sm-4'>
+                                        <button type='submit' class='btn btn-warning btn-lg btn-block' name = 'otkaziDugme' >Otkaži</button>
                                     </div>
-                                    <div class="col-sm-4">
-                                        <button type="button" class="btn btn-warning btn-lg btn-block">Oceni</button>
+                                    <div class='col-sm-4'>
+                                    <button type= 'submit' class='btn btn-warning btn-lg btn-block' name = 'oceniDugme' >Oceni</button> 
                                     </div>
-                                    <div class="col-sm-4">
-                                        <select class="form-group"  style="background-color: hsla(35, 8%, 14%, 0.96); color: hsla(35, 84%, 51%, 0.96);" >
+                                    <div class='col-sm-4'>
+                                        <select  name = 'ocena' class='form-group'  style='background-color: hsla(35, 8%, 14%, 0.96); color: hsla(35, 84%, 51%, 0.96);' >
                                             <option>5</option>
                                             <option>6</option>
                                             <option>7</option>
@@ -134,18 +145,33 @@
                                             <option>9</option>
                                             <option>10</option>  
                                         </select>
+                                    </div>";
+                                            } if (strcmp($rezervacija['Ocena'], "0") && !strcmp($rezervacija['Status'], "Ostvarena")) {
+                                                $ispis = $ispis = '<div class="col-sm-12"  style="background-color: hsla(35, 8%, 14%, 0.96); color: hsla(35, 84%, 51%, 0.96)";>Ovu rezervaciju ocenili ste ocenom : ' . $rezervacija['Ocena'] . '</div>';
+                                            }
+
+
+
+                                            if (!strcmp($rezervacija['Status'], "Otkazana")) {
+
+                                                $ispis = "<div class='col-sm-12'>   </div> ";
+                                            }
+                                            echo $ispis;
+                                            ?>
+
+
+                                    <hr/>
                                     </div>
-                                </div>
-                            </div>
-                        <?php } ?> 
+                               
 
-
-                    </div>
-                </div>    
-            </div>
-            <div class="row">
-                &nbsp;
-            </div>
+                            </form>
+                        </div>
+                         <?php } ?>  
+                    </div>    
+                </div>
+                <div class="row">
+                    &nbsp;
+                </div>
 
         </section>
 

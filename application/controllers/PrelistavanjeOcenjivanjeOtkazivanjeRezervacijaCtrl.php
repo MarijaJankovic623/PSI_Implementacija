@@ -11,24 +11,50 @@
  *
  * @author Marija
  */
-class PrelistavanjeOcenjivanjeOtkazivanjeRezervacijaCtrl  extends CI_Controller{
-    
+class PrelistavanjeOcenjivanjeOtkazivanjeRezervacijaCtrl extends CI_Controller {
+
     public function index() {
         $this->load->model('UserValidationModel');
         $this->UserValidationModel->checkSession();
         $this->load->model('BusinessLogic');
 
-        $data['rezervacije'] = $this->BusinessLogic->getAllReservations( $this->session->userdata('userid'));
-   
+        $data['rezervacije'] = $this->BusinessLogic->getAllReservations($this->session->userdata('userid'));
+
         $this->load->view('PrelistavanjeOcenjivanjeOtkazivanjeRezervacijaView', $data);
     }
 
-    public function restoranDetails($id) {
+    public function rezervacijaCancelGrade($id) {
         $this->load->model('UserValidationModel');
         $this->UserValidationModel->checkSession();
         $this->load->model('BusinessLogic');
-        
-        $data['restoran'] = $this->BusinessLogic->getRestaurant($id);
-        $this->load->view('RezervisanjeStolaView', $data);
-    }
+
+        if (isset($_POST['oceniDugme'])) {
+
+            $input = $this->input;
+            $rezervacija = array(
+                "idrezervacija" => $id,
+                "ocena" => $input->post('ocena'),
+            );
+
+            $this->BusinessLogic->rezervacijaGrade($rezervacija);
+
+            $data['rezervacije'] = $this->BusinessLogic->getAllReservations($this->session->userdata('userid'));
+
+            $this->load->view('PrelistavanjeOcenjivanjeOtkazivanjeRezervacijaView', $data);
+            
+        } else if (isset($_POST['otkaziDugme'])) {
+
+            $input = $this->input;
+            $rezervacija = array(
+                "idrezervacija" => $id,
+            );
+
+            $this->BusinessLogic->rezervacijaCancel($rezervacija);
+
+            $data['rezervacije'] = $this->BusinessLogic->getAllReservations($this->session->userdata('userid'));
+
+            $this->load->view('PrelistavanjeOcenjivanjeOtkazivanjeRezervacijaView', $data);
+    }}
+    
+
 }
