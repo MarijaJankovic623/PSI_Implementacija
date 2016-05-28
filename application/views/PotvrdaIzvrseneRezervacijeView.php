@@ -1,4 +1,4 @@
-<!-- Jovana Djunisijevic -->
+<!--Ivana Djunisijevic-->
 <!doctype html>
 <!--[if IE 7 ]>    <html lang="en-gb" class="isie ie7 oldie no-js"> <![endif]-->
 <!--[if IE 8 ]>    <html lang="en-gb" class="isie ie8 oldie no-js"> <![endif]-->
@@ -14,7 +14,7 @@
     <![endif]-->
 <title>Restooking - It's restaurants and booking.</title>
 <meta name="description" content="">
-<meta name="author" content="Jovana Djunisijevic">
+<meta name="author" content="Ivana Djunisijevic">
 <!--[if lt IE 9]>
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -46,8 +46,10 @@
       <!--/.navbar-header-->
       <div id="main-nav" class="collapse navbar-collapse">
         <ul class="nav navbar-nav" id="mainNav">
-
-           <li><a href="<?php echo base_url(); ?>index.php/BrisanjeKorisnikaCtrl" class="scroll-link">Korisnici</a></li>
+          
+          <li><a href="" class="scroll-link"></a></li>  
+          <li><a href="" class="scroll-link"></a></li>
+           <li><a href="<?php echo base_url(); ?>index.php/OznacavanjeStolaZauzetimCtrl" class="scroll-link">Rezervisi</a></li>
           <li><a href="<?php echo base_url(); ?>" class="scroll-link">Moj profil</a></li>
           <li><a href="<?php echo base_url(); ?>" class="scroll-link">Izloguj se </a></li>
         </ul>
@@ -92,35 +94,38 @@
   </div>
 </section>
 
-                     
-                     
-                     
-                
-            </div>
-            <div class="col-sm-9">
-                <?php foreach ($korisnici as $korisnik) { ?>
-                            <div class="jumbotron" style="background-color:rgba(237, 231, 227, 0.87)">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                            <img src="<?php echo base_url(); ?>images/Djune.jpg" class="img-circle" alt="Cinque Terre" width="304" height="236">
+<section>
+    <div clas="container">
+        <div class="row">
+            &nbsp;
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <?php foreach ($rezervacije as $rez) { ?>
+                <div class="jumbotron" style="background-color:rgba(237, 231, 227, 0.87)">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <img src="<?php echo base_url(); ?>images/slides/1.jpg" class="img-circle" alt="Cinque Terre" width="304" height="236">
                         </div>
                         <div class="col-sm-8">
                             <h2>
-                                <?php echo $korisnik['Ime'].' '.$korisnik['Prezime']?>
+                                <?php echo $restoran; ?>
                             </h2>
-                            <p>
-                                bla bla bla bla blabla bla bla bla blabla bla bla bla bla
-                                bla bla bla bla blabla bla bla bla blabla bla bla bla blabla bla bla bla blabla bla bla bla blabla bla bla bla blabla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
-                            </p>
-                        </div>
+							<h3>Pocetak rezervacije: <?php echo $rez['VremeOd']; ?></h3>
+							<h3>Kraj rezervacije: <?php echo $rez['VremeDo']; ?></h3> 
+                            <h3>Broj ljudi: <?php echo $rez['brojLjudi']; ?> </h3>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <a href="<?php echo base_url().'index.php/PotvrdaIzvrseneRezervacijeCtrl/potvrdi/'.$rez['IDRezervacija']; ?>" class="btn btn-warning btn-lg btn-block" >Rezervacija ostvarena</a>
                                 </div>
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <a href="<?php echo base_url().'index.php/BrisanjeKorisnikaCtrl/check/'.$korisnik['IDKorisnik']; ?>" class="btn btn-warning btn-lg">Obrisi korisnika</a>
-                                    </div>
-                                </div>
+						
                             </div>
-                        <?php } ?>  
+                        </div>
+                    </div>
+                    
+                </div>
+                <?php } ?> 
+                
                 
             </div>
         </div>    
@@ -129,7 +134,7 @@
             &nbsp;
         </div>
     
-
+</section>
  
 
 
@@ -137,7 +142,7 @@
 <section class="copyright">
   <div class="container">
     <div class="row">
-      <div class="col-sm-12 text-center"> Copyright 2016 <a href="http://etf.bg.ac.rs">ETF Belgrade</a> </div>
+      <div class="col-sm-12 text-center"> Copyright 2016 <a href="<?php echo base_url(); ?>http://etf.bg.ac.rs">ETF Belgrade</a> </div>
     </div>
     <!-- / .row --> 
   </div>
