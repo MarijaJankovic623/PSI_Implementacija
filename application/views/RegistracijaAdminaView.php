@@ -107,9 +107,9 @@
                         <?php echo form_error('lastname'); ?>
                         <label for="">Prezime</label>
                         <input type="text" class="form-control" name="lastname" placeholder="Unesite vase Prezime ovde">
-                        <?php echo form_error('mail'); ?>
+                        <?php echo form_error('email'); ?>
                         <label for="">Email</label>
-                        <input type="text" class="form-control" name="mail" placeholder="Unesite vas email ovde">
+                        <input type="text" class="form-control" name="email" placeholder="Unesite vas email ovde">
                         <?php echo form_error('code'); ?>
 						<label for="">Specijalan kod</label>
                         <input type="text" class="form-control" name="code" placeholder="Unesite specijalan kod dobijen od glavnog admina">

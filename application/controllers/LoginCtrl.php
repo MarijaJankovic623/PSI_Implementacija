@@ -31,8 +31,11 @@ class LoginCtrl extends CI_Controller {
                 $id=$this->session->userdata('userid');
                 redirect("OtpustanjeKonobaraCtrl/profil/$id");
             }
-            if ($this->session->userdata('admin'))
-                redirect('BrisanjeKorisnikaCtrl/pogled');
+            if ($this->session->userdata('admin')) {
+                $this->load->model('BusinessLogic');
+                $data['user']=$this->BusinessLogic->getUser($this->session->userdata('userid'));
+                $this->load->view('ProfilAdminaView', $data);
+            }
            
                
         } else {

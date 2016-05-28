@@ -22,7 +22,7 @@ class RegistracijaAdminaCtrl extends CI_Controller{
             "password"=>$input->post('password'),
             "ime"=>$input->post('name'),
             "prezime"=>$input->post('lastname'),
-            "email"=>$input->post('mail'),
+            "email"=>$input->post('email'),
             "kod"=>$input->post('code')
         
         );

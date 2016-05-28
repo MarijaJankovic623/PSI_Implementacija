@@ -48,6 +48,15 @@ class EditovanjeNalogaCtrl extends CI_Controller {
         $data['user']=$this->BusinessLogic->getUser($this->session->userdata('userid'));
         $this->load->view('ProfilKonobaraView', $data);
     }
+    
+    public function profileAdmin() {
+        $this->load->model('UserValidationModel');
+        $this->UserValidationModel->checkSession();
+        $this->load->model('BusinessLogic');
+        $data['user']=$this->BusinessLogic->getUser($this->session->userdata('userid'));
+        $this->load->view('ProfilAdminaView', $data);
+    }
+    
     public function confirm() {
         $this->load->model('UserValidationModel');
         if ($this->session->userdata('korisnik')) {
@@ -68,7 +77,7 @@ class EditovanjeNalogaCtrl extends CI_Controller {
                 $this->load->view('EditNalogaKorisnikView', $data);
             }
         }
-        if ($this->session->userdata('restoran')) {
+        else if ($this->session->userdata('restoran')) {
             $input = $this->input;
             $restoran = array(
                 "lozinka" => $input->post('lozinka'),
@@ -94,7 +103,7 @@ class EditovanjeNalogaCtrl extends CI_Controller {
                 $this->load->view('EditNalogaRestoranView', $data);
             }
         }
-        if ($this->session->userdata('konobar')) {
+        else if ($this->session->userdata('konobar')) {
             $input = $this->input;
             $konobar = array(
                 "name" => $input->post('name'),
@@ -103,13 +112,31 @@ class EditovanjeNalogaCtrl extends CI_Controller {
                 "email" => $input->post('email')
             );
             $this->load->model('BusinessLogic');
-            $data['user']=$this->BusinessLogic->getUser($this->session->userdata('userid'));
             $id=$this->session->userdata('userid');
             if ($this->UserValidationModel->updateWaiter($konobar, $id)) {
+                $data['user']=$this->BusinessLogic->getUser($this->session->userdata('userid'));
                 $this->load->view('ProfilKonobaraView', $data);
             }
             else {
                 $this->load->view('EditNalogaKonobarView', $data);
+            }
+        }
+        else if ($this->session->userdata('admin')) {
+            $input=$this->input;
+            $admin=array(
+                "password"=>$input->post('password'),
+                "ime"=>$input->post('name'),
+                "prezime"=>$input->post('lastname'),
+                "email"=>$input->post('email')
+            );
+            $this->load->model('BusinessLogic');
+            $id=$this->session->userdata('userid');
+            if ($this->UserValidationModel->updateAdmin($admin, $id)) {
+                $data['user']=$this->BusinessLogic->getUser($this->session->userdata('userid'));
+                $this->load->view('ProfilAdminaView', $data);
+            }
+            else {
+                $this->load->view('EditNalogaAdminView', $data);
             }
         }
     }

@@ -35,7 +35,7 @@ class BusinessLogic extends CI_Model {
             $stmt->prepare("SELECT * FROM konobar WHERE IDKonobar=?");
         }
         if ($this->session->userdata('admin')) {
-            $stmt->prepare("SELECT * FROM korisnik WHERE IDKorisnik=?");
+            $stmt->prepare("SELECT * FROM admin WHERE IDAdmin=?");
         }
         $stmt->bind_param("i", $id);
         $stmt->execute();

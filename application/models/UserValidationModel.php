@@ -105,8 +105,10 @@ class UserValidationModel extends CI_Model {
         $stmt->bind_param("ss", $kime, $lozinka); 
         $stmt->execute();
 
-        if ($stmt->get_result()->num_rows > 0) {
+        $res = $stmt->get_result()->fetch_assoc();
+        if (isset($res['IDAdmin'])) {
             $data = array(
+                'userid' => $res['IDAdmin'],
                 'username' => $kime,
                 'loggedIn' => true,
                 'admin' => true,
@@ -398,7 +400,7 @@ class UserValidationModel extends CI_Model {
         $this->form_validation->set_rules('password', 'lozinka', 'trim|required|min_length[4]|max_length[32]');
         $this->form_validation->set_rules('name', 'ime admina', 'required|max_length[15]');
         $this->form_validation->set_rules('lastname', 'prezime admina', 'required|max_length[15]');
-        $this->form_validation->set_rules('mail', 'email', 'required|valid_email');
+        $this->form_validation->set_rules('email', 'email', 'required|valid_email');
         $this->form_validation->set_rules('code', 'kod', 'required|trim');
         
         $conn = $this->my_database->conn;
@@ -412,10 +414,32 @@ class UserValidationModel extends CI_Model {
         if ($this->form_validation->run()== FALSE || $result==NULL){
             return false;
         }else{
-            /*$conn=$this->my_database->conn;
-            $stmt=$this->stmt_init();*/
+            $conn=$this->my_database->conn;
+            $stmt=$conn->stmt_init();
             $stmt->prepare("INSERT INTO admin(KIme,Lozinka,Ime,Prezime,Email,KodAdmina)VALUES(?,?,?,?,?,?)");
             $stmt->bind_param("sssssi", $admin['username'], $admin['password'], $admin['ime'], $admin['prezime'], $admin['email'], $admin['kod']);
+            $stmt->execute();
+            return true;
+        }
+    }
+    
+    public function updateAdmin($admin, $id) {
+        $this->load->library('form_validation');
+        $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+        
+        $this->load->database();
+        $this->form_validation->set_rules('password', 'lozinka', 'trim|required|min_length[4]|max_length[32]');
+        $this->form_validation->set_rules('name', 'ime admina', 'required|max_length[15]');
+        $this->form_validation->set_rules('lastname', 'prezime admina', 'required|max_length[15]');
+        $this->form_validation->set_rules('email', 'email', 'required|valid_email');
+        
+        if ($this->form_validation->run()== FALSE){
+            return false;
+        }else{
+            $conn=$this->my_database->conn;
+            $stmt=$conn->stmt_init();
+            $stmt->prepare("UPDATE admin SET Lozinka=?,Ime=?,Prezime=?,Email=? WHERE IDAdmin=?");
+            $stmt->bind_param("ssssi", $admin['password'], $admin['ime'], $admin['prezime'], $admin['email'], $id);
             $stmt->execute();
             return true;
         }

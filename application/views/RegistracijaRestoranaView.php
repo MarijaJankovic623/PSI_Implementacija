@@ -58,27 +58,26 @@
         <section id="home">
             <div class="banner-container"> 
                 <!-- Slider -->
-                <div id="main-slider" class="flexslider">
-                    <ul class="slides">
-                        <li>
-                            <img src="<?php echo(base_url()); ?>images/slides/1.jpg" alt="" />
-                            <div class="flex-caption">
-                                <h3>Best app on the market</h3>  
-                            </div>
-                        </li>
-                        <li>
-                            <img src="<?php echo(base_url()); ?>images/slides/2.jpg" alt="" />
-                            <div class="flex-caption">
-                                <h3>Variety of foods</h3>   
-                            </div>
-                        </li>
-                        <li>
-                            <img src="<?php echo(base_url()); ?>images/slides/3.jpg" alt="" />
-                            <div class="flex-caption">
-                                <h3>Amazing ambiance</h3>  
-                            </div>
-                        </li>
-                    </ul>
+                <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#myCarousel" data-slide-to="1"></li>
+                        <li data-target="#myCarousel" data-slide-to="2"></li>
+                    </ol>
+
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner" role="listbox">
+                        <div class="item active" > 
+                            <img src="<?php echo base_url(); ?>images/slides/1.jpg" alt="Chania">
+                        </div>
+                        <div class="item">
+                            <img src="<?php echo base_url(); ?>images/slides/2.jpg" alt="Chania">
+                        </div>
+                        <div class="item">
+                            <img src="<?php echo base_url(); ?>images/slides/3.jpg" alt="Flower">
+                        </div>
+                    </div>
                 </div>
                 <!-- end slider -->
             </div>
