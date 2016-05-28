@@ -21,10 +21,10 @@ class BusinessLogic extends CI_Model {
         $result = $conn->query("SELECT * FROM restoran");
         return $result->fetch_all(MYSQLI_ASSOC);
     }
-    
+
     public function getUser($id) {
-        $conn=$this->my_database->conn;
-        $stmt=$conn->stmt_init();
+        $conn = $this->my_database->conn;
+        $stmt = $conn->stmt_init();
         if ($this->session->userdata('korisnik')) {
             $stmt->prepare("SELECT * FROM korisnik WHERE IDKorisnik=?");
         }
@@ -40,33 +40,32 @@ class BusinessLogic extends CI_Model {
         $stmt->bind_param("i", $id);
         $stmt->execute();
     }
-    
+
     public function getAllWaiters($id) {
-        $conn=$this->my_database->conn;
-        $result=$conn->query("SELECT * FROM konobar WHERE IDRestoranFK = ".$id);
+        $conn = $this->my_database->conn;
+        $result = $conn->query("SELECT * FROM konobar WHERE IDRestoranFK = " . $id);
         return $result->fetch_all(MYSQLI_ASSOC);
     }
-    
+
     public function deleteWaiter($id) {
-        $conn=$this->my_database->conn;
-        $stmt=$conn->stmt_init();
+        $conn = $this->my_database->conn;
+        $stmt = $conn->stmt_init();
         $stmt->prepare("DELETE FROM konobar WHERE IDKonobar=?");
         $stmt->bind_param("i", $id);
         $stmt->execute();
-        
-        $test=$conn->stmt_init();
+
+        $test = $conn->stmt_init();
         $test->prepare("SELECT * FROM konobar WHERE IDKonobar=?");
         $test->bind_param("i", $id);
         $test->execute();
-        
-        if($test->get_result()->num_rows>0) {
+
+        if ($test->get_result()->num_rows > 0) {
             return false;
-        }
-        else {
+        } else {
             return true;
         }
     }
-    
+
     /**
      * 
      * @param string $id represents restaurants primary key 
@@ -93,7 +92,7 @@ class BusinessLogic extends CI_Model {
         $sto = $stmt->get_result()->fetch_assoc();
         if (isset($sto['IDSto'])) {
             $userid = $this->session->userdata('userid');
-            
+
             $conn = $this->my_database->conn;
             $stmt = $conn->stmt_init();
             $stmt->prepare("INSERT INTO rezervacija(IDStoFK,IDKorisnikFK,VremeOd,VremeDo) VALUES(?,?,?,?)");
@@ -107,28 +106,27 @@ class BusinessLogic extends CI_Model {
         return false;
     }
 
-    public function getAllUsers(){
+    public function getAllUsers() {
         $conn = $this->my_database->conn;
         $result = $conn->query("SELECT * FROM korisnik");
         return $result->fetch_all(MYSQLI_ASSOC);
     }
-    
-    public function deleteUser($idUser){
-        $conn=$this->my_database->conn;
-        $stmt=$conn->stmt_init();
+
+    public function deleteUser($idUser) {
+        $conn = $this->my_database->conn;
+        $stmt = $conn->stmt_init();
         $stmt->prepare("DELETE FROM korisnik WHERE IDKorisnik=?");
         $stmt->bind_param("i", $idUser);
         $stmt->execute();
-        
-        $result=$conn->stmt_init();
+
+        $result = $conn->stmt_init();
         $result->prepare("SELECT * FROM korisnik WHERE IDKorisnik=?");
         $result->bind_param("i", $idUser);
         $result->execute();
-        
-        if($result->get_result()->num_rows>0){
+
+        if ($result->get_result()->num_rows > 0) {
             return false;
-        }
-        else{
+        } else {
             return true;
         }
     }
@@ -258,4 +256,32 @@ class BusinessLogic extends CI_Model {
         return $restoran['ImeObjekta'];
     }
     
+
+    public function getAllReservations($idUser) {
+        $conn = $this->my_database->conn;
+        $stmt = $conn->stmt_init();
+        $result = $conn->query("CALL sve_rezervacije(" . $idUser . ")");
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function rezervacijaGrade($rezervacija) {
+        $conn = $this->my_database->conn;
+        $stmt = $conn->stmt_init();
+
+        $stmt->prepare("UPDATE rezervacija SET Ocena = ?  WHERE IDRezervacija=?");
+        $stmt->bind_param("ii", $rezervacija['ocena'], $rezervacija['idrezervacija']);
+        $stmt->execute();
+    }
+
+    public function rezervacijaCancel($rezervacija) {
+
+        $conn = $this->my_database->conn;
+        $stmt = $conn->stmt_init();
+
+        $stmt->prepare("UPDATE rezervacija SET Status = 'Otkazana'  WHERE IDRezervacija=?");
+        $stmt->bind_param("i",$rezervacija['idrezervacija']);
+        $stmt->execute();
+    }
+
 }
