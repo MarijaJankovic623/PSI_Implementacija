@@ -62,5 +62,31 @@ class EditovanjeNalogaCtrl extends CI_Controller {
                 $this->load->view('EditNalogaKorisnikView', $data);
             }
         }
+        if ($this->session->userdata('restoran')) {
+            $input = $this->input;
+            $restoran = array(
+                "lozinka" => $input->post('lozinka'),
+                "iobj" => $input->post('iobj'),
+                "ivlasnika" => $input->post('ivlasnika'),
+                "pvlasnika" => $input->post('pvlasnika'),
+                "email" => $input->post('email'),
+                "opis" =>$input->post('opis'),
+                "kuhinje" => $input->post('kuhinje'),
+                "opstina" =>$input->post('opstina'),
+                "kod" => $input->post('kod'),
+                "sto2" => $input->post('sto_2'),
+                "sto4" => $input->post('sto_4'),
+                "sto6" => $input->post('sto_6'),
+            );
+            $id=$this->session->userdata('userid');
+            if ($this->UserValidationModel->updateRestaurant($restoran, $id)) {
+                redirect('OtpustanjeKonobaraCtrl/profil/'.$id);
+            }
+            else {
+                $this->load->model('BusinessLogic');
+                $data['user']=$this->BusinessLogic->getUser($this->session->userdata('userid'));
+                $this->load->view('EditNalogaRestoranView', $data);
+            }
+        }
     }
 }

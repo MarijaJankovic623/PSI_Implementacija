@@ -174,7 +174,101 @@ class UserValidationModel extends CI_Model {
             return true;
         }
     }
+    
+    public function updateRestaurant($restoran, $id) {
+        $this->load->library('form_validation');
+        $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+        $this->load->database();
+        
+        $this->form_validation->set_rules('lozinka', 'lozinka', 'trim|required|min_length[4]|max_length[32]');
+        $this->form_validation->set_rules('iobj', 'ime objekta', 'required');
+        $this->form_validation->set_rules('ivlasnika', 'ime vlasnika', 'required|max_length[15]');
+        $this->form_validation->set_rules('pvlasnika', 'prezime vlasnika', 'required|max_length[15]');
+        $this->form_validation->set_rules('email', 'email', 'required|valid_email');
+        
+        if ($this->form_validation->run() == FALSE) {
+            return false;
+        } else {
+            $conn = $this->my_database->conn;
+            $stmt = $conn->stmt_init();
+            $stmt->prepare("UPDATE restoran SET Lozinka=?,ImeObjekta=?,ImeVlasnika=?,PrezimeVlasnika=?,Email=?,Opis=?,Kuhinja=?,Opstina=?,KodKonobara=? WHERE IDRestoran=?");
+            $stmt->bind_param("ssssssssii", $restoran['lozinka'], $restoran['iobj'], $restoran['ivlasnika'], $restoran['pvlasnika'], $restoran['email'],$restoran['opis'],$restoran['kuhinje'],$restoran['opstina'],$restoran['kod'], $id);
+            $stmt->execute();
+            $restoranId = $stmt->insert_id;
 
+            if (is_numeric($restoran['sto2'])) {
+                $this->TableForTwo($restoran, $id);
+            }
+            if (is_numeric($restoran['sto4'])) {
+                $this->TableForFour($restoran, $id);
+            }
+            if (is_numeric($restoran['sto6'])) {
+                $this->TableForSix($restoran, $id);
+            }
+            return true;
+        }
+    }
+    
+    public function TableForTwo($restoran, $id) {
+        $conn = $this->my_database->conn;
+        $stmt = $conn->stmt_init();
+        $param['broj']=2;
+        $stmt->prepare("SELECT * FROM sto WHERE IDRestoranFK=? AND BrojOsoba=?");
+        $stmt->bind_param("ii", $id, $param['broj']);
+        $stmt->execute();
+        $result=$stmt->get_result()->num_rows;
+        if ($result>$restoran['sto2']) {
+            for ($i = 1; $i <= ($result-$restoran['sto2']); $i++) {
+                $this->deleteSto(2, $id);
+            }
+        }
+        else if ($result<$restoran['sto2']) {
+            for ($i=1; $i<=($restoran['sto2']-$result); $i++) {
+                $this->createSto(2, $id);
+            }
+        }
+    }
+    
+    public function TableForFour($restoran, $id) {
+        $conn = $this->my_database->conn;
+        $stmt = $conn->stmt_init();
+        $param['broj']=4;
+        $stmt->prepare("SELECT * FROM sto WHERE IDRestoranFK=? AND BrojOsoba=?");
+        $stmt->bind_param("ii", $id, $param['broj']);
+        $stmt->execute();
+        $result=$stmt->get_result()->num_rows;
+        if ($result>$restoran['sto4']) {
+            for ($i = 1; $i <= ($result-$restoran['sto4']); $i++) {
+                $this->deleteSto(4, $id);
+            }
+        }
+        else if ($result<$restoran['sto4']) {
+            for ($i=1; $i<=($restoran['sto4']-$result); $i++) {
+                $this->createSto(4, $id);
+            }
+        }
+    }
+    
+    public function TableForSix($restoran, $id) {
+        $conn = $this->my_database->conn;
+        $stmt = $conn->stmt_init();
+        $param['broj']=6;
+        $stmt->prepare("SELECT * FROM sto WHERE IDRestoranFK=? AND BrojOsoba=?");
+        $stmt->bind_param("ii", $id, $param['broj']);
+        $stmt->execute();
+        $result=$stmt->get_result()->num_rows;
+        if ($result>$restoran['sto6']) {
+            for ($i = 1; $i <= ($result-$restoran['sto6']); $i++) {
+                $this->deleteSto(6, $id);
+            }
+        }
+        else if ($result<$restoran['sto6']) {
+            for ($i=1; $i<=($restoran['sto6']-$result); $i++) {
+                $this->createSto(6, $id);
+            }
+        }
+    }
+    
     public function createSto($brojOsoba, $restoranId) {
         $conn = $this->my_database->conn;
         $stmt = $conn->stmt_init();
@@ -182,7 +276,15 @@ class UserValidationModel extends CI_Model {
         $stmt->bind_param("ii", $restoranId, $brojOsoba);
         $stmt->execute();
     }
-
+    
+    public function deleteSto($brojOsoba, $id) {
+        $conn = $this->my_database->conn;
+        $stmt = $conn->stmt_init();
+        $stmt->prepare("DELETE FROM sto WHERE IDRestoranFK=? AND BrojOsoba=? LIMIT 1");
+        $stmt->bind_param("ii", $id, $brojOsoba);
+        $stmt->execute();
+    }
+    
     public function validateCreateKorisnik($kor) {
         $this->load->library('form_validation');
         $this->form_validation->set_error_delimiters('<div class="error">', '</div>');

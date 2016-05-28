@@ -80,7 +80,17 @@ class BusinessLogic extends CI_Model {
         $result = $conn->query("SELECT * FROM restoran WHERE IDRestoran = " . $id);
         return $result->fetch_assoc();
     }
-
+    
+    public function getNumberOfTables($id, $n) {
+        $conn = $this->my_database->conn;
+        $stmt = $conn->stmt_init();
+        $stmt->prepare("SELECT * FROM sto WHERE IDRestoranFK=? AND BrojOsoba=?");
+        $stmt->bind_param("ii", $id, $n);
+        $stmt->execute();
+        $result=$stmt->get_result()->num_rows;
+        return $result;
+    }
+    
     public function reserveTable($idRestorana, $brLjudi, $vremeOd, $vremeDo) {
         $brLjudi = ($brLjudi <= 2)? 2:($brLjudi<=4)? 4: 6;//ovo je jer u bazi stoje 2 4 ili 6 za kapacitete stolova
         $vremeOd = date("Y-m-d h:i", strtotime($vremeOd));
