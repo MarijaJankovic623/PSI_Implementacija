@@ -235,6 +235,7 @@ class BusinessLogic extends CI_Model {
         $rezer = $conn->query("SELECT * FROM rezervacija");
         $rezervacije = $rezer->fetch_all(MYSQLI_ASSOC);
         $index = 0;
+        $data = array();
         foreach ($stolovi as $sto) {
             foreach ($rezervacije as $rez) {
                 if ($sto['IDSto'] == $rez['IDStoFK']) {

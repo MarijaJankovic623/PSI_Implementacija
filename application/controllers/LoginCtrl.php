@@ -25,7 +25,7 @@ class LoginCtrl extends CI_Controller {
                 redirect('PrelistavanjeRestoranaCtrl/index');
             
             if ($this->session->userdata('konobar'))
-                redirect('OznacavanjeStolaZauzetimCtrl/index');
+                redirect('EditovanjeNalogaCtrl/profileWaiter');
             
             if ($this->session->userdata('restoran')) {
                 $id=$this->session->userdata('userid');

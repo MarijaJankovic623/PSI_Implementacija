@@ -44,11 +44,11 @@
                     <!--/.navbar-header-->
                     <div id="main-nav" class="collapse navbar-collapse">
                         <ul class="nav navbar-nav" id="mainNav">
-                            <li ><a href =" <?php echo base_url(); ?>" class="">Rezervisi</a></li>
-                            <li ><a href =" <?php echo base_url(); ?>" class="">Potvrdi</a></li>
-                            <li ><a href =" <?php echo base_url(); ?>index.php/EditovanjeNalogaCtrl/profileWaiter" class="">Moj profil</a></li>
-                            <li class="active"><a href =" <?php echo base_url(); ?>index.php/EditovanjeNalogaCtrl/profileWaiter" class="">Napusti izmenu</a></li>                            
-                            <li ><a href ="<?php echo base_url().'index.php/LogoutCtrl';?>" class="">Izloguj se</a></li>
+                            <li><a href="<?php echo base_url() . 'index.php/OznacavanjeStolaZauzetimCtrl'; ?>" class="">Zauzmi sto</a></li>
+                            <li><a href="<?php echo base_url() . 'index.php/PotvrdaIzvrseneRezervacijeCtrl'; ?>" class="">Potvrdi rezervaciju</a></li>
+                            <li><a href="<?php echo base_url() . 'index.php/EditovanjeNalogaCtrl/profileWaiter'; ?>" class="scroll-link">Moj profil</a></li>
+                            <li class="active"><a href="<?php echo base_url() . 'index.php/EditovanjeNalogaCtrl'; ?>" class="scroll-link">Izmeni profil</a></li>
+                            <li><a href="<?php echo base_url() . 'index.php/LogoutCtrl'; ?>" class="scroll-link">Izloguj se </a></li>
                         </ul>
                     </div>
                     <!--/.navbar-collapse--> 

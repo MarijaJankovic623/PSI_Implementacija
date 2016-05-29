@@ -43,9 +43,10 @@
                     <!--/.navbar-header-->
                     <div id="main-nav" class="collapse navbar-collapse">
                         <ul class="nav navbar-nav" id="mainNav">
-                            <li><a href="<?php echo base_url(); ?>index.php/OznacavanjeStolaZauzetimCtrl" class="scroll-link">Rezervisi</a></li>
-                            <li><a href="<?php echo base_url(); ?>index.php/PotvrdaIzvrseneRezervacijeCtrl" class="scroll-link">Potvrdi</a></li>
-                            <li><a href="<?php echo base_url(); ?>" class="scroll-link">Moj profil</a></li>
+                            <li><a href="<?php echo base_url() . 'index.php/OznacavanjeStolaZauzetimCtrl'; ?>" class="scroll-link">Zauzmi sto</a></li>
+                            <li><a href="<?php echo base_url() . 'index.php/PotvrdaIzvrseneRezervacijeCtrl'; ?>" class="scroll-link">Potvrdi rezervaciju</a></li>
+                            <li><a href="<?php echo base_url() . 'index.php/EditovanjeNalogaCtrl/profileWaiter'; ?>" class="scroll-link">Moj profil</a></li>
+                            <li><a href="<?php echo base_url() . 'index.php/EditovanjeNalogaCtrl'; ?>" class="scroll-link">Izmeni profil</a></li>
                             <li><a href="<?php echo base_url() . 'index.php/LogoutCtrl'; ?>" class="scroll-link">Izloguj se </a></li>
                         </ul>
                     </div>
@@ -83,9 +84,7 @@
                 </div>
                 <!-- end slider -->
             </div>
-            <div class="container hero-text2">
-                <h3>Lorem ipsum dolor sit amet, ea eum labitur scsstie percipitoleat<br/> fabulas complectitur deterruisset at pro</h3>
-            </div>
+       
         </section>
 
         <section>
@@ -94,9 +93,8 @@
                     &nbsp;
                 </div>
                 <div class="row">
-                    <div class="col-sm-8 col-sm-offset-2" >
-                        <font size = '8'><b><?php echo $poruka ?></b></font> 
-                        <!--/.Poruka je ovde napisana statički samo zbog slike za protitip, inače će dinamički ubacivati u zavisnosti od ishoda-->
+                    <div class="col-sm-8 col-sm-offset-4" >
+                        <h2><?php echo $poruka ?></h2>
                     </div>
                 </div>
                 <div class="row">

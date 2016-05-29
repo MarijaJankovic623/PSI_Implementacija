@@ -46,11 +46,10 @@
                     <!--/.navbar-header-->
                     <div id="main-nav" class="collapse navbar-collapse">
                         <ul class="nav navbar-nav" id="mainNav">
-
-                            <li><a href="" class="scroll-link"></a></li>  
-                            <li><a href="" class="scroll-link"></a></li>
-                            <li><a href="<?php echo base_url(); ?>index.php/OznacavanjeStolaZauzetimCtrl" class="scroll-link">Rezervisi</a></li>
-                            <li><a href="<?php echo base_url(); ?>" class="scroll-link">Moj profil</a></li>
+                            <li><a href="<?php echo base_url() . 'index.php/OznacavanjeStolaZauzetimCtrl'; ?>" class="scroll-link">Zauzmi sto</a></li>
+                            <li class="active"><a href="<?php echo base_url() . 'index.php/PotvrdaIzvrseneRezervacijeCtrl'; ?>" class="scroll-link">Potvrdi rezervaciju</a></li>
+                            <li><a href="<?php echo base_url() . 'index.php/EditovanjeNalogaCtrl/profileWaiter'; ?>" class="scroll-link">Moj profil</a></li>
+                            <li><a href="<?php echo base_url() . 'index.php/EditovanjeNalogaCtrl'; ?>" class="scroll-link">Izmeni profil</a></li>
                             <li><a href="<?php echo base_url() . 'index.php/LogoutCtrl'; ?>" class="scroll-link">Izloguj se </a></li>
                         </ul>
                     </div>
