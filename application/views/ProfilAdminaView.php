@@ -89,9 +89,7 @@
                 </div>
                 <!-- end slider -->
             </div>
-            <div class="container hero-text2">
-                <h3>Lorem ipsum dolor sit amet, ea eum labitur scsstie percipitoleat<br/> fabulas complectitur deterruisset at pro</h3>
-            </div>
+
         </section>
         <section>
             <div class="container">

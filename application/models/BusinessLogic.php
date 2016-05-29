@@ -39,8 +39,8 @@ class BusinessLogic extends CI_Model {
         }
         $stmt->bind_param("i", $id);
         $stmt->execute();
-        
-        $res=$stmt->get_result()->fetch_assoc();
+
+        $res = $stmt->get_result()->fetch_assoc();
         return $res;
     }
 
@@ -79,23 +79,48 @@ class BusinessLogic extends CI_Model {
         $result = $conn->query("SELECT * FROM restoran WHERE IDRestoran = " . $id);
         return $result->fetch_assoc();
     }
-    
+
     public function getNumberOfTables($id, $n) {
         $conn = $this->my_database->conn;
         $stmt = $conn->stmt_init();
         $stmt->prepare("SELECT * FROM sto WHERE IDRestoranFK=? AND BrojOsoba=?");
         $stmt->bind_param("ii", $id, $n);
         $stmt->execute();
-        $result=$stmt->get_result()->num_rows;
+        $result = $stmt->get_result()->num_rows;
         return $result;
     }
-    
-    public function reserveTable($idRestorana, $brLjudi, $vremeOd, $vremeDo) {
-        if($brLjudi<=2) $brljudi=2;
-        else if($brLjudi>2 && $brLjudi<=4) $brLjudi=4;
-            else if($brLjudi>4 && $brLjudi<=6) $brLjudi=6;
+
+    public function getCriteriaRestaurants($opstina, $brLjudi, $vremeOd, $vremeDo) {
+        if ($brLjudi <= 2)
+            $brLjudi = 2;
+        else if ($brLjudi > 2 && $brLjudi <= 4)
+            $brLjudi = 4;
+        else if ($brLjudi > 4 && $brLjudi <= 6)
+            $brLjudi = 6;
+        
         $vremeOd = date("Y-m-d h:i", strtotime($vremeOd));
         $vremeDo = date("Y-m-d h:i", strtotime($vremeDo));
+        
+        $conn = $this->my_database->conn;
+        $stmt = $conn->stmt_init();
+        $stmt->prepare("CALL slobodni_stolovi_restorani(?,?,?,?)");
+        $stmt->bind_param("siss", $opstina,$brLjudi,$vremeOd,$vremeDo);
+        $stmt->execute();
+        
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function reserveTable($idRestorana, $brLjudi, $vremeOd, $vremeDo) {
+        if ($brLjudi <= 2)
+            $brLjudi = 2;
+        else if ($brLjudi > 2 && $brLjudi <= 4)
+            $brLjudi = 4;
+        else if ($brLjudi > 4 && $brLjudi <= 6)
+            $brLjudi = 6;
+        
+        $vremeOd = date("Y-m-d h:i", strtotime($vremeOd));
+        $vremeDo = date("Y-m-d h:i", strtotime($vremeDo));
+        
         $conn = $this->my_database->conn;
         $stmt = $conn->stmt_init();
         $stmt->prepare("CALL slobodni_stolovi(?,?,?,?)");
@@ -108,7 +133,7 @@ class BusinessLogic extends CI_Model {
 
             $conn = $this->my_database->conn;
             $stmt = $conn->stmt_init();
-            $stmt->prepare("INSERT INTO rezervacija(IDStoFK,IDKorisnikFK,VremeOd,VremeDo) VALUES(?,?,?,?)");
+            $stmt->prepare("INSERT INTO rezervacija(IDStoFK,IDKorisnikFK,VremeOd,VremeDo,Status) VALUES(?,?,?,?,'Nadolazeca')");
             $stmt->bind_param("iiss", $sto['IDSto'], $userid, $vremeOd, $vremeDo);
             $stmt->execute();
 
@@ -143,22 +168,24 @@ class BusinessLogic extends CI_Model {
             return true;
         }
     }
-    
-    
-    public function freeTables($id, $brLjudi, $vremeOd, $vremeDo, $korisnik){
-        
-        $conn=$this->my_database->conn;
-        $stmt=$conn->stmt_init();
+
+    public function freeTables($id, $brLjudi, $vremeOd, $vremeDo, $korisnik) {
+
+        $conn = $this->my_database->conn;
+        $stmt = $conn->stmt_init();
         $stmt->prepare("SELECT * FROM konobar WHERE IDKonobar=?");
         $stmt->bind_param("i", $id);
         $stmt->execute();
-        
-        $result=$stmt->get_result()->fetch_assoc();
-        
-        if($brLjudi<=2) $brljudi=2;
-        else if($brLjudi>2 && $brLjudi<=4) $brLjudi=4;
-            else if($brLjudi>4 && $brLjudi<=6) $brLjudi=6;
-       
+
+        $result = $stmt->get_result()->fetch_assoc();
+
+        if ($brLjudi <= 2)
+            $brljudi = 2;
+        else if ($brLjudi > 2 && $brLjudi <= 4)
+            $brLjudi = 4;
+        else if ($brLjudi > 4 && $brLjudi <= 6)
+            $brLjudi = 6;
+
         $vremeOd = date("Y-m-d h:i", strtotime($vremeOd));
         $vremeDo = date("Y-m-d h:i", strtotime($vremeDo));
         $conn = $this->my_database->conn;
@@ -166,109 +193,103 @@ class BusinessLogic extends CI_Model {
         $stmt->prepare("CALL slobodni_stolovi(?,?,?,?)");
         $stmt->bind_param("iiss", $result['IDRestoranFK'], $brLjudi, $vremeOd, $vremeDo);
         $stmt->execute();
-        
+
         $sto = $stmt->get_result()->fetch_assoc();
         if (isset($sto['IDSto'])) {
-            
-            $conn=$this->my_database->conn;
-            $stmt=$conn->stmt_init();
+
+            $conn = $this->my_database->conn;
+            $stmt = $conn->stmt_init();
             $stmt->prepare("SELECT * FROM korisnik WHERE KIme=?");
             $stmt->bind_param("s", $korisnik['imeKorisnika']);
             $stmt->execute();
-            
-            $idKorisnika=$stmt->get_result()->fetch_assoc();
-            
+
+            $idKorisnika = $stmt->get_result()->fetch_assoc();
+
             $conn = $this->my_database->conn;
             $stmt = $conn->stmt_init();
             $stmt->prepare("INSERT INTO rezervacija(IDStoFK,IDKorisnikFK,VremeOd,VremeDo) VALUES(?,?,?,?)");
             $stmt->bind_param("iiss", $sto['IDSto'], $idKorisnika['IDKorisnik'], $vremeOd, $vremeDo);
             $stmt->execute();
-            
+
             return true;
-        }
-        else {
+        } else {
             return false;
         }
-       
     }
-    
-    public function getReservations(){
-        
-        $conn=$this->my_database->conn;
-        $stmt=$conn->stmt_init();
-        $id=$this->session->userdata('userid');
+
+    public function getReservations() {
+
+        $conn = $this->my_database->conn;
+        $stmt = $conn->stmt_init();
+        $id = $this->session->userdata('userid');
         $stmt->prepare("SELECT * FROM konobar WHERE IDKonobar=?");
         $stmt->bind_param("i", $id);
         $stmt->execute();
-        $result=$stmt->get_result()->fetch_assoc();
-        
-        $conn=$this->my_database->conn;
-        $stol=$conn->query("SELECT * FROM sto WHERE IDRestoranFK=".$result['IDRestoranFK']);
-        $stolovi=$stol->fetch_all(MYSQLI_ASSOC);
-        
-        $conn=$this->my_database->conn;
-        $rezer=$conn->query("SELECT * FROM rezervacija");
-        $rezervacije=$rezer->fetch_all(MYSQLI_ASSOC);
-        $index=0;
-        foreach($stolovi as $sto){
-            foreach($rezervacije as $rez){
-                if($sto['IDSto']==$rez['IDStoFK']){
-                    
-                    $conn=$this->my_database->conn;
-                    $stmt=$conn->stmt_init();
+        $result = $stmt->get_result()->fetch_assoc();
+
+        $conn = $this->my_database->conn;
+        $stol = $conn->query("SELECT * FROM sto WHERE IDRestoranFK=" . $result['IDRestoranFK']);
+        $stolovi = $stol->fetch_all(MYSQLI_ASSOC);
+
+        $conn = $this->my_database->conn;
+        $rezer = $conn->query("SELECT * FROM rezervacija");
+        $rezervacije = $rezer->fetch_all(MYSQLI_ASSOC);
+        $index = 0;
+        foreach ($stolovi as $sto) {
+            foreach ($rezervacije as $rez) {
+                if ($sto['IDSto'] == $rez['IDStoFK']) {
+
+                    $conn = $this->my_database->conn;
+                    $stmt = $conn->stmt_init();
                     $stmt->prepare("SELECT * FROM sto WHERE IDSto=?");
                     $stmt->bind_param("i", $rez['IDStoFK']);
                     $stmt->execute();
-                    $table=$stmt->get_result()->fetch_assoc();
-                    $rez['brojLjudi']=$table['BrojOsoba'];
-                    $data[$index]=$rez;
+                    $table = $stmt->get_result()->fetch_assoc();
+                    $rez['brojLjudi'] = $table['BrojOsoba'];
+                    $data[$index] = $rez;
                     ++$index;
-                   }
-               }
-           }
+                }
+            }
+        }
         return $data;
     }
-    
-    
-    public function oslobodi($rez){
-        $conn=$this->my_database->conn;
-        $stmt=$conn->stmt_init();
+
+    public function oslobodi($rez) {
+        $conn = $this->my_database->conn;
+        $stmt = $conn->stmt_init();
         $stmt->prepare("DELETE FROM rezervacija WHERE IDRezervacija=?");
         $stmt->bind_param("i", $rez);
         $stmt->execute();
-        
-        $stmt=$conn->stmt_init();
+
+        $stmt = $conn->stmt_init();
         $stmt->prepare("SELECT * FROM rezervacija WHERE IDRezervacija=?");
         $stmt->bind_param("i", $rez);
         $stmt->execute();
-        if($stmt->get_result()->num_rows>0){
+        if ($stmt->get_result()->num_rows > 0) {
             return false;
-        }
-        else {
+        } else {
             return true;
         }
-        
     }
-    
-    public function getNameRestaurant(){
-        $conn=$this->my_database->conn;
-        $stmt=$conn->stmt_init();
-        $idKonobar=$this->session->userdata('userid');
+
+    public function getNameRestaurant() {
+        $conn = $this->my_database->conn;
+        $stmt = $conn->stmt_init();
+        $idKonobar = $this->session->userdata('userid');
         $stmt->prepare("SELECT * FROM konobar WHERE IDKonobar=?");
         $stmt->bind_param("i", $idKonobar);
         $stmt->execute();
-        
-        $konobar=$stmt->get_result()->fetch_assoc();
-        $conn=$this->my_database->conn;
-        $stmt=$conn->stmt_init();
+
+        $konobar = $stmt->get_result()->fetch_assoc();
+        $conn = $this->my_database->conn;
+        $stmt = $conn->stmt_init();
         $stmt->prepare("SELECT * FROM restoran WHERE IDRestoran=?");
         $stmt->bind_param("i", $konobar['IDRestoranFK']);
         $stmt->execute();
-        
-        $restoran=$stmt->get_result()->fetch_assoc();
+
+        $restoran = $stmt->get_result()->fetch_assoc();
         return $restoran['ImeObjekta'];
     }
-    
 
     public function getAllReservations($idUser) {
         $conn = $this->my_database->conn;
@@ -293,7 +314,7 @@ class BusinessLogic extends CI_Model {
         $stmt = $conn->stmt_init();
 
         $stmt->prepare("UPDATE rezervacija SET Status = 'Otkazana'  WHERE IDRezervacija=?");
-        $stmt->bind_param("i",$rezervacija['idrezervacija']);
+        $stmt->bind_param("i", $rezervacija['idrezervacija']);
         $stmt->execute();
     }
 

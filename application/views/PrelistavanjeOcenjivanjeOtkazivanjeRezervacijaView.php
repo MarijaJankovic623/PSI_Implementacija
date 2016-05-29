@@ -47,9 +47,10 @@
                     <!--/.navbar-header-->
                     <div id="main-nav" class="collapse navbar-collapse">
                         <ul class="nav navbar-nav" id="mainNav">
-
-                            <li><a href="" class="scroll-link">Moje rezervacije</a></li>
-                            <li><a href="" class="scroll-link">Moj profil</a></li>
+                            <li><a href="<?php echo base_url() . 'index.php/PrelistavanjeRestoranaCtrl'; ?>" class="scroll-link">Prelistavanje restorana</a></li>
+                            <li><a href="<?php echo base_url() . 'index.php/EditovanjeNalogaCtrl'; ?>" class="scroll-link">Izmena naloga</a></li>
+                            <li class="active"><a href="<?php echo base_url() . 'index.php/PrelistavanjeOcenjivanjeOtkazivanjeRezervacijaCtrl'; ?>" class="scroll-link">Moje rezervacije</a></li>
+                            <li><a href="<?php echo base_url(); ?>index.php/EditovanjeNalogaCtrl/profileUser" class="scroll-link">Moj profil</a></li>
                             <li><a href="<?php echo base_url() . 'index.php/LogoutCtrl'; ?>" class="scroll-link">Izloguj se </a></li>
                         </ul>
                     </div>
@@ -65,31 +66,29 @@
         <section id="home">
             <div class="banner-container"> 
                 <!-- Slider -->
-                <div id="main-slider" class="flexslider">
-                    <ul class="slides">
-                        <li>
-                            <img src="<?php echo base_url(); ?>images/slides/1.jpg" alt="" />
-                            <div class="flex-caption">
-                                <h3>Best app on the market</h3>  
-                            </div>
-                        </li>
-                        <li>
-                            <img src="<?php echo base_url(); ?>images/slides/2.jpg" alt="" />
-                            <div class="flex-caption">
-                                <h3>Variety of foods</h3>   
-                            </div>
-                        </li>
-                        <li>
-                            <img src="<?php echo base_url(); ?>images/slides/3.jpg" alt="" />
-                            <div class="flex-caption">
-                                <h3>Amazing ambiance</h3>  
-                            </div>
-                        </li>
-                    </ul>
+                <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#myCarousel" data-slide-to="1"></li>
+                        <li data-target="#myCarousel" data-slide-to="2"></li>
+                    </ol>
+
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner" role="listbox">
+                        <div class="item active" > 
+                            <img src="<?php echo base_url(); ?>images/slides/1.jpg" alt="Chania">
+                        </div>
+                        <div class="item">
+                            <img src="<?php echo base_url(); ?>images/slides/2.jpg" alt="Chania">
+                        </div>
+                        <div class="item">
+                            <img src="<?php echo base_url(); ?>images/slides/3.jpg" alt="Flower">
+                        </div>
+                    </div>
                 </div>
                 <!-- end slider -->
             </div>
-
         </section>
 
         <section>
@@ -101,35 +100,35 @@
                     <div class="col-sm-12">
                         <?php foreach ($rezervacije as $rezervacija) { ?>
                             <div class="jumbotron" style="background-color:rgba(237, 231, 227, 0.87)">
-                                <form action="<?php echo(base_url().'index.php/PrelistavanjeOcenjivanjeOtkazivanjeRezervacijaCtrl/rezervacijaCancelGrade/'.$rezervacija['IDRezervacija']); ?>" method="POST" role="form">
+                                <form action="<?php echo(base_url() . 'index.php/PrelistavanjeOcenjivanjeOtkazivanjeRezervacijaCtrl/rezervacijaCancelGrade/' . $rezervacija['IDRezervacija']); ?>" method="POST" role="form">
                                     <div class="row">
                                         <div class="col-sm-4">
                                             <img src="<?php echo base_url(); ?>images/slides/1.jpg" class="img-circle" alt="Cinque Terre" width="304" height="236">
                                         </div>
                                         <div class="col-sm-8">
                                             <h2>
-                                                <?php echo "Ime restorana: ".$rezervacija['ImeObjekta']; ?>
+                                                <?php echo "Ime restorana: " . $rezervacija['ImeObjekta']; ?>
                                             </h2>
 
-                                            <h5> <?php echo "Vreme početka rezervacije: ".$rezervacija['VremeOd']; ?></h5>
-                                            <h5> <?php echo "Vreme kraja rezervacije: ".$rezervacija['VremeDo']; ?></h5>
-                                            <h5> <?php echo "Status rezervacije: ". $rezervacija['Status']; ?></h5>
+                                            <h5> <?php echo "Vreme početka rezervacije: " . $rezervacija['VremeOd']; ?></h5>
+                                            <h5> <?php echo "Vreme kraja rezervacije: " . $rezervacija['VremeDo']; ?></h5>
+                                            <h5> <?php echo "Status rezervacije: " . $rezervacija['Status']; ?></h5>
                                             <p>
-                                            <?php echo "Opis resotrana: ". $rezervacija['Opis']; ?>
+                                                <?php echo "Opis resotrana: " . $rezervacija['Opis']; ?>
                                             </p>
                                         </div>
                                     </div>
                                     <div class="row">
 
-                                            <?php
-                                            if (!strcmp($rezervacija['Status'], "Nadolazeca")) {
-                                                $ispis = " 
+                                        <?php
+                                        if (!strcmp($rezervacija['Status'], "Nadolazeca")) {
+                                            $ispis = " 
                                         <div class='col-sm-12'>
                                         <button type='submit' class='btn btn-warning btn-lg btn-block' name = 'otkaziDugme' >Otkaži</button>
                                          </div>";
-                                            }
-                                            if (!strcmp($rezervacija['Ocena'], "0") && !strcmp($rezervacija['Status'], "Ostvarena")) {
-                                                $ispis = " 
+                                        }
+                                        if (!strcmp($rezervacija['Ocena'], "0") && !strcmp($rezervacija['Status'], "Ostvarena")) {
+                                            $ispis = " 
                                      <div class='col-sm-4'>
                                         <button type='submit' class='btn btn-warning btn-lg btn-block' name = 'otkaziDugme' >Otkaži</button>
                                     </div>
@@ -146,27 +145,27 @@
                                             <option>10</option>  
                                         </select>
                                     </div>";
-                                            } if (strcmp($rezervacija['Ocena'], "0") && !strcmp($rezervacija['Status'], "Ostvarena")) {
-                                                $ispis = $ispis = '<div class="col-sm-12"  style="background-color: hsla(35, 8%, 14%, 0.96); color: hsla(35, 84%, 51%, 0.96)";>Ovu rezervaciju ocenili ste ocenom : ' . $rezervacija['Ocena'] . '</div>';
-                                            }
+                                        } if (strcmp($rezervacija['Ocena'], "0") && !strcmp($rezervacija['Status'], "Ostvarena")) {
+                                            $ispis = $ispis = '<div class="col-sm-12"  style="background-color: hsla(35, 8%, 14%, 0.96); color: hsla(35, 84%, 51%, 0.96)";>Ovu rezervaciju ocenili ste ocenom : ' . $rezervacija['Ocena'] . '</div>';
+                                        }
 
 
 
-                                            if (!strcmp($rezervacija['Status'], "Otkazana")) {
+                                        if (!strcmp($rezervacija['Status'], "Otkazana")) {
 
-                                                $ispis = "<div class='col-sm-12'>   </div> ";
-                                            }
-                                            echo $ispis;
-                                            ?>
+                                            $ispis = "<div class='col-sm-12'>   </div> ";
+                                        }
+                                        echo $ispis;
+                                        ?>
 
 
-                                    <hr/>
+                                        <hr/>
                                     </div>
-                               
 
-                            </form>
-                        </div>
-                         <?php } ?>  
+
+                                </form>
+                            </div>
+                        <?php } ?>  
                     </div>    
                 </div>
                 <div class="row">

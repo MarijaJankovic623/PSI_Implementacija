@@ -26,9 +26,22 @@ class PrelistavanjeRestoranaCtrl extends CI_Controller {
         $this->load->model('UserValidationModel');
         $this->UserValidationModel->checkSession();
         $this->load->model('BusinessLogic');
-        
+
         $data['restoran'] = $this->BusinessLogic->getRestaurant($id);
         $this->load->view('RezervisanjeStolaView', $data);
+    }
+
+    public function criteriaRestaurants() {
+        $brLjudi = $this->input->post('brLjudi');
+        $vremeOd = $this->input->post('vremeOd');
+        $vremeDo = $this->input->post('vremeDo');
+        $opstina = $this->input->post('opstina');
+
+        $this->load->model("BusinessLogic");
+
+        $data['restorani'] = $this->BusinessLogic->getCriteriaRestaurants($opstina, $brLjudi, $vremeOd, $vremeDo);
+
+        $this->load->view('PrelistavanjeRestoranaView', $data);
     }
 
 }
