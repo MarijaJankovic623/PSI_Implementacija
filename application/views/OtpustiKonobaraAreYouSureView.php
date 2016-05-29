@@ -93,8 +93,8 @@
         
         <div class="container">
             <div class="row">
-                <div class="col-sm-10">
-                    <H1>     Da li ste sigurni da želite da otpustite izabranog konobara? </H1>
+                <div class="col-sm-9 col-sm-offset-2">
+                    <H2>     Da li ste sigurni da želite da otpustite izabranog konobara? </H2>
                 </div>
             </div>
             <div class="row">

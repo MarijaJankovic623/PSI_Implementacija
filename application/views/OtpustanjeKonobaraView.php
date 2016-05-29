@@ -105,7 +105,9 @@
                                     </h2>
                                     <p>
                                         bla bla bla bla blabla bla bla bla blabla bla bla bla bla
-                                        bla bla bla bla blabla bla bla bla blabla bla bla bla blabla bla bla bla blabla bla bla bla blabla bla bla bla blabla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
+                                        bla bla bla bla blabla bla bla bla blabla bla bla bla blabla 
+                                        bla bla bla blabla bla bla bla blabla bla bla bla blabla bla 
+                                        bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
                                     </p>
                                 </div>
                             </div>
