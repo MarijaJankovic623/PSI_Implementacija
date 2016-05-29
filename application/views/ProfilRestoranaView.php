@@ -105,24 +105,41 @@
                                 </div>
                                 <div class="col-sm-8">
                                     <h2>
-                                        <?php echo $rest['ImeObjekta']; ?>
+                                        Profil info
                                     </h2>
-                                    <h4>Vlasnik: <?php echo $rest['ImeVlasnika'] . ' ' . $rest['PrezimeVlasnika']; ?></h4>
-                                    <h4><?php echo $rest['Opis']; ?></h4>
-                                    <h4>Kuhinja: <?php echo $rest['Kuhinja'] ?> </h4>
-                                    <h4>Opstina: <?php echo $rest['Opstina'] ?> </h4>
-                                    <h4>Broj posetilaca: <?php echo $rest['BrojPosetilaca'] ?> </h4>
-                                    <h4>Kontakt email: <?php echo $rest['Email'] ?> </h4>
-                                    <b style="color:red">  </b>
-                                    <p>
+                                    <h3>
+                                        Ime objekta : <b><?php echo " " . $rest['ImeObjekta']; ?></b>
+                                    </h3>
+                                    <h3>
+                                        Ime vlasnika : <b><?php echo " " . $rest['ImeVlasnika']; ?></b>
+                                    </h3>
+                                    <h3>
+                                        Prezime vlasnika :<b><?php echo " " . $rest['PrezimeVlasnika']; ?></b>
+                                    </h3>
+                                    <h3>
+                                        Vase korisnicko ime : <b><?php echo " " . $rest['KIme']; ?></b>
+                                    </h3>
+                                    <h3>
+                                        Kod za zaposljenje konobara : <b><?php echo " " . $rest['KodKonobara']; ?></b>
+                                    </h3>
+                                    <h3>
+                                        Opis objekta : <b><?php echo " " . $rest['Opis']; ?></b>
+                                    </h3>
+                                    <h3>
+                                        Kuhinje:<b> <?php echo " " . $rest['Kuhinja'] ?> </b>
+                                    </h3>
+                                    <h3>
+                                        Opstina: <b><?php echo " " . $rest['Opstina'] ?> </b></h3>
+                                    <h3>
+                                        Broj posetilaca: <b><?php echo " " . $rest['BrojPosetilaca'] ?> </b>
+                                    </h3>
+                                    <h3>
+                                        Kontakt email: <b><?php echo " " . $rest['Email'] ?></b> 
+                                    </h3>
 
-                                    </p>
                                 </div>
                             </div>
-                            <div class="row">
 
-
-                            </div>
                         </div>
 
 

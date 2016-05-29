@@ -104,14 +104,25 @@
                                     <img src="<?php echo base_url(); ?>images/slides/1.jpg" class="img-circle" alt="Cinque Terre" width="304" height="236">
                                 </div>
                                 <div class="col-sm-8">
-
-                                    <H2>     Dobro dosao, admine, <?php echo $user['Ime'] . ' ' . $user['Prezime'] ?>! </H2>
-                                    <h4>Kontakt email: <?php echo $user['Email']; ?></h4>
+                                    <h2>
+                                        Profil info
+                                    </h2>
+                                    <h3>
+                                        Vase ime :<b> <?php echo " " . $user['Ime']; ?> </b> 
+                                    </h3>
+                                    <h3>
+                                        Vase prezime : <b><?php echo " " . $user['Prezime']; ?></b>
+                                    </h3>
+                                    <h3>
+                                        Vas e-mail : <b><?php echo " " . $user['Email']; ?></b>
+                                    </h3>
+                                    <h3>
+                                        Vase korisnicko ime : <b><?php echo " " . $user['KIme']; ?></b>
+                                    </h3>
+                                    <h3>
+                                        Kod za registrovanje drugih admina : <b><?php echo " " . $user['KodAdmina']; ?></b>
+                                    </h3>
                                 </div>
-                            </div>
-                            <div class="row">
-
-
                             </div>
                         </div>
                     </div>

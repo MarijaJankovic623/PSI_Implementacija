@@ -108,29 +108,23 @@
                                 </div>
                                 <div class="col-sm-8">
                                     <h2>
-                                        <?php echo $user['Ime'] . ' ' . $user['Prezime']; ?>
+                                        Profil info
                                     </h2>
-                                    <h5><?php echo $user['Email']; ?></h5>
-
-                                    <b style="color:red"> status </b>
-                                    <p>
-                                        bla bla bla bla blabla bla bla bla blabla bla bla bla bla
-                                        bla bla bla bla blabla bla bla bla blabla bla bla bla blabla bla bla bla blabla bla bla bla blabla bla bla bla blabla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
-                                    </p>
+                                    <h3>
+                                        Vase ime :<b> <?php echo " " . $user['Ime']; ?> </b> 
+                                    </h3>
+                                    <h3>
+                                        Vase prezime : <b><?php echo " " . $user['Prezime']; ?></b>
+                                    </h3>
+                                    <h3>
+                                        Vas e-mail : <b><?php echo " " . $user['Email']; ?></b>
+                                    </h3>
+                                    <h3>
+                                        Vase korisnicko ime : <b><?php echo " " . $user['KIme']; ?></b>
+                                    </h3>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-4 col-sm-offset-2">
-                                    <button type="button" class="btn btn-warning btn-lg btn-block" >Otkaži - mozda</button>
-                                </div>
-                                <div class="col-sm-4">
-                                    <button type="button" class="btn btn-warning btn-lg btn-block">Oceni - mozda</button>
-                                </div>
-
                             </div>
                         </div>
-
-
                     </div>
                 </div>    
             </div>
