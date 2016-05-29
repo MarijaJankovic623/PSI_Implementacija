@@ -48,7 +48,7 @@
                             <li ><a href =" <?php echo base_url(); ?>" class="">Potvrdi</a></li>
                             <li ><a href =" <?php echo base_url(); ?>index.php/EditovanjeNalogaCtrl/profileWaiter" class="">Moj profil</a></li>
                             <li class="active"><a href =" <?php echo base_url(); ?>index.php/EditovanjeNalogaCtrl/profileWaiter" class="">Napusti izmenu</a></li>                            
-                            <li ><a href =" <?php echo base_url(); ?>" class="">Izloguj se</a></li>
+                            <li ><a href ="<?php echo base_url().'index.php/LogoutCtrl';?>" class="">Izloguj se</a></li>
                         </ul>
                     </div>
                     <!--/.navbar-collapse--> 

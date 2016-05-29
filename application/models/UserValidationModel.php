@@ -64,7 +64,7 @@ class UserValidationModel extends CI_Model {
                 'korisnik' => false,
                 'admin'=> false
             );
-
+            
             $this->session->set_userdata($data);
             return true;
         } else {

@@ -5,59 +5,59 @@
 <!--[if IE 9 ]>    <html lang="en-gb" class="isie ie9 no-js"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!-->
 <html lang="en-gb" class="no-js">
-<!--<![endif]-->
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<!--[if lt IE 9]> 
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <![endif]-->
-<title>Restooking - It's restaurants and booking.</title>
-<meta name="description" content="">
-<meta name="author" content="Jovana Djunisijevic">
-<!--[if lt IE 9]>
-        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-<!--[if lte IE 8]>
-		<script type="text/javascript" src="http://explorercanvas.googlecode.com/svn/trunk/excanvas.js"></script>
-	<![endif]-->
-<link rel="stylesheet" href="<?php echo base_url(); ?>css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>css/isotope.css" media="screen" />
-<link rel="stylesheet" href="<?php echo base_url(); ?>js/fancybox/jquery.fancybox.css" type="text/css" media="screen" />
-<link href="<?php echo base_url(); ?>css/animate.css" rel="stylesheet" media="screen">
-<link href="<?php echo base_url(); ?>flexslider/flexslider.css" rel="stylesheet" />
-<link href="<?php echo base_url(); ?>js/owl-carousel/owl.carousel.css" rel="stylesheet">
-<link rel="stylesheet" href="<?php echo base_url(); ?>css/styles.css" />
-<!-- Font Awesome -->
-<link href="<?php echo base_url(); ?>font/css/font-awesome.min.css" rel="stylesheet">
-</head>
+    <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <!--[if lt IE 9]> 
+            <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+            <![endif]-->
+        <title>Restooking - It's restaurants and booking.</title>
+        <meta name="description" content="">
+        <meta name="author" content="Jovana Djunisijevic">
+        <!--[if lt IE 9]>
+                <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+            <![endif]-->
+        <!--[if lte IE 8]>
+                        <script type="text/javascript" src="http://explorercanvas.googlecode.com/svn/trunk/excanvas.js"></script>
+                <![endif]-->
+        <link rel="stylesheet" href="<?php echo base_url(); ?>css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>css/isotope.css" media="screen" />
+        <link rel="stylesheet" href="<?php echo base_url(); ?>js/fancybox/jquery.fancybox.css" type="text/css" media="screen" />
+        <link href="<?php echo base_url(); ?>css/animate.css" rel="stylesheet" media="screen">
+        <link href="<?php echo base_url(); ?>flexslider/flexslider.css" rel="stylesheet" />
+        <link href="<?php echo base_url(); ?>js/owl-carousel/owl.carousel.css" rel="stylesheet">
+        <link rel="stylesheet" href="<?php echo base_url(); ?>css/styles.css" />
+        <!-- Font Awesome -->
+        <link href="<?php echo base_url(); ?>font/css/font-awesome.min.css" rel="stylesheet">
+    </head>
 
-<body>
-<header class="header">
-  <div class="container">
-    <nav class="navbar navbar-inverse" role="navigation">
-      <div class="navbar-header">
-        <button type="button" id="nav-toggle" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-        <a href="#" class="navbar-brand scroll-top logo  animated bounceInLeft"><b><i>Restooking</i></b></a> 
-      </div>
-      <!--/.navbar-header-->
-      <div id="main-nav" class="collapse navbar-collapse">
-        <ul class="nav navbar-nav" id="mainNav">
-          <li class="active"><a href="<?php echo base_url(); ?>index.php/HomeCtrl" class="">Napusti registraciju</a></li>
-        </ul>
-      </div>
-      <!--/.navbar-collapse--> 
-    </nav>
-    <!--/.navbar--> 
-  </div>
-  <!--/.container--> 
-</header>
-<!--/.header-->
-<div id="#top"></div>
-<section id="home">
-  <div class="banner-container"> 
-  <!-- Slider -->
-        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <body>
+        <header class="header">
+            <div class="container">
+                <nav class="navbar navbar-inverse" role="navigation">
+                    <div class="navbar-header">
+                        <button type="button" id="nav-toggle" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+                        <a href="#" class="navbar-brand scroll-top logo  animated bounceInLeft"><b><i>Restooking</i></b></a> 
+                    </div>
+                    <!--/.navbar-header-->
+                    <div id="main-nav" class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav" id="mainNav">
+                            <li class="active"><a href="<?php echo base_url(); ?>index.php/HomeCtrl" class="">Napusti registraciju</a></li>
+                        </ul>
+                    </div>
+                    <!--/.navbar-collapse--> 
+                </nav>
+                <!--/.navbar--> 
+            </div>
+            <!--/.container--> 
+        </header>
+        <!--/.header-->
+        <div id="#top"></div>
+        <section id="home">
+            <div class="banner-container"> 
+                <!-- Slider -->
+                <div id="myCarousel" class="carousel slide" data-ride="carousel">
                     <!-- Indicators -->
                     <ol class="carousel-indicators">
                         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -78,67 +78,67 @@
                         </div>
                     </div>
                 </div>
-	<!-- end slider -->
-  </div>
-  <div class="container hero-text2">
-  <h3>Lorem ipsum dolor sit amet, ea eum labitur scsstie percipitoleat<br/> fabulas complectitur deterruisset at pro</h3>
-  </div>
-</section>
-
-<section>
-    <div class="container">
-        <div class="row">
-            &nbsp;
-        </div>
-        <div class="row">
-            <div class="col-sm-8 col-sm-offset-2" >
-                <form action="<?php echo base_url(); ?>index.php/RegistracijaAdminaCtrl/submit" method="POST" role="form">
-                    <div class="form-group">
-                        <legend>Registracija admina</legend>
-                        <?php echo form_error('username'); ?>
-                         <label for="">Korisničko ime</label>
-                        <input type="text" class="form-control" name="username" placeholder="Unesite korisničko ime">
-                        <?php echo form_error('password'); ?>
-                          <label for="">Lozinka</label>
-                        <input type="password" class="form-control" name="password" placeholder="Unesite lozinku">
-                        <?php echo form_error('name'); ?>
-                        <label for="">Ime</label>
-                        <input type="text" class="form-control" name="name" placeholder="Unesite vase ime ovde">
-                        <?php echo form_error('lastname'); ?>
-                        <label for="">Prezime</label>
-                        <input type="text" class="form-control" name="lastname" placeholder="Unesite vase Prezime ovde">
-                        <?php echo form_error('email'); ?>
-                        <label for="">Email</label>
-                        <input type="text" class="form-control" name="email" placeholder="Unesite vas email ovde">
-                        <?php echo form_error('code'); ?>
-						<label for="">Specijalan kod</label>
-                        <input type="text" class="form-control" name="code" placeholder="Unesite specijalan kod dobijen od glavnog admina">
-                    
-                        <button type="submit" class="btn btn-primary">Potvrdi</button>
-                    </div>	                
-                </form>
+                <!-- end slider -->
             </div>
-        </div>
-    </div>
-</section>
- 
+            <div class="container hero-text2">
+                <h3>Lorem ipsum dolor sit amet, ea eum labitur scsstie percipitoleat<br/> fabulas complectitur deterruisset at pro</h3>
+            </div>
+        </section>
+
+        <section>
+            <div class="container">
+                <div class="row">
+                    &nbsp;
+                </div>
+                <div class="row">
+                    <div class="col-sm-8 col-sm-offset-2" >
+                        <form action="<?php echo base_url(); ?>index.php/RegistracijaAdminaCtrl/submit" method="POST" role="form">
+                            <div class="form-group">
+                                <legend>Registracija admina</legend>
+                                <?php echo form_error('username'); ?>
+                                <label for="">Korisničko ime</label>
+                                <input type="text" class="form-control" name="username" placeholder="Unesite korisničko ime">
+                                <?php echo form_error('password'); ?>
+                                <label for="">Lozinka</label>
+                                <input type="password" class="form-control" name="password" placeholder="Unesite lozinku">
+                                <?php echo form_error('name'); ?>
+                                <label for="">Ime</label>
+                                <input type="text" class="form-control" name="name" placeholder="Unesite vase ime ovde">
+                                <?php echo form_error('lastname'); ?>
+                                <label for="">Prezime</label>
+                                <input type="text" class="form-control" name="lastname" placeholder="Unesite vase Prezime ovde">
+                                <?php echo form_error('email'); ?>
+                                <label for="">Email</label>
+                                <input type="text" class="form-control" name="email" placeholder="Unesite vas email ovde">
+                                <?php echo form_error('code'); ?>
+                                <label for="">Specijalan kod</label>
+                                <input type="text" class="form-control" name="code" placeholder="Unesite specijalan kod dobijen od glavnog admina">
+
+                                <button type="submit" class="btn btn-primary">Potvrdi</button>
+                            </div>	                
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
 
 
-<!--/.page-section-->
-<section class="copyright">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12 text-center"> Copyright 2016 <a href="http://etf.bg.ac.rs">ETF Belgrade</a> </div>
-    </div>
-    <!-- / .row --> 
-  </div>
-</section>
-<a href="#top" class="topHome"><i class="fa fa-chevron-up fa-2x"></i></a> 
+
+        <!--/.page-section-->
+        <section class="copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 text-center"> Copyright 2016 <a href="http://etf.bg.ac.rs">ETF Belgrade</a> </div>
+                </div>
+                <!-- / .row --> 
+            </div>
+        </section>
+        <a href="#top" class="topHome"><i class="fa fa-chevron-up fa-2x"></i></a> 
 
 <!--[if lte IE 8]><script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script><![endif]--> 
-<script src="<?php echo base_url(); ?>js/jquery-1.8.2.min.js" type="text/javascript"></script> 
-<script src="<?php echo base_url(); ?>js/bootstrap.min.js" type="text/javascript"></script> 
+        <script src="<?php echo base_url(); ?>js/jquery-1.8.2.min.js" type="text/javascript"></script> 
+        <script src="<?php echo base_url(); ?>js/bootstrap.min.js" type="text/javascript"></script> 
 
-</body>
+    </body>
 </html>
 

@@ -50,7 +50,7 @@
 
                             <li><a href="" class="scroll-link">Moje rezervacije</a></li>
                             <li><a href="" class="scroll-link">Moj profil</a></li>
-                            <li><a href="" class="scroll-link">Izloguj se </a></li>
+                            <li><a href="<?php echo base_url() . 'index.php/LogoutCtrl'; ?>" class="scroll-link">Izloguj se </a></li>
                         </ul>
                     </div>
 
@@ -93,7 +93,7 @@
         </section>
 
         <section>
-            <div clas="container">
+            <div class="container">
                 <div class="row">
                     &nbsp;
                 </div>

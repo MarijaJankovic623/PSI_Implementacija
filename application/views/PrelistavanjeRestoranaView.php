@@ -50,7 +50,7 @@
                             <li><a href="<?php echo base_url().'index.php/EditovanjeNalogaCtrl';?>" class="scroll-link">Izmena naloga</a></li>
                             <li><a href="<?php echo base_url().'index.php/PrelistavanjeOcenjivanjeOtkazivanjeRezervacijaCtrl';?>" class="scroll-link">Moje rezervacije</a></li>
                             <li><a href="" class="scroll-link">Moj profil</a></li>
-                            <li><a href="" class="scroll-link">Izloguj se </a></li>
+                            <li><a href="<?php echo base_url().'index.php/LogoutCtrl';?>" class="scroll-link">Izloguj se </a></li>
                         </ul>
                     </div>
 

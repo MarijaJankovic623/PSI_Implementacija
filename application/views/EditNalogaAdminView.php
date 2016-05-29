@@ -47,7 +47,7 @@
                             <li><a href="<?php echo base_url().'index.php/BrisanjeKorisnikaCtrl/index'?>" class="scroll-link">Brisi Korisnika</a></li>
                             <li><a href="<?php echo base_url().'index.php/EditovanjeNalogaCtrl/profileAdmin'; ?>" class="scroll-link">Moj profil</a></li>
                             <li class="active"><a href="<?php echo base_url().'index.php/EditovanjeNalogaCtrl/profileAdmin'; ?>" class="scroll-link">Napusti izmenu</a></li>
-                            <li><a href="<?php echo base_url(); ?>" class="scroll-link">Izloguj se </a></li>
+                            <li><a href="<?php echo base_url().'index.php/LogoutCtrl';?>" class="scroll-link">Izloguj se </a></li>
                         </ul>
                     </div>
                     <!--/.navbar-collapse--> 

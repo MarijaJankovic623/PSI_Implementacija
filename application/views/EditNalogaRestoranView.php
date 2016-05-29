@@ -47,7 +47,7 @@
                             <li><a href="<?php echo base_url().'index.php/OtpustanjeKonobaraCtrl/index/'.$user['IDRestoran']; ?>" class="scroll-link">Otpusti konobara</a></li>
                             <li ><a href="<?php echo base_url().'index.php/OtpustanjeKonobaraCtrl/profil/'.$this->session->userdata('userid'); ?>" class="">Moj profil</a></li>
                             <li class="active"><a href="<?php echo base_url().'index.php/OtpustanjeKonobaraCtrl/profil/'.$this->session->userdata('userid'); ?>" class="">Napusti izmenu</a></li>
-                            <li ><a href="<?php echo base_url(); ?>index.php/HomeCtrl" class="">Izloguj se</a></li>
+                            <li ><a href="<?php echo base_url().'index.php/LogoutCtrl';?>" class="">Izloguj se</a></li>
                         </ul>
                     </div>
                     <!--/.navbar-collapse--> 
