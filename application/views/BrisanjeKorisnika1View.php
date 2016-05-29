@@ -46,9 +46,9 @@
                     <!--/.navbar-header-->
                     <div id="main-nav" class="collapse navbar-collapse">
                         <ul class="nav navbar-nav" id="mainNav">
-
-                            <li><a href="<?php echo base_url(); ?>index.php/BrisanjeKorisnikaCtrl" class="scroll-link">Korisnici</a></li>
+                            <li class="active"><a href="<?php echo base_url() . 'index.php/BrisanjeKorisnikaCtrl/index' ?>" class="scroll-link">Brisi Korisnika</a></li>              
                             <li><a href="<?php echo base_url().'index.php/EditovanjeNalogaCtrl/profileAdmin'; ?>" class="scroll-link">Moj profil</a></li>
+                            <li><a href="<?php echo base_url() . 'index.php/EditovanjeNalogaCtrl'; ?>" class="scroll-link">Izmena profila</a></li>
                             <li><a href="<?php echo base_url(); ?>index.php/LogoutCtrl" class="scroll-link">Izloguj se </a></li>
                         </ul>
                     </div>

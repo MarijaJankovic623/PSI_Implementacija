@@ -105,7 +105,7 @@
                                 </div>
                                 <div class="col-sm-8">
 
-                                    <H1>     Dobro dosao, admine, <?php echo $user['Ime'] . ' ' . $user['Prezime'] ?>! </H1>
+                                    <H2>     Dobro dosao, admine, <?php echo $user['Ime'] . ' ' . $user['Prezime'] ?>! </H2>
                                     <h4>Kontakt email: <?php echo $user['Email']; ?></h4>
                                 </div>
                             </div>

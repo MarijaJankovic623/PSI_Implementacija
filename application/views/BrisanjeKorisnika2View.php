@@ -46,9 +46,9 @@
                     <!--/.navbar-header-->
                     <div id="main-nav" class="collapse navbar-collapse">
                         <ul class="nav navbar-nav" id="mainNav">
-
-                            <li><a href="<?php echo base_url(); ?>index.php/BrisanjeKorisnikaCtrl" class="scroll-link">Korisnici</a></li>
-                            <li><a href="<?php echo base_url().'index.php/EditovanjeNalogaCtrl/profileAdmin'; ?>" class="scroll-link">Moj profil</a></li>
+                            <li><a href="<?php echo base_url() . 'index.php/BrisanjeKorisnikaCtrl/index' ?>" class="scroll-link">Brisi Korisnika</a></li>              
+                            <li><a href="<?php echo base_url() . 'index.php/EditovanjeNalogaCtrl/profileAdmin'; ?>" class="scroll-link">Moj profil</a></li>
+                            <li><a href="<?php echo base_url() . 'index.php/EditovanjeNalogaCtrl'; ?>" class="scroll-link">Izmena profila</a></li>
                             <li><a href="<?php echo base_url(); ?>index.php/LogoutCtrl" class="scroll-link">Izloguj se </a></li>
                         </ul>
                     </div>
@@ -91,8 +91,8 @@
         </section>
         <div class = "container">
             <div class="row">
-                <div class="col-sm-10">
-                    <H1>     Da li ste sigurni da želite da obrišete izabranog korisnika? </H1>
+                <div class="col-sm-10 col-sm-offset-2">
+                    <H2>     Da li ste sigurni da želite da obrišete izabranog korisnika? </H2>
                 </div>
             </div>
             <div class="row">
