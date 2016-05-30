@@ -201,16 +201,22 @@
                                     <div class="col-sm-4">
                                         <img src="<?php echo base_url(); ?>images/slides/1.jpg" class="img-circle" alt="Cinque Terre" width="304" height="236">
                                     </div>
-                                    <div class="col-sm-8">
+                                    <div class="col-sm-8">                                       
                                         <h2>
-                                            <?php echo $restoran['ImeObjekta']; ?>    
+                                            Ime objekta : <b><?php echo $restoran['ImeObjekta']; ?></b>    
                                         </h2>
-                                        <p>
-
-                                            Opis: <?php echo $restoran['Opis']; ?><br/>
-                                            Kuhinje: <?php echo $restoran['Kuhinja']; ?><br/>
-
-                                        </p>
+                                        <h3>
+                                            Opis objekta : <b><?php echo " " . $restoran['Opis']; ?></b>
+                                        </h3>
+                                        <h3>
+                                            Kuhinje:<b> <?php echo " " . $restoran['Kuhinja'] ?> </b>
+                                        </h3>
+                                        <h3>
+                                            Opstina: <b><?php echo " " . $restoran['Opstina'] ?> </b>
+                                        </h3>
+                                        <h3>
+                                            Kontakt email: <b><?php echo " " . $restoran['Email'] ?></b> 
+                                        </h3>
                                     </div>
                                 </div>
                                 <div class="row">

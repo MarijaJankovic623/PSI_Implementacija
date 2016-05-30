@@ -100,93 +100,93 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-3" style="background-color: hsla(35, 8%, 14%, 0.96); color: hsla(35, 84%, 51%, 0.96);"  >
-                        <form action="<?php echo base_url().'index.php/HomeCtrl/criteriaRestaurants'; ?>" method="POST" role="form">
-                        <div class="row">
-                            &nbsp;
-                        </div>
-
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    &nbsp;
-                                    <label class="control-label">Unesite broj ljudi:</label><br />
-                                    <input type="number" name="brLjudi" />  
-                                </div>
-                            </div>
-                        </div>
-
-                        <hr/>
-
-                        <div class = "row">
-                            <div class = "col-sm-12">
-                                <div class="form-group">
-                                    &nbsp;
-                                    <font size = '5'>Odaberite opštinu:</font>
-
-                                    <select class="form-group"  name ="opstina" style="background-color: hsla(35, 8%, 14%, 0.96); color: hsla(35, 84%, 51%, 0.96);">
-                                        <option selected>Sve opštine</option>
-                                        <option>Čukarica</option>
-                                        <option>Novi Beograd</option>
-                                        <option>Palilula</option>
-                                        <option>Rakovica</option>
-                                        <option>Savski venac</option>
-                                        <option>Stari grad</option>
-                                        <option>Voždovac</option>
-                                        <option>Vračar</option>
-                                        <option>Zemun</option>         
-                                        <option>Zvezdara</option>
-                                        <option>Barajevo</option>
-                                        <option>Grocka</option>
-                                        <option>Lazarevac</option>
-                                        <option>Mladenovac</option>
-                                        <option>Obrenovac</option>
-                                        <option>Sopot</option>
-                                        <option>Surčin</option>   
-                                    </select>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <hr/>
-
-                        <div class = "row">
-                            <div class = "col-sm-12">             
-                                <div class="form-group">
-                                    <label class="control-label">Odaberite vreme i datum od:</label>
-                                    <div class="controls input-append date form_datetime" data-date="2016-01-01T05:25:07Z" data-date-format="yyyy-mm-dd  hh:ii " data-link-field="dtp_input1">
-                                        <input size="16" type="text" value="" readonly name="vremeOd">
-                                        <span class="add-on"><i class="icon-remove"></i></span>
-                                        <span class="add-on"><i class="icon-th"></i></span>
-                                    </div>
-                                    <input type="hidden" id="dtp_input1" value="" /><br/>
-                                </div>
-                            </div>
-                        </div>
-                        <div class = "row">
-                            <div class = "col-sm-12">             
-                                <div class="form-group">
-                                    <label class="control-label">Odaberite vreme i datum do:</label>
-                                    <div class="controls input-append date form_datetime" data-date="2016-01-01T05:25:07Z" data-date-format="yyyy-mm-dd  hh:ii " data-link-field="dtp_input1">
-                                        <input size="16" type="text" value="" readonly name="vremeDo">
-                                        <span class="add-on"><i class="icon-remove"></i></span>
-                                        <span class="add-on"><i class="icon-th"></i></span>
-                                    </div>
-                                    <input type="hidden" id="dtp_input1" value="" /><br/>
-                                </div>
-                            </div>
-                        </div>
-
-                        <hr/>    
-
-                        <div class = "row">
-                            <div class = "col-sm-10 col-sm-offset-1">       
-                                <button type="submit" class="btn btn-warning btn-lg btn-block">Pretraži</button>
+                        <form action="<?php echo base_url() . 'index.php/HomeCtrl/criteriaRestaurants'; ?>" method="POST" role="form">
+                            <div class="row">
                                 &nbsp;
                             </div>
-                        </div> 
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        &nbsp;
+                                        <label class="control-label">Unesite broj ljudi:</label><br />
+                                        <input type="number" name="brLjudi" />  
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr/>
+
+                            <div class = "row">
+                                <div class = "col-sm-12">
+                                    <div class="form-group">
+                                        &nbsp;
+                                        <font size = '5'>Odaberite opštinu:</font>
+
+                                        <select class="form-group"  name ="opstina" style="background-color: hsla(35, 8%, 14%, 0.96); color: hsla(35, 84%, 51%, 0.96);">
+                                            <option selected>Sve opštine</option>
+                                            <option>Čukarica</option>
+                                            <option>Novi Beograd</option>
+                                            <option>Palilula</option>
+                                            <option>Rakovica</option>
+                                            <option>Savski venac</option>
+                                            <option>Stari grad</option>
+                                            <option>Voždovac</option>
+                                            <option>Vračar</option>
+                                            <option>Zemun</option>         
+                                            <option>Zvezdara</option>
+                                            <option>Barajevo</option>
+                                            <option>Grocka</option>
+                                            <option>Lazarevac</option>
+                                            <option>Mladenovac</option>
+                                            <option>Obrenovac</option>
+                                            <option>Sopot</option>
+                                            <option>Surčin</option>   
+                                        </select>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <hr/>
+
+                            <div class = "row">
+                                <div class = "col-sm-12">             
+                                    <div class="form-group">
+                                        <label class="control-label">Odaberite vreme i datum od:</label>
+                                        <div class="controls input-append date form_datetime" data-date="2016-01-01T05:25:07Z" data-date-format="yyyy-mm-dd  hh:ii " data-link-field="dtp_input1">
+                                            <input size="16" type="text" value="" readonly name="vremeOd">
+                                            <span class="add-on"><i class="icon-remove"></i></span>
+                                            <span class="add-on"><i class="icon-th"></i></span>
+                                        </div>
+                                        <input type="hidden" id="dtp_input1" value="" /><br/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class = "row">
+                                <div class = "col-sm-12">             
+                                    <div class="form-group">
+                                        <label class="control-label">Odaberite vreme i datum do:</label>
+                                        <div class="controls input-append date form_datetime" data-date="2016-01-01T05:25:07Z" data-date-format="yyyy-mm-dd  hh:ii " data-link-field="dtp_input1">
+                                            <input size="16" type="text" value="" readonly name="vremeDo">
+                                            <span class="add-on"><i class="icon-remove"></i></span>
+                                            <span class="add-on"><i class="icon-th"></i></span>
+                                        </div>
+                                        <input type="hidden" id="dtp_input1" value="" /><br/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr/>    
+
+                            <div class = "row">
+                                <div class = "col-sm-10 col-sm-offset-1">       
+                                    <button type="submit" class="btn btn-warning btn-lg btn-block">Pretraži</button>
+                                    &nbsp;
+                                </div>
+                            </div> 
                         </form>
                     </div>
                     <div class="col-sm-9">
@@ -198,17 +198,25 @@
                                     </div>
                                     <div class="col-sm-8">
                                         <h2>
-                                            <?php echo $restoran['ImeObjekta']; ?>    
+                                            Ime objekta : <b><?php echo $restoran['ImeObjekta']; ?></b>    
                                         </h2>
-                                        <p>
-                                            Opis: <?php echo $restoran['Opis']; ?><br/>
-                                            Kuhinje: <?php echo $restoran['Kuhinja']; ?><br/>
-                                        </p>
+                                        <h3>
+                                            Opis objekta : <b><?php echo " " . $restoran['Opis']; ?></b>
+                                        </h3>
+                                        <h3>
+                                            Kuhinje:<b> <?php echo " " . $restoran['Kuhinja'] ?> </b>
+                                        </h3>
+                                        <h3>
+                                            Opstina: <b><?php echo " " . $restoran['Opstina'] ?> </b>
+                                        </h3>
+                                        <h3>
+                                            Kontakt email: <b><?php echo " " . $restoran['Email'] ?></b> 
+                                        </h3>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <button type="button" class="btn btn-warning btn-lg">Detaljnije i rezervacija</button>
+                                        <a href="<?php echo base_url(); ?>index.php/LoginCtrl" class="btn btn-warning btn-lg">Rezervacija</a>
                                     </div>
                                 </div>
                             </div>

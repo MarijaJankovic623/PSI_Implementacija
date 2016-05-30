@@ -96,12 +96,9 @@
                 <div class="row">
                     &nbsp;
                 </div>
-
-
-
                 <div class="row">
-                    <div class="col-sm-4 col-sm-offset-3">
-                        <form action="<?php echo base_url().'index.php/RezervisanjeStolaCtrl/rezervisi/'.$restoran['IDRestoran']; ?>" method="POST" role="form">
+                    <div class="col-sm-4 col-sm-offset-4">
+                        <form action="<?php echo base_url() . 'index.php/RezervisanjeStolaCtrl/rezervisi/' . $restoran['IDRestoran']; ?>" method="POST" role="form">
                             <div class="control-group">
                                 <label class="control-label">Odaberite vreme i datum od:</label>
                                 <div class="controls input-append date form_datetime" data-date="2016-01-01T05:25:07Z" data-date-format="yyyy-mm-dd  hh:ii " data-link-field="dtp_input1">
@@ -126,138 +123,110 @@
                                 &nbsp;&nbsp;&nbsp;
                             </div>
 
-                            <button type="submit" class="btn-dark btn-warning btn-lg btn-block">Rezervisi</button>
+                            <button  type="submit" class=" btn-warning btn-lg btn-block">Rezervisi</button>
                         </form> 
                     </div>
 
                 </div>
+                <div class="row">  
+                    <div class="col-sm-12 ">
+                        &nbsp;
+                    </div>  
+                    <div class="col-sm-4 col-sm-offset-4">
+                        <img src="<?php echo base_url(); ?>images/slides/1.jpg" class="img-circle" alt="Cinque Terre" width="1504" height="1236">
+                    </div>
 
+                    <div class="col-sm-8 col-sm-offset-2">
+                        <font size = '10' style = "color: hsla(35, 84%, 51%, 0.96); ">
+                        <?php echo $restoran['ImeObjekta']; ?>
+                        </font>
+                        <h3>
+                            Opis objekta : <b><?php echo " " . $restoran['Opis']; ?></b>
+                        </h3>
+                        <h3>
+                            Kuhinje:<b> <?php echo " " . $restoran['Kuhinja'] ?> </b>
+                        </h3>
+                        <h3>
+                            Opstina: <b><?php echo " " . $restoran['Opstina'] ?> </b>
+                        </h3>
+                        <h3>
+                            Kontakt email: <b><?php echo " " . $restoran['Email'] ?></b> 
+                        </h3>
+                    </div>
 
-            </div>
-            <div class="row">  
-                <div class="col-sm-12 ">
+                </div>
+
+                <hr>
+
+                <div class="row">
+                    <div class="col-sm-8 col-sm-offset-2" >
+                        <h2>Galerija</h2>
+                    </div>
+
+                    <div class="col-sm-8 col-sm-offset-2" >
+
+                        <div class="col-md-3 img-portfolio">
+                            <a href="images/image-M-2.jpg" data-lightbox="roadtrip">
+                                <img class="img-responsive img-hover" src="images/image-M-2.jpg" alt="">
+                            </a>
+                        </div>
+                        <div class="col-md-3 img-portfolio">
+                            <a href="images/image-M-3.jpg" data-lightbox="roadtrip">
+                                <img class="img-responsive img-hover" src="images/image-M-3.jpg" alt="">
+                            </a>
+                        </div>
+                        <div class="col-md-3 img-portfolio">
+                            <a href="images/image-M-4.jpg" data-lightbox="roadtrip">
+                                <img class="img-responsive img-hover" src="images/image-M-4.jpg" alt="">
+                            </a>
+                        </div>
+                        <div class="col-md-3 img-portfolio">
+                            <a href="images/image-M-5.jpg" data-lightbox="roadtrip">
+                                <img class="img-responsive img-hover" src="images/image-M-5.jpg" alt="">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
                     &nbsp;
-
-                </div>  
-                <div class="col-sm-4 col-sm-offset-4">
-                    <img src="<?php echo base_url(); ?>images/slides/1.jpg" class="img-circle" alt="Cinque Terre" width="1504" height="1236">
-                </div>
-
-
-
-
-
-                <div class="col-sm-8 col-sm-offset-2">
-                    <font size = '10' style = "color: hsla(35, 84%, 51%, 0.96); ">
-                    <?php echo $restoran['ImeObjekta']; ?>
-                    </font>
-                </div>
-
-
-                <div class="col-sm-8 col-sm-offset-2">    
-                    <font size = '5' style = "color: hsla(35, 1%, 7%, 0.96); " >
-                    <b>
-                        <p>Opstina: Savski venac</p>
-                        <p>Kuhinja: Italijanska</p>
-                    </b>
-                    </font>
-
-
-
-                    <p>Microsoft  američka je multinacionalna korporacija smještena u Redmondu, Washington, koja razvija, proizvodi, licencira, podržava i prodaje računarski softver, korisničku elektroniku, te osobne računare i servise. </p>
-                    <p> Njihov najpoznatiji softver je serija operativnih sistema Microsoft Windows, te uredskih paketa Microsoft Office, kao i internetski preglednici Internet Explorer i Spartan. Njihovi hardverski proizvodi su poznata konzola Xbox i serija tableta Microsoft Surface. Microsoft je najveći proizvođač softvera ako se u obzir uzme prihod.[2] Također je jedna od svjetskih najvrijednijih kompanija.</p>
-                    <p>Microsoft su osnovali Bill Gates i Paul Allen 4. aprila 1975. godine za razvoj i prodaju BASIC-a za računar Altair 8800.</p>
                 </div>
             </div>
-        </div>
+        </section>
 
 
 
-
-
-
-        <hr>
-
-        <div class="row">
-            <div class="col-sm-8 col-sm-offset-2" >
-                <h2>Galerija</h2>
+        <!--/.page-section-->
+        <section class="copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 text-center"> Copyright 2016 <a href="http://etf.bg.ac.rs">ETF Belgrade</a> </div>
+                </div>
+                <!-- / .row --> 
             </div>
-
-            <div class="col-sm-8 col-sm-offset-2" >
-
-                <div class="col-md-3 img-portfolio">
-                    <a href="images/image-M-2.jpg" data-lightbox="roadtrip">
-                        <img class="img-responsive img-hover" src="images/image-M-2.jpg" alt="">
-                    </a>
-                </div>
-                <div class="col-md-3 img-portfolio">
-                    <a href="images/image-M-3.jpg" data-lightbox="roadtrip">
-                        <img class="img-responsive img-hover" src="images/image-M-3.jpg" alt="">
-                    </a>
-                </div>
-                <div class="col-md-3 img-portfolio">
-                    <a href="images/image-M-4.jpg" data-lightbox="roadtrip">
-                        <img class="img-responsive img-hover" src="images/image-M-4.jpg" alt="">
-                    </a>
-                </div>
-                <div class="col-md-3 img-portfolio">
-                    <a href="images/image-M-5.jpg" data-lightbox="roadtrip">
-                        <img class="img-responsive img-hover" src="images/image-M-5.jpg" alt="">
-                    </a>
-                </div>
-
-
-
-
-
-
-            </div>
-        </div>
-    </div>
-
-
-    <div class="row">
-        &nbsp;
-    </div>
-
-</section>
-
-
-
-<!--/.page-section-->
-<section class="copyright">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12 text-center"> Copyright 2016 <a href="http://etf.bg.ac.rs">ETF Belgrade</a> </div>
-        </div>
-        <!-- / .row --> 
-    </div>
-</section>
-<a href="#top" class="topHome"><i class="fa fa-chevron-up fa-2x"></i></a> 
+        </section>
+        <a href="#top" class="topHome"><i class="fa fa-chevron-up fa-2x"></i></a> 
 
 <!--[if lte IE 8]><script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script><![endif]--> 
-<script src="<?php echo base_url(); ?>js/jquery-1.8.2.min.js" type="text/javascript"></script> 
-<script src="<?php echo base_url(); ?>js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="<?php echo base_url(); ?>js/jquery-1.8.2.min.js" type="text/javascript"></script> 
+        <script src="<?php echo base_url(); ?>js/bootstrap.min.js" type="text/javascript"></script>
 
-<script type="text/javascript" src="<?php echo base_url(); ?>js/jquery-1.8.3.min.js" charset="UTF-8"></script>  
-<script type="text/javascript" src="<?php echo base_url(); ?>js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>js/bootstrap-datetimepicker.rs.js" charset="UTF-8"></script>
-
-
-<script type="text/javascript">
-    $('.form_datetime').datetimepicker({
-        language: 'rs',
-        weekStart: 1,
-        todayBtn: 1,
-        autoclose: 1,
-        todayHighlight: 1,
-        startView: 2,
-        forceParse: 0,
-        showMeridian: 1
-    });
-</script>
+        <script type="text/javascript" src="<?php echo base_url(); ?>js/jquery-1.8.3.min.js" charset="UTF-8"></script>  
+        <script type="text/javascript" src="<?php echo base_url(); ?>js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+        <script type="text/javascript" src="<?php echo base_url(); ?>js/bootstrap-datetimepicker.rs.js" charset="UTF-8"></script>
 
 
+        <script type="text/javascript">
+            $('.form_datetime').datetimepicker({
+                language: 'rs',
+                weekStart: 1,
+                todayBtn: 1,
+                autoclose: 1,
+                todayHighlight: 1,
+                startView: 2,
+                forceParse: 0,
+                showMeridian: 1
+            });
+        </script>
 
 
 
@@ -265,5 +234,7 @@
 
 
 
-</body>
+
+
+    </body>
 </html>

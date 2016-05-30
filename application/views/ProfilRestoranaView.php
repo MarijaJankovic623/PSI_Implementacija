@@ -129,7 +129,8 @@
                                         Kuhinje:<b> <?php echo " " . $rest['Kuhinja'] ?> </b>
                                     </h3>
                                     <h3>
-                                        Opstina: <b><?php echo " " . $rest['Opstina'] ?> </b></h3>
+                                        Opstina: <b><?php echo " " . $rest['Opstina'] ?> </b>
+                                    </h3>
                                     <h3>
                                         Broj posetilaca: <b><?php echo " " . $rest['BrojPosetilaca'] ?> </b>
                                     </h3>
