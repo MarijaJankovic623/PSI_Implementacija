@@ -143,7 +143,7 @@
                                             <option>10</option>  
                                         </select>
                                     </div>";
-                                        } if (strcmp($rezervacija['Ocena'], "0") && !strcmp($rezervacija['Status'], "Ostvarena")) {
+                                        } if (!strcmp($rezervacija['Status'], "Ocenjena")) {
                                             $ispis = $ispis = '<div class="col-sm-12"  style="background-color: hsla(35, 8%, 14%, 0.96); color: hsla(35, 84%, 51%, 0.96)";>Ovu rezervaciju ocenili ste ocenom : ' . $rezervacija['Ocena'] . '</div>';
                                         }
 

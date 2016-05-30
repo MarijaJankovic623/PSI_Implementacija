@@ -304,7 +304,7 @@ class BusinessLogic extends CI_Model {
         $conn = $this->my_database->conn;
         $stmt = $conn->stmt_init();
 
-        $stmt->prepare("UPDATE rezervacija SET Ocena = ?  WHERE IDRezervacija=?");
+        $stmt->prepare("UPDATE rezervacija  SET Status = 'Ocenjena',  Ocena = ? WHERE IDRezervacija=?");
         $stmt->bind_param("ii", $rezervacija['ocena'], $rezervacija['idrezervacija']);
         $stmt->execute();
     }

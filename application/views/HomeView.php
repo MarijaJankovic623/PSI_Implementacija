@@ -213,7 +213,7 @@
                                             Kontakt email: <b><?php echo " " . $restoran['Email'] ?></b> 
                                         </h3>
                                         <h3>
-                                            Ocena restorana: <b><?php echo " " . $rest['Ocena'] ?></b> 
+                                            Ocena restorana: <b><?php echo " " . $restoran['Ocena'] ?></b> 
                                         </h3>
                                     </div>
                                 </div>
