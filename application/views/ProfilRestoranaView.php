@@ -137,6 +137,9 @@
                                     <h3>
                                         Kontakt email: <b><?php echo " " . $rest['Email'] ?></b> 
                                     </h3>
+                                    <h3>
+                                        Vasa ocena: <b><?php echo " " . $rest['Ocena'] ?></b> 
+                                    </h3>
 
                                 </div>
                             </div>

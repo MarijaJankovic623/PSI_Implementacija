@@ -212,6 +212,9 @@
                                         <h3>
                                             Kontakt email: <b><?php echo " " . $restoran['Email'] ?></b> 
                                         </h3>
+                                        <h3>
+                                            Ocena restorana: <b><?php echo " " . $rest['Ocena'] ?></b> 
+                                        </h3>
                                     </div>
                                 </div>
                                 <div class="row">
