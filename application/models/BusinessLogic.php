@@ -207,7 +207,7 @@ class BusinessLogic extends CI_Model {
 
             $conn = $this->my_database->conn;
             $stmt = $conn->stmt_init();
-            $stmt->prepare("INSERT INTO rezervacija(IDStoFK,IDKorisnikFK,VremeOd,VremeDo) VALUES(?,?,?,?)");
+            $stmt->prepare("INSERT INTO rezervacija(IDStoFK,IDKorisnikFK,VremeOd,VremeDo,Status) VALUES(?,?,?,?,'Nadolazeca')");
             $stmt->bind_param("iiss", $sto['IDSto'], $idKorisnika['IDKorisnik'], $vremeOd, $vremeDo);
             $stmt->execute();
 
@@ -232,7 +232,7 @@ class BusinessLogic extends CI_Model {
         $stolovi = $stol->fetch_all(MYSQLI_ASSOC);
 
         $conn = $this->my_database->conn;
-        $rezer = $conn->query("SELECT * FROM rezervacija");
+        $rezer = $conn->query("SELECT * FROM rezervacija WHERE Status = 'Nadolazeca'");
         $rezervacije = $rezer->fetch_all(MYSQLI_ASSOC);
         $index = 0;
         $data = array();
@@ -258,7 +258,7 @@ class BusinessLogic extends CI_Model {
     public function oslobodi($rez) {
         $conn = $this->my_database->conn;
         $stmt = $conn->stmt_init();
-        $stmt->prepare("DELETE FROM rezervacija WHERE IDRezervacija=?");
+        $stmt->prepare("UPDATE rezervacija SET Status='Ostvarena' WHERE IDRezervacija=?");
         $stmt->bind_param("i", $rez);
         $stmt->execute();
 

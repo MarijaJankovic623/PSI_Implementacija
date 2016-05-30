@@ -129,9 +129,7 @@
                                         }
                                         if (!strcmp($rezervacija['Ocena'], "0") && !strcmp($rezervacija['Status'], "Ostvarena")) {
                                             $ispis = " 
-                                     <div class='col-sm-4'>
-                                        <button type='submit' class='btn btn-warning btn-lg btn-block' name = 'otkaziDugme' >Otkaži</button>
-                                    </div>
+                                    
                                     <div class='col-sm-4'>
                                     <button type= 'submit' class='btn btn-warning btn-lg btn-block' name = 'oceniDugme' >Oceni</button> 
                                     </div>
