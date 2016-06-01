@@ -97,16 +97,16 @@ class BusinessLogic extends CI_Model {
             $brLjudi = 4;
         else if ($brLjudi > 4 && $brLjudi <= 6)
             $brLjudi = 6;
-        
+
         $vremeOd = date("Y-m-d h:i", strtotime($vremeOd));
         $vremeDo = date("Y-m-d h:i", strtotime($vremeDo));
-        
+
         $conn = $this->my_database->conn;
         $stmt = $conn->stmt_init();
         $stmt->prepare("CALL slobodni_stolovi_restorani(?,?,?,?)");
-        $stmt->bind_param("siss", $opstina,$brLjudi,$vremeOd,$vremeDo);
+        $stmt->bind_param("siss", $opstina, $brLjudi, $vremeOd, $vremeDo);
         $stmt->execute();
-        
+
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
@@ -117,10 +117,10 @@ class BusinessLogic extends CI_Model {
             $brLjudi = 4;
         else if ($brLjudi > 4 && $brLjudi <= 6)
             $brLjudi = 6;
-        
+
         $vremeOd = date("Y-m-d h:i", strtotime($vremeOd));
         $vremeDo = date("Y-m-d h:i", strtotime($vremeDo));
-        
+
         $conn = $this->my_database->conn;
         $stmt = $conn->stmt_init();
         $stmt->prepare("CALL slobodni_stolovi(?,?,?,?)");
@@ -307,6 +307,10 @@ class BusinessLogic extends CI_Model {
         $stmt->prepare("UPDATE rezervacija  SET Status = 'Ocenjena',  Ocena = ? WHERE IDRezervacija=?");
         $stmt->bind_param("ii", $rezervacija['ocena'], $rezervacija['idrezervacija']);
         $stmt->execute();
+
+        $stmt = $conn->stmt_init();
+        $result = $conn->query("CALL ocena_restorana(" . $rezervacija['idrezervacija']. ")");
+
     }
 
     public function rezervacijaCancel($rezervacija) {
