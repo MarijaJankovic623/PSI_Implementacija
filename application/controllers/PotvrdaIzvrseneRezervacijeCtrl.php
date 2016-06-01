@@ -10,7 +10,7 @@ class PotvrdaIzvrseneRezervacijeCtrl extends CI_Controller{
     
     public function index(){
         $this->load->model('UserValidationModel');
-        $this->UserValidationModel->checkSession();
+        $this->UserValidationModel->checkSessionKonobar();
        
         $this->load->model('BusinessLogic');
         $data['rezervacije']=$this->BusinessLogic->getReservations();
@@ -20,7 +20,7 @@ class PotvrdaIzvrseneRezervacijeCtrl extends CI_Controller{
    
     public function potvrdi($rez){
         $this->load->model('UserValidationModel');
-        $this->UserValidationModel->checkSession();
+        $this->UserValidationModel->checkSessionKonobar();
        
         $this->load->model('BusinessLogic');
         if($this->BusinessLogic->oslobodi($rez)){

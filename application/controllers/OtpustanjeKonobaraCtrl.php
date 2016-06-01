@@ -13,7 +13,7 @@
 class OtpustanjeKonobaraCtrl extends CI_Controller {
     public function index($id) {
         $this->load->model('UserValidationModel');
-        $this->UserValidationModel->checkSession();
+        $this->UserValidationModel->checkSessionRestoran();
         
         $this->load->model('BusinessLogic');
         $data['konobari']=$this->BusinessLogic->getAllWaiters($id);
@@ -41,7 +41,7 @@ class OtpustanjeKonobaraCtrl extends CI_Controller {
     
     public function profil($id) {
         $this->load->model('UserValidationModel');
-        $this->UserValidationModel->checkSession();
+        $this->UserValidationModel->checkSessionRestoran();
         
         $this->load->model('BusinessLogic');
         $data['rest']=$this->BusinessLogic->getRestaurant($id);

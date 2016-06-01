@@ -15,7 +15,7 @@ class PrelistavanjeOcenjivanjeOtkazivanjeRezervacijaCtrl extends CI_Controller {
 
     public function index() {
         $this->load->model('UserValidationModel');
-        $this->UserValidationModel->checkSession();
+        $this->UserValidationModel->checkSessionKorisnik();
         $this->load->model('BusinessLogic');
 
         $data['rezervacije'] = $this->BusinessLogic->getAllReservations($this->session->userdata('userid'));
@@ -25,7 +25,7 @@ class PrelistavanjeOcenjivanjeOtkazivanjeRezervacijaCtrl extends CI_Controller {
 
     public function rezervacijaCancelGrade($id) {
         $this->load->model('UserValidationModel');
-        $this->UserValidationModel->checkSession();
+        $this->UserValidationModel->checkSessionKorisnik();
         $this->load->model('BusinessLogic');
 
         if (isset($_POST['oceniDugme'])) {

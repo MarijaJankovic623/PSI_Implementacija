@@ -35,7 +35,7 @@ class EditovanjeNalogaCtrl extends CI_Controller {
     
     public function profileUser() {
         $this->load->model('UserValidationModel');
-        $this->UserValidationModel->checkSession();
+        $this->UserValidationModel->checkSessionKorisnik();
         $this->load->model('BusinessLogic');
         $data['user']=$this->BusinessLogic->getUser($this->session->userdata('userid'));
         $this->load->view('ProfilKorisnikaView', $data);
@@ -43,7 +43,7 @@ class EditovanjeNalogaCtrl extends CI_Controller {
 
     public function profileWaiter() {
         $this->load->model('UserValidationModel');
-        $this->UserValidationModel->checkSession();
+        $this->UserValidationModel->checkSessionKonobar();
         $this->load->model('BusinessLogic');
         $data['user']=$this->BusinessLogic->getUser($this->session->userdata('userid'));
         $this->load->view('ProfilKonobaraView', $data);
@@ -51,7 +51,7 @@ class EditovanjeNalogaCtrl extends CI_Controller {
     
     public function profileAdmin() {
         $this->load->model('UserValidationModel');
-        $this->UserValidationModel->checkSession();
+        $this->UserValidationModel->checkSessionAdmin();
         $this->load->model('BusinessLogic');
         $data['user']=$this->BusinessLogic->getUser($this->session->userdata('userid'));
         $this->load->view('ProfilAdminaView', $data);

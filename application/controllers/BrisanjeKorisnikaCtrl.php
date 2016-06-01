@@ -9,7 +9,7 @@ class BrisanjeKorisnikaCtrl extends CI_Controller{
     public function index(){
         
         $this->load->model('UserValidationModel');
-        $this->UserValidationModel->checkSession();
+        $this->UserValidationModel->checkSessionAdmin();
        
         $this->load->model('BusinessLogic');
 

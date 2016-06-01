@@ -15,7 +15,7 @@ class PrelistavanjeRestoranaCtrl extends CI_Controller {
 
     public function index() {
         $this->load->model('UserValidationModel');
-        $this->UserValidationModel->checkSession();
+        $this->UserValidationModel->checkSessionKorisnik();
         $this->load->model('BusinessLogic');
 
         $data['restorani'] = $this->BusinessLogic->getAllRestaurants();
@@ -24,7 +24,7 @@ class PrelistavanjeRestoranaCtrl extends CI_Controller {
 
     public function restoranDetails($id) {
         $this->load->model('UserValidationModel');
-        $this->UserValidationModel->checkSession();
+        $this->UserValidationModel->checkSessionKorisnik();
         $this->load->model('BusinessLogic');
 
         $data['restoran'] = $this->BusinessLogic->getRestaurant($id);

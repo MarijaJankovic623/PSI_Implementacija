@@ -23,7 +23,7 @@ class OznacavanjeStolaZauzetimCtrl extends CI_Controller {
     public function reserve(){
         
         $this->load->model('UserValidationModel');
-        $this->UserValidationModel->checkSession();
+        $this->UserValidationModel->checkSessionKonobar();
         $this->load->model('BusinessLogic');
         $brLjudi = $this->input->post('brLjudi');
         $vremeOd = $this->input->post('vremeOd');

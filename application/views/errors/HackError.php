@@ -1,4 +1,4 @@
-<!-- Jovana Djunisijevic -->
+<!--Jovana Djunisijevic-->
 <!doctype html>
 <!--[if IE 7 ]>    <html lang="en-gb" class="isie ie7 oldie no-js"> <![endif]-->
 <!--[if IE 8 ]>    <html lang="en-gb" class="isie ie8 oldie no-js"> <![endif]-->
@@ -26,10 +26,10 @@
         <link rel="stylesheet" href="<?php echo base_url(); ?>js/fancybox/jquery.fancybox.css" type="text/css" media="screen" />
         <link href="<?php echo base_url(); ?>css/animate.css" rel="stylesheet" media="screen">
         <link href="<?php echo base_url(); ?>flexslider/flexslider.css" rel="stylesheet" />
-
+        <link href="<?php echo base_url(); ?>js/owl-carousel/owl.carousel.css" rel="stylesheet">
         <link rel="stylesheet" href="<?php echo base_url(); ?>css/styles.css" />
         <!-- Font Awesome -->
-        <link href="<?php echo base_url(); ?>font/css/font-awesome.min.css" rel="stylesheet">
+        <link href="font/css/font-awesome.min.css" rel="stylesheet">
     </head>
 
     <body>
@@ -43,7 +43,7 @@
                     <!--/.navbar-header-->
                     <div id="main-nav" class="collapse navbar-collapse">
                         <ul class="nav navbar-nav" id="mainNav">
-                            <li class="active"><a href="<?php echo base_url(); ?>index.php/HomeCtrl" class="">Napusti registraciju</a></li>
+                           
                         </ul>
                     </div>
                     <!--/.navbar-collapse--> 
@@ -80,6 +80,7 @@
                 </div>
                 <!-- end slider -->
             </div>
+            
         </section>
 
         <section>
@@ -88,34 +89,13 @@
                     &nbsp;
                 </div>
                 <div class="row">
-                    <div class="col-sm-8 col-sm-offset-2" >
-                        <form action="<?php echo base_url(); ?>index.php/RegistracijaAdminaCtrl/submit" method="POST" role="form">
-                            <div class="form-group">
-                                <legend>Registracija admina</legend>
-                                <?php echo form_error('username'); ?>
-                                <label >Korisničko ime</label>
-                                <input type="text" class="form-control" name="username" placeholder="Unesite korisničko ime">
-                                <?php echo form_error('password'); ?>
-                                <label >Lozinka</label>
-                                <input type="password" class="form-control" name="password" placeholder="Unesite lozinku">
-                                <?php echo form_error('name'); ?>
-                                <label >Ime</label>
-                                <input type="text" class="form-control" name="name" placeholder="Unesite vase ime ovde">
-                                <?php echo form_error('lastname'); ?>
-                                <label >Prezime</label>
-                                <input type="text" class="form-control" name="lastname" placeholder="Unesite vase Prezime ovde">
-                                <?php echo form_error('email'); ?>
-                                <label >Email</label>
-                                <input type="text" class="form-control" name="email" placeholder="Unesite vas email ovde">
-                                <?php echo form_error('code'); ?>
-                                <label >Specijalan kod</label>
-                                <input type="text" class="form-control" name="code" placeholder="Unesite specijalan kod dobijen od glavnog admina">
-
-                                <button type="submit" class="btn btn-primary">Potvrdi</button>
-                            </div>	                
-                        </form>
+                    <div class="col-sm-9 col-sm-offset-3" >
+                        <h1>Go away we dont like you -.-</h1>                      
                     </div>
                 </div>
+                <div class="row">
+                    &nbsp;
+                </div> 
             </div>
         </section>
 
@@ -138,4 +118,3 @@
 
     </body>
 </html>
-
