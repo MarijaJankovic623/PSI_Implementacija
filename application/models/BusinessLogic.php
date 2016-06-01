@@ -110,6 +110,21 @@ class BusinessLogic extends CI_Model {
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function checkDate($date1, $date2) {
+        date_default_timezone_set('Europe/Belgrade');
+        $date = date("Y-m-d h:i", time());
+
+        if ($date1 >= $date2) {
+
+            return false;
+        }
+        if (($date2 - $date1) > (60 * 60 * 6)) {
+            return false;
+        }
+        
+        if($date1<$date) return false;
+    }
+
     public function reserveTable($idRestorana, $brLjudi, $vremeOd, $vremeDo) {
         if ($brLjudi <= 2)
             $brLjudi = 2;
@@ -121,24 +136,27 @@ class BusinessLogic extends CI_Model {
         $vremeOd = date("Y-m-d h:i", strtotime($vremeOd));
         $vremeDo = date("Y-m-d h:i", strtotime($vremeDo));
 
-        $conn = $this->my_database->conn;
-        $stmt = $conn->stmt_init();
-        $stmt->prepare("CALL slobodni_stolovi(?,?,?,?)");
-        $stmt->bind_param("iiss", $idRestorana, $brLjudi, $vremeOd, $vremeDo);
-        $stmt->execute();
-
-        $sto = $stmt->get_result()->fetch_assoc();
-        if (isset($sto['IDSto'])) {
-            $userid = $this->session->userdata('userid');
+        if ($this->checkDate($vremeOd, $vremeDo)) {
 
             $conn = $this->my_database->conn;
             $stmt = $conn->stmt_init();
-            $stmt->prepare("INSERT INTO rezervacija(IDStoFK,IDKorisnikFK,VremeOd,VremeDo,Status) VALUES(?,?,?,?,'Nadolazeca')");
-            $stmt->bind_param("iiss", $sto['IDSto'], $userid, $vremeOd, $vremeDo);
+            $stmt->prepare("CALL slobodni_stolovi(?,?,?,?)");
+            $stmt->bind_param("iiss", $idRestorana, $brLjudi, $vremeOd, $vremeDo);
             $stmt->execute();
 
+            $sto = $stmt->get_result()->fetch_assoc();
+            if (isset($sto['IDSto'])) {
+                $userid = $this->session->userdata('userid');
 
-            return true;
+                $conn = $this->my_database->conn;
+                $stmt = $conn->stmt_init();
+                $stmt->prepare("INSERT INTO rezervacija(IDStoFK,IDKorisnikFK,VremeOd,VremeDo,Status) VALUES(?,?,?,?,'Nadolazeca')");
+                $stmt->bind_param("iiss", $sto['IDSto'], $userid, $vremeOd, $vremeDo);
+                $stmt->execute();
+
+
+                return true;
+            }
         }
 
         return false;
@@ -309,8 +327,7 @@ class BusinessLogic extends CI_Model {
         $stmt->execute();
 
         $stmt = $conn->stmt_init();
-        $result = $conn->query("CALL ocena_restorana(" . $rezervacija['idrezervacija']. ")");
-
+        $result = $conn->query("CALL ocena_restorana(" . $rezervacija['idrezervacija'] . ")");
     }
 
     public function rezervacijaCancel($rezervacija) {
@@ -321,6 +338,7 @@ class BusinessLogic extends CI_Model {
         $stmt->prepare("UPDATE rezervacija SET Status = 'Otkazana'  WHERE IDRezervacija=?");
         $stmt->bind_param("i", $rezervacija['idrezervacija']);
         $stmt->execute();
+        return true;
     }
 
 }

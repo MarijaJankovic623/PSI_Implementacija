@@ -98,6 +98,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
+                        <?php if (isset($otkazivanje)) echo "<h1 align = 'center' style='color: #FF0000';>" . $poruka . "<h1/>" ?>
                         <?php foreach ($rezervacije as $rezervacija) { ?>
                             <div class="jumbotron" style="background-color:rgba(237, 231, 227, 0.87)">
                                 <form action="<?php echo(base_url() . 'index.php/PrelistavanjeOcenjivanjeOtkazivanjeRezervacijaCtrl/rezervacijaCancelGrade/' . $rezervacija['IDRezervacija']); ?>" method="POST" role="form">

@@ -41,7 +41,6 @@ class PrelistavanjeOcenjivanjeOtkazivanjeRezervacijaCtrl extends CI_Controller {
             $data['rezervacije'] = $this->BusinessLogic->getAllReservations($this->session->userdata('userid'));
 
             $this->load->view('PrelistavanjeOcenjivanjeOtkazivanjeRezervacijaView', $data);
-            
         } else if (isset($_POST['otkaziDugme'])) {
 
             $input = $this->input;
@@ -49,12 +48,17 @@ class PrelistavanjeOcenjivanjeOtkazivanjeRezervacijaCtrl extends CI_Controller {
                 "idrezervacija" => $id,
             );
 
-            $this->BusinessLogic->rezervacijaCancel($rezervacija);
+            if ($this->BusinessLogic->rezervacijaCancel($rezervacija)) {
 
+                $data['poruka'] = 'Uspesno ste otkazali rezervaciju';
+            } else {
+                $data['poruka'] = 'Nije moguce otkazati rezervaciju';
+            }
+            $data['otkazivanje'] = true;
             $data['rezervacije'] = $this->BusinessLogic->getAllReservations($this->session->userdata('userid'));
 
             $this->load->view('PrelistavanjeOcenjivanjeOtkazivanjeRezervacijaView', $data);
-    }}
-    
+        }
+    }
 
 }
