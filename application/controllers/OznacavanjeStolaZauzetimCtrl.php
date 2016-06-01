@@ -15,7 +15,8 @@ class OznacavanjeStolaZauzetimCtrl extends CI_Controller {
 
 
     public function index() {
-        
+        $this->load->model('UserValidationModel');
+        $this->UserValidationModel->checkSessionKonobar();
         $this->load->view('OznacavanjeStolaZauzetimView');
         
 }
@@ -36,6 +37,6 @@ class OznacavanjeStolaZauzetimCtrl extends CI_Controller {
         else {
             $data['poruka']="Nije moguce napraviti rezervaciju";
         }
-        $this->load->view('OznacavanjeStolaZauzetim2View', $data);
+        $this->load->view('OznacavanjeStolaZauzetimView', $data);
     }
 }

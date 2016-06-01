@@ -280,15 +280,8 @@ class BusinessLogic extends CI_Model {
         $stmt->bind_param("i", $rez);
         $stmt->execute();
 
-        $stmt = $conn->stmt_init();
-        $stmt->prepare("SELECT * FROM rezervacija WHERE IDRezervacija=?");
-        $stmt->bind_param("i", $rez);
-        $stmt->execute();
-        if ($stmt->get_result()->num_rows > 0) {
-            return false;
-        } else {
-            return true;
-        }
+      
+        return true;
     }
 
     public function getNameRestaurant() {
