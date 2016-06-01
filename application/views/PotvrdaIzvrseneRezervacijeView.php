@@ -100,6 +100,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
+                        <?php if (isset($potvrda)) echo "<h1 align = 'center' style='color: #FF9900';>" . $poruka . "<h1/>" ?>
                         <?php foreach ($rezervacije as $rez) { ?>
                             <div class="jumbotron" style="background-color:rgba(237, 231, 227, 0.87)">
                                 <div class="row">

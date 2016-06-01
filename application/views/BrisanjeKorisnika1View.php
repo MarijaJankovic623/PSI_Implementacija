@@ -98,6 +98,7 @@
         <div class = "container">
     <div class = "row">
     <div class="col-sm-9 col-sm-offset-2">
+         <?php if (isset($brisanje)) echo "<h1 align = 'center' style='color: #FF9900';>" . $poruka . "<h1/>" ?>
         <?php foreach ($korisnici as $korisnik) { ?>
             <div class="jumbotron" style="background-color:rgba(237, 231, 227, 0.87)">
                 <div class="row">

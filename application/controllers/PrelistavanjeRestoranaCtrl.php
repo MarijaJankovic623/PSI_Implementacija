@@ -32,6 +32,8 @@ class PrelistavanjeRestoranaCtrl extends CI_Controller {
     }
 
     public function criteriaRestaurants() {
+        $this->load->model('UserValidationModel');
+        $this->UserValidationModel->checkSessionKorisnik();
         $brLjudi = $this->input->post('brLjudi');
         $vremeOd = $this->input->post('vremeOd');
         $vremeDo = $this->input->post('vremeDo');

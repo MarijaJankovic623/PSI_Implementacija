@@ -29,7 +29,11 @@ class PotvrdaIzvrseneRezervacijeCtrl extends CI_Controller{
         else{
             $data['poruka']="Neuspesno oslobodjen sto!";
         }
-        $this->load->view('PotvrdaIzvrseneRezervacije2View', $data);
+        
+        $data['potvrda']=true;
+        $data['rezervacije']=$this->BusinessLogic->getReservations();
+        $data['restoran']=$this->BusinessLogic->getNameRestaurant();
+        $this->load->view('PotvrdaIzvrseneRezervacijeView', $data);
     }
     
 }

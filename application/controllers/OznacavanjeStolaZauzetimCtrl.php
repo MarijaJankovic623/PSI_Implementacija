@@ -15,7 +15,8 @@ class OznacavanjeStolaZauzetimCtrl extends CI_Controller {
 
 
     public function index() {
-        
+        $this->load->model('UserValidationModel');
+        $this->UserValidationModel->checkSessionKonobar();
         $this->load->view('OznacavanjeStolaZauzetimView');
         
 }
