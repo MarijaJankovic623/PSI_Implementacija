@@ -93,6 +93,9 @@
 
         <section>
             <div class="container">
+                <div class="col-sm-12 align-center">
+                <?php if (isset($zauzeto)) echo "<h1 align = 'center' style='color: #FF9900';>" . $poruka . "<h1/>" ?>
+                </div>
                 <div class="row">
                     &nbsp;
                 </div>
@@ -132,6 +135,7 @@
                         &nbsp;
                     </div>  
                 </div>
+            
             </div>
             <hr>
             <div class="row">

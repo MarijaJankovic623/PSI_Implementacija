@@ -36,6 +36,7 @@ class OznacavanjeStolaZauzetimCtrl extends CI_Controller {
         else {
             $data['poruka']="Nije moguce napraviti rezervaciju";
         }
-        $this->load->view('OznacavanjeStolaZauzetim2View', $data);
+        $data['zauzeto'] = true;
+        $this->load->view('OznacavanjeStolaZauzetimView', $data);
     }
 }

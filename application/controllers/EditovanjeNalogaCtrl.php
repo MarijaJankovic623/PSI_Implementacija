@@ -20,15 +20,23 @@ class EditovanjeNalogaCtrl extends CI_Controller {
         $data['user']=$this->BusinessLogic->getUser($this->session->userdata('userid'));
         
         if ($this->session->userdata('korisnik')) {
+            $this->load->model('UserValidationModel');
+            $this->UserValidationModel->checkSessionKorisnik();
             $this->load->view('EditNalogaKorisnikView', $data);
         }
         else if ($this->session->userdata('restoran')) {
+            $this->load->model('UserValidationModel');
+            $this->UserValidationModel->checkSessionRestoran();
             $this->load->view('EditNalogaRestoranView', $data);
         }
         else if ($this->session->userdata('konobar')) {
+            $this->load->model('UserValidationModel');
+            $this->UserValidationModel->checkSessionKonobar();
             $this->load->view('EditNalogaKonobarView', $data);
         }
         else if ($this->session->userdata('admin')) {
+            $this->load->model('UserValidationModel');
+            $this->UserValidationModel->checkSessionAdmin();
             $this->load->view('EditNalogaAdminView', $data);
         }
     }
@@ -60,6 +68,7 @@ class EditovanjeNalogaCtrl extends CI_Controller {
     public function confirm() {
         $this->load->model('UserValidationModel');
         if ($this->session->userdata('korisnik')) {
+            $this->UserValidationModel->checkSessionKorisnik();
             $input = $this->input;
             $korisnik = array(
                 "name" => $input->post('name'),
@@ -78,6 +87,7 @@ class EditovanjeNalogaCtrl extends CI_Controller {
             }
         }
         else if ($this->session->userdata('restoran')) {
+            $this->UserValidationModel->checkSessionRestoran();
             $input = $this->input;
             $restoran = array(
                 "lozinka" => $input->post('lozinka'),
@@ -104,6 +114,7 @@ class EditovanjeNalogaCtrl extends CI_Controller {
             }
         }
         else if ($this->session->userdata('konobar')) {
+            $this->UserValidationModel->checkSessionKonobar();
             $input = $this->input;
             $konobar = array(
                 "name" => $input->post('name'),
@@ -122,6 +133,7 @@ class EditovanjeNalogaCtrl extends CI_Controller {
             }
         }
         else if ($this->session->userdata('admin')) {
+            $this->UserValidationModel->checkSessionAdmin();
             $input=$this->input;
             $admin=array(
                 "password"=>$input->post('password'),

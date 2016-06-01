@@ -123,6 +123,7 @@ class BusinessLogic extends CI_Model {
         }
         
         if($date1<$date) return false;
+        else return true;
     }
 
     public function reserveTable($idRestorana, $brLjudi, $vremeOd, $vremeDo) {
@@ -206,33 +207,38 @@ class BusinessLogic extends CI_Model {
 
         $vremeOd = date("Y-m-d h:i", strtotime($vremeOd));
         $vremeDo = date("Y-m-d h:i", strtotime($vremeDo));
-        $conn = $this->my_database->conn;
-        $stmt = $conn->stmt_init();
-        $stmt->prepare("CALL slobodni_stolovi(?,?,?,?)");
-        $stmt->bind_param("iiss", $result['IDRestoranFK'], $brLjudi, $vremeOd, $vremeDo);
-        $stmt->execute();
-
-        $sto = $stmt->get_result()->fetch_assoc();
-        if (isset($sto['IDSto'])) {
-
+        
+        if ($this->checkDate($vremeOd, $vremeDo)) {
+        
             $conn = $this->my_database->conn;
             $stmt = $conn->stmt_init();
-            $stmt->prepare("SELECT * FROM korisnik WHERE KIme=?");
-            $stmt->bind_param("s", $korisnik['imeKorisnika']);
+            $stmt->prepare("CALL slobodni_stolovi(?,?,?,?)");
+            $stmt->bind_param("iiss", $result['IDRestoranFK'], $brLjudi, $vremeOd, $vremeDo);
             $stmt->execute();
 
-            $idKorisnika = $stmt->get_result()->fetch_assoc();
+            $sto = $stmt->get_result()->fetch_assoc();
+            if (isset($sto['IDSto'])) {
 
-            $conn = $this->my_database->conn;
-            $stmt = $conn->stmt_init();
-            $stmt->prepare("INSERT INTO rezervacija(IDStoFK,IDKorisnikFK,VremeOd,VremeDo,Status) VALUES(?,?,?,?,'Nadolazeca')");
-            $stmt->bind_param("iiss", $sto['IDSto'], $idKorisnika['IDKorisnik'], $vremeOd, $vremeDo);
-            $stmt->execute();
+                $conn = $this->my_database->conn;
+                $stmt = $conn->stmt_init();
+                $stmt->prepare("SELECT * FROM korisnik WHERE KIme=?");
+                $stmt->bind_param("s", $korisnik['imeKorisnika']);
+                $stmt->execute();
 
-            return true;
-        } else {
-            return false;
+                $idKorisnika = $stmt->get_result()->fetch_assoc();
+
+                $conn = $this->my_database->conn;
+                $stmt = $conn->stmt_init();
+                $stmt->prepare("INSERT INTO rezervacija(IDStoFK,IDKorisnikFK,VremeOd,VremeDo,Status) VALUES(?,?,?,?,'Nadolazeca')");
+                $stmt->bind_param("iiss", $sto['IDSto'], $idKorisnika['IDKorisnik'], $vremeOd, $vremeDo);
+                $stmt->execute();
+
+                return true;
+            } else {
+                return false;
+            }
         }
+        return false;
     }
 
     public function getReservations() {

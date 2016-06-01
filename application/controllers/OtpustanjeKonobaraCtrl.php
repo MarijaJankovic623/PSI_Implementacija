@@ -22,11 +22,15 @@ class OtpustanjeKonobaraCtrl extends CI_Controller {
     }
     
     public function AreYouSure($id) {
+        $this->load->model('UserValidationModel');
+        $this->UserValidationModel->checkSessionRestoran();
         $noviID['id']=$id;
         $this->load->view('OtpustiKonobaraAreYouSureView', $noviID);
     }
     
     public function delete($id) {
+        $this->load->model('UserValidationModel');
+        $this->UserValidationModel->checkSessionRestoran();
         $this->load->model('BusinessLogic');
         if ($this->BusinessLogic->deleteWaiter($id)==true) {
             $data['poruka']='Konobar je uspesno izbrisan';
@@ -34,6 +38,7 @@ class OtpustanjeKonobaraCtrl extends CI_Controller {
         else {
             $data['poruka']='Konobar nije uspesno izbrisan';
         }
+        $data['otpustanje'] = true;
         $ID=$this->session->userdata('userid');
         $data['konobari']=$this->BusinessLogic->getAllWaiters($ID);
         $this->load->view('OtpustanjeKonobaraView', $data);

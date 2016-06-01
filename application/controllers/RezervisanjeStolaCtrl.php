@@ -8,6 +8,8 @@
 class RezervisanjeStolaCtrl extends CI_Controller {
 
     public function rezervisi($idRestorana) {
+        $this->load->model('UserValidationModel');
+        $this->UserValidationModel->checkSessionKorisnik();
         $brLjudi = $this->input->post('brLjudi');
         $vremeOd = $this->input->post('vremeOd');
         $vremeDo = $this->input->post('vremeDo');
