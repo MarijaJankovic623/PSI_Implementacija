@@ -12,11 +12,53 @@ class UserValidationModel extends CI_Model {
         $this->load->library("my_database");
     }
 
+    /**
+     * Znaci ova funkcija ostaje i poziva se unutar ostalih za proveru sesija
+     * ona proverava samo da li je korisnik koji pokusava da prostupi
+     * ulogovan i ako nije vraca ga na pocetnu stranu sistema
+     */
     public function checkSession() {
         $is_logged_in = $this->session->userdata('loggedIn');
 
+
         if (!isset($is_logged_in) || $is_logged_in != true) {
-            redirect('home/index');
+            redirect("ErrorCtrl");
+        }
+    }
+
+    public function checkSessionKorisnik() {
+        $this->checkSession();
+        $korisnik = $this->session->userdata('korisnik');
+
+        if (!$korisnik) {
+            redirect("ErrorCtrl");
+        }
+    }
+
+    public function checkSessionRestoran() {
+        $this->checkSession();
+        $restoran = $this->session->userdata('restoran');
+
+        if (!$restoran) {
+            redirect("ErrorCtrl");
+        }
+    }
+
+    public function checkSessionKonobar() {
+        $this->checkSession();
+        $konobar = $this->session->userdata('konobar');
+
+        if (!$konobar) {
+            redirect("ErrorCtrl");
+        }
+    }
+
+    public function checkSessionAdmin() {
+        $this->checkSession();
+        $admin = $this->session->userdata('admin');
+
+        if (!$admin) {
+            redirect("ErrorCtrl");
         }
     }
 
@@ -36,7 +78,7 @@ class UserValidationModel extends CI_Model {
                 'korisnik' => true,
                 'restoran' => false,
                 'konobar' => false,
-                'admin'=> false
+                'admin' => false
             );
 
             $this->session->set_userdata($data);
@@ -45,14 +87,14 @@ class UserValidationModel extends CI_Model {
             return false;
         }
     }
-    
+
     public function loginRestoran($kime, $lozinka) {
         $conn = $this->my_database->conn;
         $stmt = $conn->stmt_init(); //dohvatanje iskaza
         $stmt->prepare("SELECT * FROM restoran WHERE KIme = ? AND Lozinka = ?"); //pravljenje istog
         $stmt->bind_param("ss", $kime, $lozinka); //vezivanej parametara 
         $stmt->execute();
-        
+
         $res = $stmt->get_result()->fetch_assoc();
         if (isset($res['IDRestoran'])) {
             $data = array(
@@ -62,9 +104,9 @@ class UserValidationModel extends CI_Model {
                 'restoran' => true,
                 'konobar' => false,
                 'korisnik' => false,
-                'admin'=> false
+                'admin' => false
             );
-            
+
             $this->session->set_userdata($data);
             return true;
         } else {
@@ -78,7 +120,7 @@ class UserValidationModel extends CI_Model {
         $stmt->prepare("SELECT * FROM konobar WHERE KIme = ? AND Lozinka = ?"); //pravljenje istog
         $stmt->bind_param("ss", $kime, $lozinka); //vezivanej parametara 
         $stmt->execute();
-        
+
         $res = $stmt->get_result()->fetch_assoc();
         if (isset($res['IDKonobar'])) {
             $data = array(
@@ -88,7 +130,7 @@ class UserValidationModel extends CI_Model {
                 'konobar' => true,
                 'korisnik' => false,
                 'restoran' => false,
-                'admin'=> false
+                'admin' => false
             );
 
             $this->session->set_userdata($data);
@@ -98,11 +140,11 @@ class UserValidationModel extends CI_Model {
         }
     }
 
-    public function loginAdmin($kime, $lozinka){
+    public function loginAdmin($kime, $lozinka) {
         $conn = $this->my_database->conn;
-        $stmt = $conn->stmt_init(); 
-        $stmt->prepare("SELECT * FROM admin WHERE KIme = ? AND Lozinka = ?"); 
-        $stmt->bind_param("ss", $kime, $lozinka); 
+        $stmt = $conn->stmt_init();
+        $stmt->prepare("SELECT * FROM admin WHERE KIme = ? AND Lozinka = ?");
+        $stmt->bind_param("ss", $kime, $lozinka);
         $stmt->execute();
 
         $res = $stmt->get_result()->fetch_assoc();
@@ -114,7 +156,7 @@ class UserValidationModel extends CI_Model {
                 'admin' => true,
                 'konobar' => false,
                 'korisnik' => false,
-                'restoran'=> false
+                'restoran' => false
             );
 
             $this->session->set_userdata($data);
@@ -123,7 +165,7 @@ class UserValidationModel extends CI_Model {
             return false;
         }
     }
-    
+
     public function login($kime, $lozinka) {
 
 
@@ -154,7 +196,7 @@ class UserValidationModel extends CI_Model {
             $stmt = $conn->stmt_init();
             $stmt->prepare("INSERT INTO restoran(KIme,Lozinka,ImeObjekta,
                             ImeVlasnika,PrezimeVlasnika,Email,Opis,Kuhinja,Opstina,KodKonobara)VALUES(?,?,?,?,?,?,?,?,?,?)");
-            $stmt->bind_param("sssssssssi", $res['kime'], $res['lozinka'], $res['iobj'], $res['ivlasnika'], $res['pvlasnika'], $res['email'],$res['opis'],$res['kuhinje'],$res['opstina'],$res['kod']);
+            $stmt->bind_param("sssssssssi", $res['kime'], $res['lozinka'], $res['iobj'], $res['ivlasnika'], $res['pvlasnika'], $res['email'], $res['opis'], $res['kuhinje'], $res['opstina'], $res['kod']);
             $stmt->execute();
             $restoranId = $stmt->insert_id;
 
@@ -176,25 +218,25 @@ class UserValidationModel extends CI_Model {
             return true;
         }
     }
-    
+
     public function updateRestaurant($restoran, $id) {
         $this->load->library('form_validation');
         $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
         $this->load->database();
-        
+
         $this->form_validation->set_rules('lozinka', 'lozinka', 'trim|required|min_length[4]|max_length[32]');
         $this->form_validation->set_rules('iobj', 'ime objekta', 'required');
         $this->form_validation->set_rules('ivlasnika', 'ime vlasnika', 'required|max_length[15]');
         $this->form_validation->set_rules('pvlasnika', 'prezime vlasnika', 'required|max_length[15]');
         $this->form_validation->set_rules('email', 'email', 'required|valid_email');
-        
+
         if ($this->form_validation->run() == FALSE) {
             return false;
         } else {
             $conn = $this->my_database->conn;
             $stmt = $conn->stmt_init();
             $stmt->prepare("UPDATE restoran SET Lozinka=?,ImeObjekta=?,ImeVlasnika=?,PrezimeVlasnika=?,Email=?,Opis=?,Kuhinja=?,Opstina=?,KodKonobara=? WHERE IDRestoran=?");
-            $stmt->bind_param("ssssssssii", $restoran['lozinka'], $restoran['iobj'], $restoran['ivlasnika'], $restoran['pvlasnika'], $restoran['email'],$restoran['opis'],$restoran['kuhinje'],$restoran['opstina'],$restoran['kod'], $id);
+            $stmt->bind_param("ssssssssii", $restoran['lozinka'], $restoran['iobj'], $restoran['ivlasnika'], $restoran['pvlasnika'], $restoran['email'], $restoran['opis'], $restoran['kuhinje'], $restoran['opstina'], $restoran['kod'], $id);
             $stmt->execute();
             $restoranId = $stmt->insert_id;
 
@@ -210,67 +252,64 @@ class UserValidationModel extends CI_Model {
             return true;
         }
     }
-    
+
     public function TableForTwo($restoran, $id) {
         $conn = $this->my_database->conn;
         $stmt = $conn->stmt_init();
-        $param['broj']=2;
+        $param['broj'] = 2;
         $stmt->prepare("SELECT * FROM sto WHERE IDRestoranFK=? AND BrojOsoba=?");
         $stmt->bind_param("ii", $id, $param['broj']);
         $stmt->execute();
-        $result=$stmt->get_result()->num_rows;
-        if ($result>$restoran['sto2']) {
-            for ($i = 1; $i <= ($result-$restoran['sto2']); $i++) {
+        $result = $stmt->get_result()->num_rows;
+        if ($result > $restoran['sto2']) {
+            for ($i = 1; $i <= ($result - $restoran['sto2']); $i++) {
                 $this->deleteSto(2, $id);
             }
-        }
-        else if ($result<$restoran['sto2']) {
-            for ($i=1; $i<=($restoran['sto2']-$result); $i++) {
+        } else if ($result < $restoran['sto2']) {
+            for ($i = 1; $i <= ($restoran['sto2'] - $result); $i++) {
                 $this->createSto(2, $id);
             }
         }
     }
-    
+
     public function TableForFour($restoran, $id) {
         $conn = $this->my_database->conn;
         $stmt = $conn->stmt_init();
-        $param['broj']=4;
+        $param['broj'] = 4;
         $stmt->prepare("SELECT * FROM sto WHERE IDRestoranFK=? AND BrojOsoba=?");
         $stmt->bind_param("ii", $id, $param['broj']);
         $stmt->execute();
-        $result=$stmt->get_result()->num_rows;
-        if ($result>$restoran['sto4']) {
-            for ($i = 1; $i <= ($result-$restoran['sto4']); $i++) {
+        $result = $stmt->get_result()->num_rows;
+        if ($result > $restoran['sto4']) {
+            for ($i = 1; $i <= ($result - $restoran['sto4']); $i++) {
                 $this->deleteSto(4, $id);
             }
-        }
-        else if ($result<$restoran['sto4']) {
-            for ($i=1; $i<=($restoran['sto4']-$result); $i++) {
+        } else if ($result < $restoran['sto4']) {
+            for ($i = 1; $i <= ($restoran['sto4'] - $result); $i++) {
                 $this->createSto(4, $id);
             }
         }
     }
-    
+
     public function TableForSix($restoran, $id) {
         $conn = $this->my_database->conn;
         $stmt = $conn->stmt_init();
-        $param['broj']=6;
+        $param['broj'] = 6;
         $stmt->prepare("SELECT * FROM sto WHERE IDRestoranFK=? AND BrojOsoba=?");
         $stmt->bind_param("ii", $id, $param['broj']);
         $stmt->execute();
-        $result=$stmt->get_result()->num_rows;
-        if ($result>$restoran['sto6']) {
-            for ($i = 1; $i <= ($result-$restoran['sto6']); $i++) {
+        $result = $stmt->get_result()->num_rows;
+        if ($result > $restoran['sto6']) {
+            for ($i = 1; $i <= ($result - $restoran['sto6']); $i++) {
                 $this->deleteSto(6, $id);
             }
-        }
-        else if ($result<$restoran['sto6']) {
-            for ($i=1; $i<=($restoran['sto6']-$result); $i++) {
+        } else if ($result < $restoran['sto6']) {
+            for ($i = 1; $i <= ($restoran['sto6'] - $result); $i++) {
                 $this->createSto(6, $id);
             }
         }
     }
-    
+
     public function createSto($brojOsoba, $restoranId) {
         $conn = $this->my_database->conn;
         $stmt = $conn->stmt_init();
@@ -278,7 +317,7 @@ class UserValidationModel extends CI_Model {
         $stmt->bind_param("ii", $restoranId, $brojOsoba);
         $stmt->execute();
     }
-    
+
     public function deleteSto($brojOsoba, $id) {
         $conn = $this->my_database->conn;
         $stmt = $conn->stmt_init();
@@ -286,7 +325,7 @@ class UserValidationModel extends CI_Model {
         $stmt->bind_param("ii", $id, $brojOsoba);
         $stmt->execute();
     }
-    
+
     public function validateCreateKorisnik($kor) {
         $this->load->library('form_validation');
         $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
@@ -331,6 +370,7 @@ class UserValidationModel extends CI_Model {
             return true;
         }
     }
+
     public function validateCreateKonobar($konobar) {
         $this->load->library('form_validation');
         $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
@@ -367,7 +407,7 @@ class UserValidationModel extends CI_Model {
             return true;
         }
     }
-    
+
     public function updateWaiter($konobar, $id) {
         $this->load->library('form_validation');
         $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
@@ -376,7 +416,7 @@ class UserValidationModel extends CI_Model {
         $this->form_validation->set_rules('name', 'ime vlasnika', 'required|max_length[15]');
         $this->form_validation->set_rules('lastname', 'prezime vlasnika', 'required|max_length[15]');
         $this->form_validation->set_rules('email', 'email', 'required|valid_email');
-        
+
         if ($this->form_validation->run() == FALSE) {
             return false;
         } else {
@@ -389,20 +429,19 @@ class UserValidationModel extends CI_Model {
         }
     }
 
+    public function validateCreateAdmin($admin) {
 
-    public function validateCreateAdmin($admin){
-        
         $this->load->library('form_validation');
         $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
         $this->load->database();
-        
+
         $this->form_validation->set_rules('username', 'korisnicko ime', 'is_unique[Korisnik.KIme]|is_unique[Restoran.KIme]|is_unique[Konobar.KIme]|is_unique[Admin.KIme]|trim|required');
         $this->form_validation->set_rules('password', 'lozinka', 'trim|required|min_length[4]|max_length[32]');
         $this->form_validation->set_rules('name', 'ime admina', 'required|max_length[15]');
         $this->form_validation->set_rules('lastname', 'prezime admina', 'required|max_length[15]');
         $this->form_validation->set_rules('email', 'email', 'required|valid_email');
         $this->form_validation->set_rules('code', 'kod', 'required|trim');
-        
+
         $conn = $this->my_database->conn;
         $stmt = $conn->stmt_init();
         $stmt->prepare("SELECT IDAdmin FROM admin WHERE KodAdmina = ?");
@@ -410,34 +449,34 @@ class UserValidationModel extends CI_Model {
         $stmt->bind_param("i", $admin['kod']);
         $stmt->execute();
         $result = $stmt->get_result()->fetch_array();
-        
-        if ($this->form_validation->run()== FALSE || $result==NULL){
+
+        if ($this->form_validation->run() == FALSE || $result == NULL) {
             return false;
-        }else{
-            $conn=$this->my_database->conn;
-            $stmt=$conn->stmt_init();
+        } else {
+            $conn = $this->my_database->conn;
+            $stmt = $conn->stmt_init();
             $stmt->prepare("INSERT INTO admin(KIme,Lozinka,Ime,Prezime,Email,KodAdmina)VALUES(?,?,?,?,?,?)");
             $stmt->bind_param("sssssi", $admin['username'], $admin['password'], $admin['ime'], $admin['prezime'], $admin['email'], $admin['kod']);
             $stmt->execute();
             return true;
         }
     }
-    
+
     public function updateAdmin($admin, $id) {
         $this->load->library('form_validation');
         $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
-        
+
         $this->load->database();
         $this->form_validation->set_rules('password', 'lozinka', 'trim|required|min_length[4]|max_length[32]');
         $this->form_validation->set_rules('name', 'ime admina', 'required|max_length[15]');
         $this->form_validation->set_rules('lastname', 'prezime admina', 'required|max_length[15]');
         $this->form_validation->set_rules('email', 'email', 'required|valid_email');
-        
-        if ($this->form_validation->run()== FALSE){
+
+        if ($this->form_validation->run() == FALSE) {
             return false;
-        }else{
-            $conn=$this->my_database->conn;
-            $stmt=$conn->stmt_init();
+        } else {
+            $conn = $this->my_database->conn;
+            $stmt = $conn->stmt_init();
             $stmt->prepare("UPDATE admin SET Lozinka=?,Ime=?,Prezime=?,Email=? WHERE IDAdmin=?");
             $stmt->bind_param("ssssi", $admin['password'], $admin['ime'], $admin['prezime'], $admin['email'], $id);
             $stmt->execute();
