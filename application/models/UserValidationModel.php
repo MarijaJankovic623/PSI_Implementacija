@@ -182,13 +182,13 @@ class UserValidationModel extends CI_Model {
         /* OZBILJNE PROVERE OVDE */
         $this->load->database();
         $this->form_validation->set_rules('kime', 'korisnicko ime', 'is_unique[Korisnik.KIme]|is_unique[Restoran.KIme]|is_unique[Konobar.KIme]|trim|required');
-        /*
-          $this->form_validation->set_rules('lozinka', 'lozinka', 'trim|required|min_length[4]|max_length[32]');
-          $this->form_validation->set_rules('iobj', 'ime objekta', 'required');
-          $this->form_validation->set_rules('ivlasnika', 'ime vlasnika', 'required|max_length[15]');
-          $this->form_validation->set_rules('pvlasnika', 'prezime vlasnika', 'required|max_length[15]');
-          $this->form_validation->set_rules('email', 'email', 'required|valid_email');
-         */
+
+        $this->form_validation->set_rules('lozinka', 'lozinka', 'trim|required|min_length[4]|max_length[32]');
+        $this->form_validation->set_rules('iobj', 'ime objekta', 'required');
+        $this->form_validation->set_rules('ivlasnika', 'ime vlasnika', 'required|max_length[15]');
+        $this->form_validation->set_rules('pvlasnika', 'prezime vlasnika', 'required|max_length[15]');
+        $this->form_validation->set_rules('email', 'email', 'required|valid_email');
+
         if ($this->form_validation->run() == FALSE) {
             return false;
         } else {
@@ -215,6 +215,7 @@ class UserValidationModel extends CI_Model {
                     $this->createSto(6, $restoranId);
                 }
             }
+            $this->uploadSlika($restoranId);
             return true;
         }
     }
@@ -482,6 +483,67 @@ class UserValidationModel extends CI_Model {
             $stmt->execute();
             return true;
         }
+    }
+
+    public function uploadSlika($id) {
+        $target_dir = "./slike/" . $id . "/";
+        mkdir($target_dir);
+
+        $total = count($_FILES['slike']['name']);
+
+        for ($i = 0; $i < $total; $i++) {
+
+            $target_file = $target_dir . basename($_FILES["slike"]["name"][$i]);
+            $uploadOk = 1;
+            $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
+            // Check if image file is a actual image or fake image
+            if (isset($_POST["submit"])) {
+                $check = getimagesize($_FILES["slike"]["tmp_name"][$i]);
+                if ($check !== false) {
+                    echo "File is an image - " . $check["mime"] . ".";
+                    $uploadOk = 1;
+                } else {
+                    echo "File is not an image.";
+                    $uploadOk = 0;
+                }
+            }
+            // Check if file already exists
+            if (file_exists($target_file)) {
+                echo "Sorry, file already exists.";
+                $uploadOk = 0;
+            }
+            // Check file size
+            if ($_FILES["slike"]["size"][$i] > 500000) {
+                echo "Sorry, your file is too large.";
+                $uploadOk = 0;
+            }
+            // Allow certain file formats
+            if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
+                echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+                $uploadOk = 0;
+            }
+            // Check if $uploadOk is set to 0 by an error
+            if ($uploadOk == 0) {
+                echo "Sorry, your file was not uploaded.";
+                // if everything is ok, try to upload file
+            } else {
+                if (move_uploaded_file($_FILES["slike"]["tmp_name"][$i], $target_file)) {
+                    echo "The file " . basename($_FILES["slike"]["name"][$i]) . " has been uploaded.";
+                    $this->insertSlika($id, $target_file);
+                } else {
+                    echo "Sorry, there was an error uploading your file.";
+                }
+            }
+        }
+    }
+
+    public function insertSlika($id, $target) {
+
+        $conn = $this->my_database->conn;
+        $stmt = $conn->stmt_init();
+        $stmt->prepare("INSERT INTO slika(IDRestoranFK, Putanja) VALUES(?,?)");
+        $stmt->bind_param("is", $id, $target);
+        $stmt->execute();
     }
 
 }

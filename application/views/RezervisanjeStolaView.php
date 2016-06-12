@@ -32,9 +32,7 @@
         <link href="<?php echo base_url(); ?>font/css/font-awesome.min.css" rel="stylesheet">
         <link href="<?php echo base_url(); ?>css/lightbox.css" rel="stylesheet" />
 
-        <link href="<?php echo base_url(); ?>/ss/bootstrap.min.css" rel="stylesheet" media="screen">
         <link href="<?php echo base_url(); ?>/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
-        <link href="<?php echo base_url(); ?>/ss/bootstrap.css" rel="stylesheet" media="screen">
     </head>
 
     <body>
@@ -133,7 +131,7 @@
                         &nbsp;
                     </div>  
                     <div class="col-sm-4 col-sm-offset-4">
-                        <img src="<?php echo base_url(); ?>images/slides/1.jpg" class="img-circle" alt="Cinque Terre" width="1504" height="1236">
+                        <img src="<?php echo base_url().$slike[0]['Putanja']; ?>" class="img-circle" alt="Cinque Terre" width="1504" height="1236">
                     </div>
 
                     <div class="col-sm-8 col-sm-offset-2">
@@ -164,27 +162,15 @@
                     </div>
 
                     <div class="col-sm-8 col-sm-offset-2" >
-
+                        <?php foreach($slike as $slika){ ?>
+                        
                         <div class="col-md-3 img-portfolio">
-                            <a href="images/image-M-2.jpg" data-lightbox="roadtrip">
-                                <img class="img-responsive img-hover" src="images/image-M-2.jpg" alt="">
+                            <a href="<?php echo base_url().$slika['Putanja'];?>" data-lightbox="roadtrip">
+                                <img class="img-responsive img-hover" src="<?php echo base_url().$slika['Putanja'];?>" alt="">
                             </a>
                         </div>
-                        <div class="col-md-3 img-portfolio">
-                            <a href="images/image-M-3.jpg" data-lightbox="roadtrip">
-                                <img class="img-responsive img-hover" src="images/image-M-3.jpg" alt="">
-                            </a>
-                        </div>
-                        <div class="col-md-3 img-portfolio">
-                            <a href="images/image-M-4.jpg" data-lightbox="roadtrip">
-                                <img class="img-responsive img-hover" src="images/image-M-4.jpg" alt="">
-                            </a>
-                        </div>
-                        <div class="col-md-3 img-portfolio">
-                            <a href="images/image-M-5.jpg" data-lightbox="roadtrip">
-                                <img class="img-responsive img-hover" src="images/image-M-5.jpg" alt="">
-                            </a>
-                        </div>
+                        
+                        <?php } ?>
                     </div>
                 </div>
                 <div class="row">

@@ -12,7 +12,8 @@ class RegistracijaRestoranaCtrl extends CI_Controller {
 
     public function submit() {
         $this->load->model("UserValidationModel");
-
+        
+        
         $input = $this->input;
         $restoran = array(
             "kime" => $input->post('kime'),
@@ -27,7 +28,7 @@ class RegistracijaRestoranaCtrl extends CI_Controller {
             "kod" => $input->post('kod'),
             "sto2" => $input->post('sto_2'),
             "sto4" => $input->post('sto_4'),
-            "sto6" => $input->post('sto_6'),
+            "sto6" => $input->post('sto_6')            
         );
 
         if ($this->UserValidationModel->validateCreateRestoran($restoran)) {

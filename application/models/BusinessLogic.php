@@ -339,5 +339,21 @@ class BusinessLogic extends CI_Model {
         $stmt->execute();
         return true;
     }
+    
+    public function getSlike($idRestoran) {
+        $conn = $this->my_database->conn;
+        $stmt = $conn->stmt_init();
+        
+        $stmt->prepare("SELECT * FROM slika WHERE IDRestoranFK=?");
+        
+        $stmt->bind_param("i", $idRestoran);
+        $stmt->execute();
+
+        $res = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $res;
+        
+        
+        
+    }
 
 }

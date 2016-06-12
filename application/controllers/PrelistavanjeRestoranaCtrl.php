@@ -28,6 +28,7 @@ class PrelistavanjeRestoranaCtrl extends CI_Controller {
         $this->load->model('BusinessLogic');
 
         $data['restoran'] = $this->BusinessLogic->getRestaurant($id);
+        $data['slike'] = $this->BusinessLogic->getSlike($id);
         $this->load->view('RezervisanjeStolaView', $data);
     }
 

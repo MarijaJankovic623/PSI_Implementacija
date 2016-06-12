@@ -93,7 +93,7 @@
                     <div class="col-sm-8 col-sm-offset-2" >
 
 
-                        <form action="<?php echo(base_url()); ?>index.php/RegistracijaRestoranaCtrl/submit" method="POST" role="form">
+                        <form action="<?php echo(base_url()); ?>index.php/RegistracijaRestoranaCtrl/submit" method="POST" role="form" enctype="multipart/form-data">
                             <div class="form-group">
                                 <legend>Registracija restorana</legend>
                                 <?php echo form_error('kime'); ?>
@@ -175,8 +175,8 @@
                                     </div>
 
                                 </div>
-                                <label for="" class="block" style="display:inline-block;">Dodajte slike</label></br>
-                                <button type="button" class="btn btn-primary" style="display:inline-block;">Učitaj</button></br>
+                                <label class="block" style="display:inline-block;">Dodajte slike</label></br>
+                                <input type="file" class="btn btn-file"  name="slike[]" multiple/></br>
                                 </br>
                                 <button type="submit" class="btn btn-primary" >Potvrdi</button>
                             </div>           
