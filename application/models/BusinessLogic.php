@@ -69,8 +69,8 @@ class BusinessLogic extends CI_Model {
         else if ($brLjudi > 4)
             $brLjudi = 6;
 
-        $vremeOd = date("Y-m-d h:i", strtotime($vremeOd));
-        $vremeDo = date("Y-m-d h:i", strtotime($vremeDo));
+        $vremeOd = date("Y-m-d H:i", strtotime($vremeOd));
+        $vremeDo = date("Y-m-d H:i", strtotime($vremeDo));
 
         $conn = $this->my_database->conn;
         $stmt = $conn->stmt_init();
@@ -104,8 +104,8 @@ class BusinessLogic extends CI_Model {
         else if ($brLjudi > 4)
             $brLjudi = 6;
 
-        $vremeOd = date("Y-m-d h:i", strtotime($vremeOd));
-        $vremeDo = date("Y-m-d h:i", strtotime($vremeDo));
+        $vremeOd = date("Y-m-d H:i", strtotime($vremeOd));
+        $vremeDo = date("Y-m-d H:i", strtotime($vremeDo));
 
         if ($this->checkDate($vremeOd, $vremeDo)) {
 
@@ -150,8 +150,8 @@ class BusinessLogic extends CI_Model {
         else if ($brLjudi > 4 && $brLjudi <= 6)
             $brLjudi = 6;
 
-        $vremeOd = date("Y-m-d h:i", strtotime($vremeOd));
-        $vremeDo = date("Y-m-d h:i", strtotime($vremeDo));
+        $vremeOd = date("Y-m-d H:i", strtotime($vremeOd));
+        $vremeDo = date("Y-m-d H:i", strtotime($vremeDo));
 
         if ($this->checkDate($vremeOd, $vremeDo)) {
 
@@ -239,7 +239,7 @@ class BusinessLogic extends CI_Model {
      */
     public function checkDate($date1, $date2) {
         date_default_timezone_set('Europe/Belgrade');
-        $date = date("Y-m-d h:i", time());
+        $date = date("Y-m-d H:i", time());
 
         if ($date1 >= $date2) {
 
