@@ -19,6 +19,7 @@ class UserValidationModel extends CI_Model {
      * ona proverava samo da li je korisnik koji pokusava da prostupi
      * ulogovan i ako nije vraca ga na pocetnu stranu sistema.
      * 
+     * 
      */
     public function checkSession() {
         $is_logged_in = $this->session->userdata('loggedIn');
@@ -28,6 +29,8 @@ class UserValidationModel extends CI_Model {
             redirect("ErrorCtrl");
         }
     }
+    
+ 
 
     public function checkSessionKorisnik() {
         $this->checkSession();
@@ -101,6 +104,18 @@ class UserValidationModel extends CI_Model {
         }
     }
 
+    
+     /**
+     * Logovanje restorana.
+     * 
+     * Proverava da li restoran sa datim imenom i sifrom
+     * postoji, i ako postoji puni podatke o sesiji i vraca
+     * poruku o uspehu, u suprotnom o neuspehu.
+     * 
+     * @param string $kime Korisnicko ime
+     * @param string $lozinka Korisnicka lozinka
+     * @return boolean Informacija o uspehu logovanja
+     */
     public function loginRestoran($kime, $lozinka) {
         $conn = $this->my_database->conn;
         $stmt = $conn->stmt_init(); //dohvatanje iskaza
@@ -126,6 +141,18 @@ class UserValidationModel extends CI_Model {
             return false;
         }
     }
+    
+     /**
+     * Logovanje konobara.
+     * 
+     * Proverava da li konobar sa datim imenom i sifrom
+     * postoji, i ako postoji puni podatke o sesiji i vraca
+     * poruku o uspehu, u suprotnom o neuspehu.
+     * 
+     * @param string $kime Korisnicko ime
+     * @param string $lozinka Korisnicka lozinka
+     * @return boolean Informacija o uspehu logovanja
+     */
 
     public function loginKonobar($kime, $lozinka) {
         $conn = $this->my_database->conn;
@@ -152,6 +179,18 @@ class UserValidationModel extends CI_Model {
             return false;
         }
     }
+    
+     /**
+     * Logovanje administratora.
+     * 
+     * Proverava da li administrator sa datim imenom i sifrom
+     * postoji, i ako postoji puni podatke o sesiji i vraca
+     * poruku o uspehu, u suprotnom o neuspehu.
+     * 
+     * @param string $kime Korisnicko ime
+     * @param string $lozinka Korisnicka lozinka
+     * @return boolean Informacija o uspehu logovanja
+     */
 
     public function loginAdmin($kime, $lozinka) {
         $conn = $this->my_database->conn;
@@ -178,6 +217,17 @@ class UserValidationModel extends CI_Model {
             return false;
         }
     }
+    
+    /**
+     * Proverava da li je moguce loginovanje bilo kog tipa korisnika
+     * 
+     * Metoda poziva sve metode vezane za proveru loginovanja odredjee vrste korisnika
+     * 
+     * 
+     * @param string $kime korisniko ime
+     * @param string $lozinka korisnicka lozinka
+     * @return boolean uspesnos mogucnosti logovanja
+     */
 
     public function login($kime, $lozinka) {
 
@@ -189,6 +239,17 @@ class UserValidationModel extends CI_Model {
         }
     }
 
+    /**
+     * Proverava da li je registracija restorana moguca
+     * 
+     * Metoda prihvata sve parametre vezane za registraciju restorana i proverava ih
+     * shodno pravilima sistema. Ukoliko  sve provere prodju kreira se restoran sa odredjenom galerijom slika,
+     *i stolovima.(sto i slike su naglaseni jer oni nisu samo polja u restoranu vec i posebne tabele u bazi)
+     * 
+     * @param array $res asocijativni niz koji sadrzi sve podatke unete preko forme za registraciju restorana
+     * @return boolean uspesnost registracije restorana
+     */
+    
     public function validateCreateRestoran($res) {
         $this->load->library('form_validation');
         $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
@@ -324,6 +385,16 @@ class UserValidationModel extends CI_Model {
         }
     }
 
+    /**
+     * Funkcija koja kreira sto za odredjeni restoran
+     * 
+     * Funkcija koja vrsi insertovanje u bazu 
+     * Kreira novu tabelu sto za oredjeni restoran
+     * 
+     * @param Integer $brojOsoba tip stola koji se kreira, koliko ljudi moze da sedne za isti
+     * @param Integer $restoranId  id restorana kome sto pripada
+     */
+    
     public function createSto($brojOsoba, $restoranId) {
         $conn = $this->my_database->conn;
         $stmt = $conn->stmt_init();

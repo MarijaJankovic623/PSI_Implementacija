@@ -223,6 +223,20 @@ class BusinessLogic extends CI_Model {
         return $result;
     }
 
+    
+    /**
+     * Proverava da li je uneto validno vreme za pocetak i kraj rezervacije
+     * 
+     * Funkcija vrsi proveru da datum prijave ne bude nakon datuma odlaska, 
+     * da razlika izmedju prijave i odjave ne bude vise od 6 sati, 
+     * i da datum prijave a samim tim i odjave bude nakon trenutnog vremena
+     * Ukoliko su svi kriterijumi ispunjeni vraca true a ukoliko nisu false
+     * 
+     * 
+     * @param Date $date1
+     * @param Date $date2
+     * @return boolean vraca true ukoliko su vremena u redu, a false ukoliko nisu
+     */
     public function checkDate($date1, $date2) {
         date_default_timezone_set('Europe/Belgrade');
         $date = date("Y-m-d h:i", time());
@@ -360,6 +374,17 @@ class BusinessLogic extends CI_Model {
         $restoran = $stmt->get_result()->fetch_assoc();
         return $restoran['ImeObjekta'];
     }
+    
+    
+    /**
+     * Za odredjenog korisnika dohvata sve njegove rezervacije
+     * 
+     * Za oredjenog korisnika dohvata sve informacije o svim njegovim rezervacijama
+     * 
+     * @param type $idUser id korisnika za kog zelimo da dohvatimo sve rezervacije neovisno od njihovog statusa
+     * 
+     * @return array asocijativni niz rezervacija (sve informacije o rezervaciji koje se nalaze i u bazi)
+     */
 
     public function getAllReservations($idUser) {
         $conn = $this->my_database->conn;
@@ -368,6 +393,15 @@ class BusinessLogic extends CI_Model {
 
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+    
+    /**
+     * Ocenjuje rezervaciju od strane korisnika
+     * 
+     * Ocenjuje rezervaciju od strane korisnika ciiji je status 'Ostvarena', upisuje ocenu, azurira i prosecnu ocenu restorana 
+     * za kog je rezervacija napravljena, i status rezervacije menja u 'Ocenjena'
+     * 
+     * @param type $rezervacija asocijativni niz rezervacija koji sadrzi id rezervacije koju zelimo da ocenimo kao i samu ocenu
+     */
 
     public function rezervacijaGrade($rezervacija) {
         $conn = $this->my_database->conn;
@@ -381,6 +415,15 @@ class BusinessLogic extends CI_Model {
         $result = $conn->query("CALL ocena_restorana(" . $rezervacija['idrezervacija'] . ")");
     }
 
+    
+    /**
+     * Otkazuje rezervaciju od strane korisnika
+     * 
+     * U bazi u tabeli rezervacija menja status na 'Otkazana'
+     * 
+     * @param array $rezervacija asocijativni niz rezervacija koji sadrzi id rezervacije koju zelimo da obrisemo
+     * @return boolean vraca u obliku true/false uspesnost otkazivanja trenutno uvek vraca true jer ne postoji mogucnost da vrati false
+     */
     public function rezervacijaCancel($rezervacija) {
 
         $conn = $this->my_database->conn;
