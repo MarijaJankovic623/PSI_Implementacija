@@ -13,66 +13,14 @@ class BusinessLogic extends CI_Model {
     }
 
     /**
+     * Dohvata sve podatke o restoranu.
      * 
-     * @return array array of asociative arrays of restoran
-     */
-    public function getAllRestaurants() {
-        $conn = $this->my_database->conn;
-        $result = $conn->query("SELECT * FROM restoran");
-        return $result->fetch_all(MYSQLI_ASSOC);
-    }
-
-    public function getUser($id) {
-        $conn = $this->my_database->conn;
-        $stmt = $conn->stmt_init();
-        if ($this->session->userdata('korisnik')) {
-            $stmt->prepare("SELECT * FROM korisnik WHERE IDKorisnik=?");
-        }
-        if ($this->session->userdata('restoran')) {
-            $stmt->prepare("SELECT * FROM restoran WHERE IDRestoran=?");
-        }
-        if ($this->session->userdata('konobar')) {
-            $stmt->prepare("SELECT * FROM konobar WHERE IDKonobar=?");
-        }
-        if ($this->session->userdata('admin')) {
-            $stmt->prepare("SELECT * FROM admin WHERE IDAdmin=?");
-        }
-        $stmt->bind_param("i", $id);
-        $stmt->execute();
-
-        $res = $stmt->get_result()->fetch_assoc();
-        return $res;
-    }
-
-    public function getAllWaiters($id) {
-        $conn = $this->my_database->conn;
-        $result = $conn->query("SELECT * FROM konobar WHERE IDRestoranFK = " . $id);
-        return $result->fetch_all(MYSQLI_ASSOC);
-    }
-
-    public function deleteWaiter($id) {
-        $conn = $this->my_database->conn;
-        $stmt = $conn->stmt_init();
-        $stmt->prepare("DELETE FROM konobar WHERE IDKonobar=?");
-        $stmt->bind_param("i", $id);
-        $stmt->execute();
-
-        $test = $conn->stmt_init();
-        $test->prepare("SELECT * FROM konobar WHERE IDKonobar=?");
-        $test->bind_param("i", $id);
-        $test->execute();
-
-        if ($test->get_result()->num_rows > 0) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    /**
+     * Dohvata sve podatke o restoranu za prosledjeni
+     * rimarni kljuci, i vraca ih u obliku asicojativnog niza
+     * gde svaki element niza predstavlja jednu kolonu.
      * 
-     * @param string $id represents restaurants primary key 
-     * @return array associative array od one restaurant
+     * @param string $id  Primarni kljuc restorana koji se dohvata
+     * @return array Restoran, tj asocijativni niz njegovih kolona
      */
     public function getRestaurant($id) {
         $conn = $this->my_database->conn;
@@ -80,22 +28,45 @@ class BusinessLogic extends CI_Model {
         return $result->fetch_assoc();
     }
 
-    public function getNumberOfTables($id, $n) {
+    /**
+     * Dohvata podatke o svim restoranima.
+     * 
+     * Dohvata podatke o svim restoranima iz baze,
+     * i vraca ih kao niz asocijativnih nizova, 
+     * gde se svaki asocijativni niz sastoji od 
+     * elemenata koji su kolone tabele
+     * 
+     * @return array Niz asocijativnih nizova koji su restorani, 
+     * sa elementima tipa kolona
+     */
+    public function getAllRestaurants() {
         $conn = $this->my_database->conn;
-        $stmt = $conn->stmt_init();
-        $stmt->prepare("SELECT * FROM sto WHERE IDRestoranFK=? AND BrojOsoba=?");
-        $stmt->bind_param("ii", $id, $n);
-        $stmt->execute();
-        $result = $stmt->get_result()->num_rows;
-        return $result;
+        $result = $conn->query("SELECT * FROM restoran");
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    /**
+     * Vraca restorane koji imaju slobodne stolove
+     * za zadate kriterijume.
+     * 
+     * Funkcija pretrazuje restorane u odredjenoj 
+     * opstini, i proverava da li u toj opstini postoje
+     * slobodni stolovi u odredjenom periodu za odredjeni 
+     * broj ljudi.
+     * 
+     * @param string $opstina Opstina na kojoj pretrazujemo restoran
+     * @param string $brLjudi Broj ljudi koji zele da rezervisu sto
+     * @param string $vremeOd Zeljeno vreme pocetka
+     * @param string $vremeDo Zeljeno vreme kraja
+     * @return array Niz asocijativnih nizova koji su restorani, 
+     * sa elementima tipa kolona
+     */
     public function getCriteriaRestaurants($opstina, $brLjudi, $vremeOd, $vremeDo) {
         if ($brLjudi <= 2)
             $brLjudi = 2;
         else if ($brLjudi > 2 && $brLjudi <= 4)
             $brLjudi = 4;
-        else if ($brLjudi > 4 && $brLjudi <= 6)
+        else if ($brLjudi > 4)
             $brLjudi = 6;
 
         $vremeOd = date("Y-m-d h:i", strtotime($vremeOd));
@@ -109,29 +80,28 @@ class BusinessLogic extends CI_Model {
 
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
-
-    public function checkDate($date1, $date2) {
-        date_default_timezone_set('Europe/Belgrade');
-        $date = date("Y-m-d h:i", time());
-
-        if ($date1 >= $date2) {
-
-            return false;
-        }
-        if (($date2 - $date1) > (60 * 60 * 6)) {
-            return false;
-        }
-        
-        if($date1<$date) return false;
-        else return true;
-    }
+    
+    /**
+     * Rezervise sto.
+     * 
+     * Funkcija vrsi proveru da li postoji slobodan
+     * sto za odredjeni broj ljudi, u odredjenom vremenu
+     * i za odredjeni restoran, i ukoliko postoji ona 
+     * vrsi rezervaciju i vraca true, u suprotnom false
+     * 
+     * @param inteeger $idRestorana Primarni kljuc restorana
+     * @param string $brLjudi Broj ljudi za koji se rezervise sto
+     * @param type $vremeOd Zeljeno vreme pocetka
+     * @param string $vremeDo Zeljeno vreme kraja
+     * @return boolean Informacija o uspehu ili neuspehu rezervacije
+     */
 
     public function reserveTable($idRestorana, $brLjudi, $vremeOd, $vremeDo) {
         if ($brLjudi <= 2)
             $brLjudi = 2;
         else if ($brLjudi > 2 && $brLjudi <= 4)
             $brLjudi = 4;
-        else if ($brLjudi > 4 && $brLjudi <= 6)
+        else if ($brLjudi > 4)
             $brLjudi = 6;
 
         $vremeOd = date("Y-m-d h:i", strtotime($vremeOd));
@@ -162,32 +132,7 @@ class BusinessLogic extends CI_Model {
 
         return false;
     }
-
-    public function getAllUsers() {
-        $conn = $this->my_database->conn;
-        $result = $conn->query("SELECT * FROM korisnik");
-        return $result->fetch_all(MYSQLI_ASSOC);
-    }
-
-    public function deleteUser($idUser) {
-        $conn = $this->my_database->conn;
-        $stmt = $conn->stmt_init();
-        $stmt->prepare("DELETE FROM korisnik WHERE IDKorisnik=?");
-        $stmt->bind_param("i", $idUser);
-        $stmt->execute();
-
-        $result = $conn->stmt_init();
-        $result->prepare("SELECT * FROM korisnik WHERE IDKorisnik=?");
-        $result->bind_param("i", $idUser);
-        $result->execute();
-
-        if ($result->get_result()->num_rows > 0) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
+    
     public function freeTables($id, $brLjudi, $vremeOd, $vremeDo, $korisnik) {
 
         $conn = $this->my_database->conn;
@@ -207,9 +152,9 @@ class BusinessLogic extends CI_Model {
 
         $vremeOd = date("Y-m-d h:i", strtotime($vremeOd));
         $vremeDo = date("Y-m-d h:i", strtotime($vremeDo));
-        
+
         if ($this->checkDate($vremeOd, $vremeDo)) {
-        
+
             $conn = $this->my_database->conn;
             $stmt = $conn->stmt_init();
             $stmt->prepare("CALL slobodni_stolovi(?,?,?,?)");
@@ -240,6 +185,113 @@ class BusinessLogic extends CI_Model {
         }
         return false;
     }
+    
+
+
+    public function getAllWaiters($id) {
+        $conn = $this->my_database->conn;
+        $result = $conn->query("SELECT * FROM konobar WHERE IDRestoranFK = " . $id);
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function deleteWaiter($id) {
+        $conn = $this->my_database->conn;
+        $stmt = $conn->stmt_init();
+        $stmt->prepare("DELETE FROM konobar WHERE IDKonobar=?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+
+        $test = $conn->stmt_init();
+        $test->prepare("SELECT * FROM konobar WHERE IDKonobar=?");
+        $test->bind_param("i", $id);
+        $test->execute();
+
+        if ($test->get_result()->num_rows > 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public function getNumberOfTables($id, $n) {
+        $conn = $this->my_database->conn;
+        $stmt = $conn->stmt_init();
+        $stmt->prepare("SELECT * FROM sto WHERE IDRestoranFK=? AND BrojOsoba=?");
+        $stmt->bind_param("ii", $id, $n);
+        $stmt->execute();
+        $result = $stmt->get_result()->num_rows;
+        return $result;
+    }
+
+    public function checkDate($date1, $date2) {
+        date_default_timezone_set('Europe/Belgrade');
+        $date = date("Y-m-d h:i", time());
+
+        if ($date1 >= $date2) {
+
+            return false;
+        }
+        if (($date2 - $date1) > (60 * 60 * 6)) {
+            return false;
+        }
+
+        if ($date1 < $date)
+            return false;
+        else
+            return true;
+    }
+    
+    
+    
+    
+    public function getUser($id) {
+        $conn = $this->my_database->conn;
+        $stmt = $conn->stmt_init();
+        if ($this->session->userdata('korisnik')) {
+            $stmt->prepare("SELECT * FROM korisnik WHERE IDKorisnik=?");
+        }
+        if ($this->session->userdata('restoran')) {
+            $stmt->prepare("SELECT * FROM restoran WHERE IDRestoran=?");
+        }
+        if ($this->session->userdata('konobar')) {
+            $stmt->prepare("SELECT * FROM konobar WHERE IDKonobar=?");
+        }
+        if ($this->session->userdata('admin')) {
+            $stmt->prepare("SELECT * FROM admin WHERE IDAdmin=?");
+        }
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+
+        $res = $stmt->get_result()->fetch_assoc();
+        return $res;
+    }
+    
+    public function getAllUsers() {
+        $conn = $this->my_database->conn;
+        $result = $conn->query("SELECT * FROM korisnik");
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function deleteUser($idUser) {
+        $conn = $this->my_database->conn;
+        $stmt = $conn->stmt_init();
+        $stmt->prepare("DELETE FROM korisnik WHERE IDKorisnik=?");
+        $stmt->bind_param("i", $idUser);
+        $stmt->execute();
+
+        $result = $conn->stmt_init();
+        $result->prepare("SELECT * FROM korisnik WHERE IDKorisnik=?");
+        $result->bind_param("i", $idUser);
+        $result->execute();
+
+        if ($result->get_result()->num_rows > 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    
 
     public function getReservations() {
 
@@ -286,7 +338,7 @@ class BusinessLogic extends CI_Model {
         $stmt->bind_param("i", $rez);
         $stmt->execute();
 
-      
+
         return true;
     }
 
@@ -340,20 +392,27 @@ class BusinessLogic extends CI_Model {
         return true;
     }
     
+    /**
+     * Dohvata slike.
+     * 
+     * Dohvata niz asocijativnih nizova, gde u 
+     * svakom asocijativnom nizu stoji putanja do slike
+     * 
+     * @param integer $idRestoran Id restorana za koji dohvatamo slike
+     * @return array niz asocijativnih nizova koji su slike, 
+     * sa elementima tipa kolona
+     */
     public function getSlike($idRestoran) {
         $conn = $this->my_database->conn;
         $stmt = $conn->stmt_init();
-        
+
         $stmt->prepare("SELECT * FROM slika WHERE IDRestoranFK=?");
-        
+
         $stmt->bind_param("i", $idRestoran);
         $stmt->execute();
 
         $res = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
         return $res;
-        
-        
-        
     }
 
 }

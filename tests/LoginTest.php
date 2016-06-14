@@ -10,9 +10,10 @@ class LoginTest extends PHPUnit_Framework_TestCase {
      */
 
     public static function setUpBeforeClass() {
-        self::$result = true;
         // Load CI instance normally
         self::$CI = &get_instance();
+        self::$result = true;
+
         self::$CI->load->library("my_database");
 
         $conn = self::$CI->my_database->conn;

@@ -13,9 +13,12 @@ class UserValidationModel extends CI_Model {
     }
 
     /**
-     * Znaci ova funkcija ostaje i poziva se unutar ostalih za proveru sesija
+     * Provera sesije za sve vrste korisnika.
+     * 
+     * Poziva se unutar ostalih funkcija za proveru sesija
      * ona proverava samo da li je korisnik koji pokusava da prostupi
-     * ulogovan i ako nije vraca ga na pocetnu stranu sistema
+     * ulogovan i ako nije vraca ga na pocetnu stranu sistema.
+     * 
      */
     public function checkSession() {
         $is_logged_in = $this->session->userdata('loggedIn');
@@ -61,7 +64,17 @@ class UserValidationModel extends CI_Model {
             redirect("ErrorCtrl");
         }
     }
-
+    /**
+     * Logovanje korisnika.
+     * 
+     * Proverava da li korisnik sa datim imenom i sifrom
+     * postoji, i ako postoji puni podatke o sesiji i vraca
+     * poruku o uspehu, u suprotnom o neuspehu.
+     * 
+     * @param string $kime Korisnicko ime
+     * @param string $lozinka Korisnicka lozinka
+     * @return boolean Informacija o uspehu logovanja
+     */
     public function loginKorisnik($kime, $lozinka) {
         $conn = $this->my_database->conn;
         $stmt = $conn->stmt_init(); //dohvatanje iskaza
