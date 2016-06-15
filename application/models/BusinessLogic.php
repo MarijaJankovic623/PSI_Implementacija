@@ -147,7 +147,7 @@ class BusinessLogic extends CI_Model {
             $brljudi = 2;
         else if ($brLjudi > 2 && $brLjudi <= 4)
             $brLjudi = 4;
-        else if ($brLjudi > 4 && $brLjudi <= 6)
+        else if ($brLjudi > 4)
             $brLjudi = 6;
 
         $vremeOd = date("Y-m-d H:i", strtotime($vremeOd));
