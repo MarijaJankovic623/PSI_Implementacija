@@ -136,7 +136,21 @@ class BusinessLogic extends CI_Model {
 
         return false;
     }
-    
+    /**
+     * Rezervise sto za ljude koji nemaju rezervaciju.
+     * 
+     * Funkcija vrsti proveru da li postoji slobodan sto
+     * za odredjeni broj ljudi, za odredjeni period i za 
+     * odredjeni restoran. Ukoliko postoji slobodan sto
+     * funkcija vraca vrednost true, u suprotnom false.
+     * 
+     * @param integer $id ID Konobara 
+     * @param integer $brLjudi Broj ljudi za koji se pravi rezervacija
+     * @param string $vremeOd Vreme u koje pocinje rezervacija
+     * @param string $vremeDo Vreme u koje se zavrsava rezervacija
+     * @param array $korisnik Asocijativni niz elemenata za korisnika
+     * @return boolean Informacija o uspehu ili neuspehu rezervacije
+     */
     public function freeTables($id, $brLjudi, $vremeOd, $vremeDo, $korisnik) {
 
         $conn = $this->my_database->conn;
@@ -190,7 +204,17 @@ class BusinessLogic extends CI_Model {
         return false;
     }
     
-
+/**
+ * Dohvata sve podatke o konobarima jednog restorana
+ * 
+ * Metoda prima ID restorana i vraca za taj
+ * restoran sve konobare kao niz asocijativnih nizova,
+ * gde se svaki niz sastoji od elemenata koji su kolone
+ * tabele.
+ * 
+ * @param integer $id ID restorana
+ * @return array Niz asocijativnih nizova
+ */
 
     public function getAllWaiters($id) {
         $conn = $this->my_database->conn;
@@ -198,6 +222,17 @@ class BusinessLogic extends CI_Model {
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    /**
+     * Brise konobara odredjenog restorana
+     * 
+     * Metoda prima ID konobara i brise tog konobara iz baze.
+     * Vraca 'true' ako je uspesno izbrisan, a 'false'
+     * ako nije.
+     * 
+     * @param integer $id ID konobar
+     * @return boolean Uspeh/neuspeh
+     */
+    
     public function deleteWaiter($id) {
         $conn = $this->my_database->conn;
         $stmt = $conn->stmt_init();
@@ -209,7 +244,7 @@ class BusinessLogic extends CI_Model {
         $test->prepare("SELECT * FROM konobar WHERE IDKonobar=?");
         $test->bind_param("i", $id);
         $test->execute();
-
+        
         if ($test->get_result()->num_rows > 0) {
             return false;
         } else {
@@ -217,6 +252,20 @@ class BusinessLogic extends CI_Model {
         }
     }
 
+    /**
+     * Dohvata broj stolova koji restoran ima za neku 
+     * kolicinu osoba
+     * 
+     * Metoda prima ID restorana i broj osoba koji moze da sedne 
+     * za neki sto. Povratna vrednost je broj redova koje
+     * baza pronadje da odgovaraju parametrima. To onda znaci
+     * da restoran ima povratni broj stolova za trazeni broj ljudi.
+     * 
+     * @param integer $id ID restorana
+     * @param integer $n broj ljudi koji moze da sedne za sto
+     * @return integer broj nizova u tabeli
+     */
+    
     public function getNumberOfTables($id, $n) {
         $conn = $this->my_database->conn;
         $stmt = $conn->stmt_init();
@@ -261,7 +310,16 @@ class BusinessLogic extends CI_Model {
     }
     
     
-    
+    /**
+     * Dohvata sve podatke o nekom korisniku
+     * 
+     * Metoda prima ID nekog od cetiri moguca korisnika i 
+     * dohvata njegove podatke u obliku asocijativnog niza,
+     * gde svaki element niza predstavlja jednu kolonu.
+     * 
+     * @param integer $id nekog od 4 vrste korisnika
+     * @return array asocijativni niz njegovih kolona
+     */
     
     public function getUser($id) {
         $conn = $this->my_database->conn;
@@ -285,12 +343,35 @@ class BusinessLogic extends CI_Model {
         return $res;
     }
     
+    /**
+     * Vraca sve korisnike iz sistema.
+     * 
+     * Funkcija dohvata sve podatke o svim korisnicima iz
+     * baze i vraca ih kao niz asocijativnih nizova, gde
+     * se svaki asocijativni niz sastoji od elemenata 
+     * koji su kolone tabele.
+     * 
+     * @return array Niz Asocijativnih nizova koji su korisnici
+     * sa elementima tipa kolona
+     */
+    
     public function getAllUsers() {
         $conn = $this->my_database->conn;
         $result = $conn->query("SELECT * FROM korisnik");
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    /**
+     * Brise korisnika iz sistema.
+     * 
+     * Funkcija pretrazuje odredjenog korisnika u bazi
+     * i kada ga pronadje brise ga iz baze i iz sistema.
+     * Vraca vrednost true ako je uspesno uklonjen korisnik
+     * iz sistema, a vrednost false u suprotnom.
+     * 
+     * @param integer $idUser ID Korisnika kojeg uklanjamo
+     * @return boolean Informacija o uspehu ili neuspehu brisanja korisnika
+     */
     public function deleteUser($idUser) {
         $conn = $this->my_database->conn;
         $stmt = $conn->stmt_init();
@@ -310,7 +391,18 @@ class BusinessLogic extends CI_Model {
         }
     }
 
-    
+    /**
+     * Vraca sve rezervacije koje postoje za restoran.
+     * 
+     * Funckija pretrazuje i dohvata podatke o
+     * svim rezervacijama koje su napravljene
+     * za odredjeni restoran i vraca niz asocijativnih nizova 
+     * gde se svaki asocijativni niz sastoji od elemenata koji
+     * su kolone tabele. 
+     * 
+     * @return array Niz Asocijativnih nizova koji su rezervacije
+     * sa elementima tipa kolona.
+     */
 
     public function getReservations() {
 
@@ -350,6 +442,16 @@ class BusinessLogic extends CI_Model {
         return $data;
     }
 
+    /**
+     * Oslobadja sto koji je bio zauzet.
+     * 
+     * Funkcija oslobadja odredjeni sto, izmenom statusa
+     * te rezervacije. Funkcija vraca vraca vrednost true 
+     * prilikom uspeha.
+     * 
+     * @param integer $rez ID Rezervacije ciji se status menja
+     * @return boolean Informacija o uspehu oslobadjanja stola
+     */
     public function oslobodi($rez) {
         $conn = $this->my_database->conn;
         $stmt = $conn->stmt_init();
@@ -361,6 +463,14 @@ class BusinessLogic extends CI_Model {
         return true;
     }
 
+    /**
+     * Vraca ime restorana.
+     * 
+     * Funkcija vraca ime restorana u kom radi ulogovani
+     * konobar. 
+     * 
+     * @return string Ime restorana u kom radi konobar
+     */
     public function getNameRestaurant() {
         $conn = $this->my_database->conn;
         $stmt = $conn->stmt_init();
@@ -394,9 +504,12 @@ class BusinessLogic extends CI_Model {
     public function getAllReservations($idUser) {
         $conn = $this->my_database->conn;
         $stmt = $conn->stmt_init();
-        $result = $conn->query("CALL sve_rezervacije(" . $idUser . ")");
 
-        return $result->fetch_all(MYSQLI_ASSOC);
+        $stmt->prepare("CALL sve_rezervacije(?)");
+        $stmt->bind_param("i", $idUser);
+        $stmt->execute();
+                      
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
     
     /**
