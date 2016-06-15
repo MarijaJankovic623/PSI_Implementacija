@@ -132,7 +132,21 @@ class BusinessLogic extends CI_Model {
 
         return false;
     }
-    
+    /**
+     * Rezervise sto za ljude koji nemaju rezervaciju.
+     * 
+     * Funkcija vrsti proveru da li postoji slobodan sto
+     * za odredjeni broj ljudi, za odredjeni period i za 
+     * odredjeni restoran. Ukoliko postoji slobodan sto
+     * funkcija vraca vrednost true, u suprotnom false.
+     * 
+     * @param integer $id ID Konobara 
+     * @param integer $brLjudi Broj ljudi za koji se pravi rezervacija
+     * @param string $vremeOd Vreme u koje pocinje rezervacija
+     * @param string $vremeDo Vreme u koje se zavrsava rezervacija
+     * @param array $korisnik Asocijativni niz elemenata za korisnika
+     * @return boolean Informacija o uspehu ili neuspehu rezervacije
+     */
     public function freeTables($id, $brLjudi, $vremeOd, $vremeDo, $korisnik) {
 
         $conn = $this->my_database->conn;
@@ -280,12 +294,35 @@ class BusinessLogic extends CI_Model {
         return $res;
     }
     
+    /**
+     * Vraca sve korisnike iz sistema.
+     * 
+     * Funkcija dohvata sve podatke o svim korisnicima iz
+     * baze i vraca ih kao niz asocijativnih nizova, gde
+     * se svaki asocijativni niz sastoji od elemenata 
+     * koji su kolone tabele.
+     * 
+     * @return array Niz Asocijativnih nizova koji su korisnici
+     * sa elementima tipa kolona
+     */
+    
     public function getAllUsers() {
         $conn = $this->my_database->conn;
         $result = $conn->query("SELECT * FROM korisnik");
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    /**
+     * Brise korisnika iz sistema.
+     * 
+     * Funkcija pretrazuje odredjenog korisnika u bazi
+     * i kada ga pronadje brise ga iz baze i iz sistema.
+     * Vraca vrednost true ako je uspesno uklonjen korisnik
+     * iz sistema, a vrednost false u suprotnom.
+     * 
+     * @param integer $idUser ID Korisnika kojeg uklanjamo
+     * @return boolean Informacija o uspehu ili neuspehu brisanja korisnika
+     */
     public function deleteUser($idUser) {
         $conn = $this->my_database->conn;
         $stmt = $conn->stmt_init();
@@ -305,7 +342,18 @@ class BusinessLogic extends CI_Model {
         }
     }
 
-    
+    /**
+     * Vraca sve rezervacije koje postoje za restoran.
+     * 
+     * Funckija pretrazuje i dohvata podatke o
+     * svim rezervacijama koje su napravljene
+     * za odredjeni restoran i vraca niz asocijativnih nizova 
+     * gde se svaki asocijativni niz sastoji od elemenata koji
+     * su kolone tabele. 
+     * 
+     * @return array Niz Asocijativnih nizova koji su rezervacije
+     * sa elementima tipa kolona.
+     */
 
     public function getReservations() {
 
@@ -345,6 +393,16 @@ class BusinessLogic extends CI_Model {
         return $data;
     }
 
+    /**
+     * Oslobadja sto koji je bio zauzet.
+     * 
+     * Funkcija oslobadja odredjeni sto, izmenom statusa
+     * te rezervacije. Funkcija vraca vraca vrednost true 
+     * prilikom uspeha.
+     * 
+     * @param integer $rez ID Rezervacije ciji se status menja
+     * @return boolean Informacija o uspehu oslobadjanja stola
+     */
     public function oslobodi($rez) {
         $conn = $this->my_database->conn;
         $stmt = $conn->stmt_init();
@@ -356,6 +414,14 @@ class BusinessLogic extends CI_Model {
         return true;
     }
 
+    /**
+     * Vraca ime restorana.
+     * 
+     * Funkcija vraca ime restorana u kom radi ulogovani
+     * konobar. 
+     * 
+     * @return string Ime restorana u kom radi konobar
+     */
     public function getNameRestaurant() {
         $conn = $this->my_database->conn;
         $stmt = $conn->stmt_init();

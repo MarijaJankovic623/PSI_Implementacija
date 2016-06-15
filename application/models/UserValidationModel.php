@@ -418,6 +418,17 @@ class UserValidationModel extends CI_Model {
         $stmt->execute();
     }
 
+    /**
+     * Proverava da li je registracija korisnika moguca.
+     * 
+     * Metoda proverava sve parametre vezane za registraciju korisnika i 
+     * proverava ih u skladu sa pravilima sistema. Ukoliko su provere prosle
+     * uspesno kreira se novi korisnik.
+     * 
+     * @param array $kor Asocijativni niz koji sadrzi sve podatke
+     * unete preko forme za registraciju korisnika
+     * @return boolean Informacija o uspehu ili neuspehu registracije
+     */
     public function validateCreateKorisnik($kor) {
         $this->load->library('form_validation');
         $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
@@ -463,6 +474,17 @@ class UserValidationModel extends CI_Model {
         }
     }
 
+    /**
+     * Proverava da li je registracija konobara moguca.
+     * 
+     * Metoda prihvata sve parametre vezane za registraciju admina i proverava ih 
+     * u skladu sa pravilima sistema. Ukoliko sve provere prodju uspesno, 
+     * kreira se novi konobar.
+     * 
+     * @param array $konobar Asocijativni niz koji sadrzi sve podatke
+     * unete preko forme za registraciju konobara
+     * @return boolean Informacija o uspehu ili neuspehu registracije
+     */
     public function validateCreateKonobar($konobar) {
         $this->load->library('form_validation');
         $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
@@ -521,6 +543,16 @@ class UserValidationModel extends CI_Model {
         }
     }
 
+    /**
+     * Proverava da li je registracija admina moguca.
+     * 
+     * Metoda prihvata sve parametre vezane za registraciju admina i proverava ih 
+     * u skladu sa pravilima sistema. Ukoliko sve provere prodju uspesno kreira se novi admin.
+     *
+     * @param array $admin Asocijativni niz koji sadrzi sve podatke 
+     * unete preko forme za registraciju admina
+     * @return boolean Informacija o uspehu ili neuspehu registracije
+     */
     public function validateCreateAdmin($admin) {
 
         $this->load->library('form_validation');
