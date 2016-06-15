@@ -71,6 +71,8 @@ class BusinessLogic extends CI_Model {
 
         $vremeOd = date("Y-m-d H:i", strtotime($vremeOd));
         $vremeDo = date("Y-m-d H:i", strtotime($vremeDo));
+        
+         if ($this->checkDate($vremeOd, $vremeDo)) {
 
         $conn = $this->my_database->conn;
         $stmt = $conn->stmt_init();
@@ -79,6 +81,8 @@ class BusinessLogic extends CI_Model {
         $stmt->execute();
 
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+         }
+         else return null;
     }
     
     /**
@@ -246,6 +250,7 @@ class BusinessLogic extends CI_Model {
             return false;
         }
         if (($date2 - $date1) > (60 * 60 * 6)) {
+           
             return false;
         }
 
