@@ -29,8 +29,6 @@ class UserValidationModel extends CI_Model {
             redirect("ErrorCtrl");
         }
     }
-    
- 
 
     public function checkSessionKorisnik() {
         $this->checkSession();
@@ -67,6 +65,7 @@ class UserValidationModel extends CI_Model {
             redirect("ErrorCtrl");
         }
     }
+
     /**
      * Logovanje korisnika.
      * 
@@ -104,8 +103,7 @@ class UserValidationModel extends CI_Model {
         }
     }
 
-    
-     /**
+    /**
      * Logovanje restorana.
      * 
      * Proverava da li restoran sa datim imenom i sifrom
@@ -141,8 +139,8 @@ class UserValidationModel extends CI_Model {
             return false;
         }
     }
-    
-     /**
+
+    /**
      * Logovanje konobara.
      * 
      * Proverava da li konobar sa datim imenom i sifrom
@@ -153,7 +151,6 @@ class UserValidationModel extends CI_Model {
      * @param string $lozinka Korisnicka lozinka
      * @return boolean Informacija o uspehu logovanja
      */
-
     public function loginKonobar($kime, $lozinka) {
         $conn = $this->my_database->conn;
         $stmt = $conn->stmt_init(); //dohvatanje iskaza
@@ -179,8 +176,8 @@ class UserValidationModel extends CI_Model {
             return false;
         }
     }
-    
-     /**
+
+    /**
      * Logovanje administratora.
      * 
      * Proverava da li administrator sa datim imenom i sifrom
@@ -191,7 +188,6 @@ class UserValidationModel extends CI_Model {
      * @param string $lozinka Korisnicka lozinka
      * @return boolean Informacija o uspehu logovanja
      */
-
     public function loginAdmin($kime, $lozinka) {
         $conn = $this->my_database->conn;
         $stmt = $conn->stmt_init();
@@ -217,7 +213,7 @@ class UserValidationModel extends CI_Model {
             return false;
         }
     }
-    
+
     /**
      * Proverava da li je moguce loginovanje bilo kog tipa korisnika
      * 
@@ -228,7 +224,6 @@ class UserValidationModel extends CI_Model {
      * @param string $lozinka korisnicka lozinka
      * @return boolean uspesnos mogucnosti logovanja
      */
-
     public function login($kime, $lozinka) {
 
 
@@ -244,16 +239,19 @@ class UserValidationModel extends CI_Model {
      * 
      * Metoda prihvata sve parametre vezane za registraciju restorana i proverava ih
      * shodno pravilima sistema. Ukoliko  sve provere prodju kreira se restoran sa odredjenom galerijom slika,
-     *i stolovima.(sto i slike su naglaseni jer oni nisu samo polja u restoranu vec i posebne tabele u bazi)
+     * i stolovima.(sto i slike su naglaseni jer oni nisu samo polja u restoranu vec i posebne tabele u bazi)
      * 
      * @param array $res asocijativni niz koji sadrzi sve podatke unete preko forme za registraciju restorana
      * @return boolean uspesnost registracije restorana
      */
-    
     public function validateCreateRestoran($res) {
+        $conn = $this->my_database->conn;
+        $conn->autocommit(FALSE);
+        $ok = true;
+
         $this->load->library('form_validation');
         $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
-        /* OZBILJNE PROVERE OVDE */
+
         $this->load->database();
         $this->form_validation->set_rules('kime', 'korisnicko ime', 'is_unique[Korisnik.KIme]|is_unique[Restoran.KIme]|is_unique[Konobar.KIme]|trim|required');
 
@@ -266,30 +264,40 @@ class UserValidationModel extends CI_Model {
         if ($this->form_validation->run() == FALSE) {
             return false;
         } else {
-            $conn = $this->my_database->conn;
             $stmt = $conn->stmt_init();
             $stmt->prepare("INSERT INTO restoran(KIme,Lozinka,ImeObjekta,
                             ImeVlasnika,PrezimeVlasnika,Email,Opis,Kuhinja,Opstina,KodKonobara)VALUES(?,?,?,?,?,?,?,?,?,?)");
             $stmt->bind_param("sssssssssi", $res['kime'], $res['lozinka'], $res['iobj'], $res['ivlasnika'], $res['pvlasnika'], $res['email'], $res['opis'], $res['kuhinje'], $res['opstina'], $res['kod']);
-            $stmt->execute();
+            $stmt->execute() ? null : $ok = false;
             $restoranId = $stmt->insert_id;
 
             if (is_numeric($res['sto2'])) {
                 for ($i = 1; $i <= $res['sto2']; $i++) {
-                    $this->createSto(2, $restoranId);
+                    $this->createSto(2, $restoranId) ? null : $ok = false;
                 }
             }
             if (is_numeric($res['sto4'])) {
                 for ($i = 1; $i <= $res['sto4']; $i++) {
-                    $this->createSto(4, $restoranId);
+                    $this->createSto(4, $restoranId) ? null : $ok = false;
                 }
             }
             if (is_numeric($res['sto6'])) {
                 for ($i = 1; $i <= $res['sto6']; $i++) {
-                    $this->createSto(6, $restoranId);
+                    $this->createSto(6, $restoranId) ? null : $ok = false;
                 }
             }
-            $this->uploadSlika($restoranId);
+            $this->uploadSlika($restoranId) ? null : $ok = false;
+
+            if ($ok == false) {
+                $conn->rollback();
+                 $conn->autocommit(TRUE);
+                return false;
+
+            } else {
+                $conn->commit();
+            }
+
+            $conn->autocommit(TRUE);
             return true;
         }
     }
@@ -394,13 +402,12 @@ class UserValidationModel extends CI_Model {
      * @param Integer $brojOsoba tip stola koji se kreira, koliko ljudi moze da sedne za isti
      * @param Integer $restoranId  id restorana kome sto pripada
      */
-    
     public function createSto($brojOsoba, $restoranId) {
         $conn = $this->my_database->conn;
         $stmt = $conn->stmt_init();
         $stmt->prepare("INSERT INTO sto(IDRestoranFK,BrojOsoba)VALUES(?,?)");
         $stmt->bind_param("ii", $restoranId, $brojOsoba);
-        $stmt->execute();
+        return $stmt->execute();
     }
 
     public function deleteSto($brojOsoba, $id) {
@@ -584,41 +591,42 @@ class UserValidationModel extends CI_Model {
             if (isset($_POST["submit"])) {
                 $check = getimagesize($_FILES["slike"]["tmp_name"][$i]);
                 if ($check !== false) {
-                    echo "File is an image - " . $check["mime"] . ".";
+
                     $uploadOk = 1;
                 } else {
-                    echo "File is not an image.";
+                    return "File is not an image.";
                     $uploadOk = 0;
                 }
             }
             // Check if file already exists
             if (file_exists($target_file)) {
-                echo "Sorry, file already exists.";
+                return "Sorry, file already exists.";
                 $uploadOk = 0;
             }
             // Check file size
             if ($_FILES["slike"]["size"][$i] > 500000) {
-                echo "Sorry, your file is too large.";
+                return "Sorry, your file is too large.";
                 $uploadOk = 0;
             }
             // Allow certain file formats
             if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
-                echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+                return "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
                 $uploadOk = 0;
             }
             // Check if $uploadOk is set to 0 by an error
             if ($uploadOk == 0) {
-                echo "Sorry, your file was not uploaded.";
+                return "Sorry, your file was not uploaded.";
                 // if everything is ok, try to upload file
             } else {
                 if (move_uploaded_file($_FILES["slike"]["tmp_name"][$i], $target_file)) {
-                    echo "The file " . basename($_FILES["slike"]["name"][$i]) . " has been uploaded.";
+
                     $this->insertSlika($id, $target_file);
                 } else {
-                    echo "Sorry, there was an error uploading your file.";
+                    return "Sorry, there was an error uploading your file.";
                 }
             }
         }
+        return true;
     }
 
     public function insertSlika($id, $target) {
