@@ -186,7 +186,17 @@ class BusinessLogic extends CI_Model {
         return false;
     }
     
-
+/**
+ * Dohvata sve podatke o konobarima jednog restorana
+ * 
+ * Metoda prima ID restorana i vraca za taj
+ * restoran sve konobare kao niz asocijativnih nizova,
+ * gde se svaki niz sastoji od elemenata koji su kolone
+ * tabele.
+ * 
+ * @param integer $id ID restorana
+ * @return array Niz asocijativnih nizova
+ */
 
     public function getAllWaiters($id) {
         $conn = $this->my_database->conn;
@@ -194,6 +204,17 @@ class BusinessLogic extends CI_Model {
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    /**
+     * Brise konobara odredjenog restorana
+     * 
+     * Metoda prima ID konobara i brise tog konobara iz baze.
+     * Vraca 'true' ako je uspesno izbrisan, a 'false'
+     * ako nije.
+     * 
+     * @param integer $id ID konobar
+     * @return boolean Uspeh/neuspeh
+     */
+    
     public function deleteWaiter($id) {
         $conn = $this->my_database->conn;
         $stmt = $conn->stmt_init();
@@ -205,7 +226,7 @@ class BusinessLogic extends CI_Model {
         $test->prepare("SELECT * FROM konobar WHERE IDKonobar=?");
         $test->bind_param("i", $id);
         $test->execute();
-
+        
         if ($test->get_result()->num_rows > 0) {
             return false;
         } else {
@@ -213,6 +234,20 @@ class BusinessLogic extends CI_Model {
         }
     }
 
+    /**
+     * Dohvata broj stolova koji restoran ima za neku 
+     * kolicinu osoba
+     * 
+     * Metoda prima ID restorana i broj osoba koji moze da sedne 
+     * za neki sto. Povratna vrednost je broj redova koje
+     * baza pronadje da odgovaraju parametrima. To onda znaci
+     * da restoran ima povratni broj stolova za trazeni broj ljudi.
+     * 
+     * @param integer $id ID restorana
+     * @param integer $n broj ljudi koji moze da sedne za sto
+     * @return integer broj nizova u tabeli
+     */
+    
     public function getNumberOfTables($id, $n) {
         $conn = $this->my_database->conn;
         $stmt = $conn->stmt_init();
@@ -256,7 +291,16 @@ class BusinessLogic extends CI_Model {
     }
     
     
-    
+    /**
+     * Dohvata sve podatke o nekom korisniku
+     * 
+     * Metoda prima ID nekog od cetiri moguca korisnika i 
+     * dohvata njegove podatke u obliku asocijativnog niza,
+     * gde svaki element niza predstavlja jednu kolonu.
+     * 
+     * @param integer $id nekog od 4 vrste korisnika
+     * @return array asocijativni niz njegovih kolona
+     */
     
     public function getUser($id) {
         $conn = $this->my_database->conn;

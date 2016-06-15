@@ -302,6 +302,18 @@ class UserValidationModel extends CI_Model {
         }
     }
 
+    /**
+     * Vrsi cuvanje napravljenih izmena na profilu restorana
+     * 
+     * Metoda prima sve parametre vezane za izmenu profila restorana
+     * i vrsi provere nad njima shodno pravilima sistema. Ukoliko sve
+     * provere prodju, pamte se promene u bazi. Ukoliko ne prodju, izmene
+     * nece biti upamcene i vraca se poruka o neuspehu.
+     * 
+     * @param array $restoran asocijativni niz koji sadrzi sve podatke o restoranu koji su uneti u formu
+     * @param integer $id ID restorana
+     * @return boolean Uspeh/neuspeh
+     */
     public function updateRestaurant($restoran, $id) {
         $this->load->library('form_validation');
         $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
@@ -336,6 +348,18 @@ class UserValidationModel extends CI_Model {
         }
     }
 
+    /**
+     * Pravi nove stolove za dvoje, ili brise stare, prilikom update-a
+     * profila restorana
+     * 
+     * Metoda prima asocijativni niz svih podataka o restoranu 
+     * cija se izmena vrsi i, na osnovu novog broja stolova koji je
+     * za tu kolicinu ljudi, dodaju se novi stolovi u bazu, ili se
+     * brise razlika prethodnih i novih.
+     * 
+     * @param array $restoran asocijativni niz podataka o restoranu
+     * @param integer $id ID restorana
+     */
     public function TableForTwo($restoran, $id) {
         $conn = $this->my_database->conn;
         $stmt = $conn->stmt_init();
@@ -355,6 +379,18 @@ class UserValidationModel extends CI_Model {
         }
     }
 
+    /**
+     * Dodaje nove stolove za cetvoro, ili brise stare, prilikom
+     * update-a profila restorana
+     * 
+     * Metoda prima asocijativni niz svih podataka o restoranu 
+     * cija se izmena vrsi i, na osnovu novog broja stolova koji je
+     * za tu kolicinu ljudi, dodaju se novi stolovi u bazu, ili se
+     * brise razlika prethodnih i novih.
+     * 
+     * @param array $restoran asocijativni niz podataka o restoranu
+     * @param integer $id ID restorana
+     */
     public function TableForFour($restoran, $id) {
         $conn = $this->my_database->conn;
         $stmt = $conn->stmt_init();
@@ -374,6 +410,18 @@ class UserValidationModel extends CI_Model {
         }
     }
 
+    /**
+     * Dodaje nove stolove za sestoro, ili brise stare, prilikom
+     * update-a profila restorana
+     * 
+     * Metoda prima asocijativni niz svih podataka o restoranu 
+     * cija se izmena vrsi i, na osnovu novog broja stolova koji je
+     * za tu kolicinu ljudi, dodaju se novi stolovi u bazu, ili se
+     * brise razlika prethodnih i novih.
+     * 
+     * @param array $restoran asocijativni niz podataka o restoranu
+     * @param integer $id ID restorana
+     */
     public function TableForSix($restoran, $id) {
         $conn = $this->my_database->conn;
         $stmt = $conn->stmt_init();
@@ -410,6 +458,16 @@ class UserValidationModel extends CI_Model {
         return $stmt->execute();
     }
 
+    /**
+     * Funkcija koja brise sto za odredjeni restoran
+     * 
+     * Metoda prima broj osoba i id restorana, na osnovu kojih
+     * povezuje koji sto u bazi treba da izbrise. Vrsi brisanje reda
+     * iz baze. 
+     * 
+     * @param integer $brojOsoba koliko ljudi moze da sedne za sto
+     * @param integer $id ID restorana kome taj sto pripada
+     */
     public function deleteSto($brojOsoba, $id) {
         $conn = $this->my_database->conn;
         $stmt = $conn->stmt_init();
@@ -441,6 +499,18 @@ class UserValidationModel extends CI_Model {
         }
     }
 
+    /**
+     * Vrsi cuvanje napravljenih izmena na profilu korisnika
+     * 
+     * Metoda prima sve parametre vezane za izmenu profila korisnika
+     * i vrsi provere nad njima shodno pravilima sistema. Ukoliko sve
+     * provere prodju, pamte se promene u bazi. Ukoliko ne prodju, izmene
+     * nece biti upamcene i vraca se poruka o neuspehu.
+     * 
+     * @param array $korisnik asocijativni niz podataka o korisniku koji se prosledjuju kroz formu
+     * @param integer $id ID korisnika
+     * @return boolean Uspeh/neuspeh
+     */
     public function updateUser($korisnik, $id) {
         $this->load->library('form_validation');
         $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
@@ -500,6 +570,18 @@ class UserValidationModel extends CI_Model {
         }
     }
 
+    /**
+     * Vrsi cuvanje napravljenih izmena na profilu konobara
+     * 
+     * Metoda prima sve parametre vezane za izmenu profila konobara
+     * i vrsi provere nad njima shodno pravilima sistema. Ukoliko sve
+     * provere prodju, pamte se promene u bazi. Ukoliko ne prodju, izmene
+     * nece biti upamcene i vraca se poruka o neuspehu.
+     * 
+     * @param array $konobar asocijativni niz podataka o konobaru koji se prosledjuju iz forme
+     * @param integer $id ID konobar
+     * @return boolean Uspeh/neuspeh
+     */
     public function updateWaiter($konobar, $id) {
         $this->load->library('form_validation');
         $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
@@ -554,6 +636,18 @@ class UserValidationModel extends CI_Model {
         }
     }
 
+    /**
+     * Vrsi cuvanje napravljenih izmena na profilu admina
+     * 
+     * Metoda prima sve parametre vezane za izmenu profila admina
+     * i vrsi provere nad njima shodno pravilima sistema. Ukoliko sve
+     * provere prodju, pamte se promene u bazi. Ukoliko ne prodju, izmene
+     * nece biti upamcene i vraca se poruka o neuspehu.
+     * 
+     * @param array $admin asocijativni niz podataka o adminu koji se prosledjuju kroz formu
+     * @param integer $id ID admin
+     * @return boolean Uspeh/neuspeh
+     */
     public function updateAdmin($admin, $id) {
         $this->load->library('form_validation');
         $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
