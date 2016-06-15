@@ -1,6 +1,6 @@
 <?php
 
-class RezervacijaGradeCancel_test extends TestCase {
+class RezervacijaGradeCancelGetAll_test extends TestCase {
     /*
      * poziva se jednom za svaku test metodu 
      */
@@ -18,7 +18,7 @@ class RezervacijaGradeCancel_test extends TestCase {
         $conn->query("INSERT INTO sto(IDSto,IDRestoranFK,BrojOsoba)VALUES(999,999,2)") ? null : $ok = false;
         $conn->query("INSERT INTO rezervacija(IDRezervacija,IDStoFK,IDKorisnikFK,Status) VALUES(999,999,999,'Nadolazeca')") ? null : $ok = false;
         $conn->query("INSERT INTO rezervacija(IDRezervacija,IDStoFK,IDKorisnikFK,Status) VALUES(998,999,999,'Nadolazeca')") ? null : $ok = false;
-        
+
         if ($ok == false) {
             $conn->rollback();
 
@@ -36,7 +36,7 @@ class RezervacijaGradeCancel_test extends TestCase {
      */
     public function tearDown() {
         $conn = $this->CI->my_database->conn;
-
+       
         $conn->query("DELETE FROM rezervacija WHERE IDRezervacija=998;");
         $conn->query("DELETE FROM rezervacija WHERE IDRezervacija=999;");
         $conn->query("DELETE FROM korisnik WHERE IDKorisnik=999;");
@@ -79,18 +79,27 @@ class RezervacijaGradeCancel_test extends TestCase {
             "ocena" => 10
         );
         $this->CI->BusinessLogic->rezervacijaGrade($rezervacija);
-        
+
         $rezervacija = array(
             "idrezervacija" => 999,
             "ocena" => 8
         );
         $this->CI->BusinessLogic->rezervacijaGrade($rezervacija);
-                       
+
         $conn = $this->CI->my_database->conn;
         $rez = $conn->query("SELECT * FROM restoran WHERE IDRestoran = 999");
         $rez = $rez->fetch_assoc();
 
         $this->assertEquals(9, $rez['Ocena'], "Doslo je do greske pri azuriranju srednje ocene restorana.");
+    }
+
+    public function testRezervacijaGetAll() {
+        $this->CI->load->model('BusinessLogic');
+
+        $rez = $this->CI->BusinessLogic->getAllReservations(999);
+
+        $this->assertEquals(998, $rez[0]['IDRezervacija'], "Doslo je do greske pri dohvatanju rezervacije.");
+        $this->assertEquals(999, $rez[1]['IDRezervacija'], "Doslo je do greske pri dohvatanju rezervacije.");
     }
 
 }
