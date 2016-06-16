@@ -218,8 +218,12 @@ class BusinessLogic extends CI_Model {
 
     public function getAllWaiters($id) {
         $conn = $this->my_database->conn;
-        $result = $conn->query("SELECT * FROM konobar WHERE IDRestoranFK = " . $id);
-        return $result->fetch_all(MYSQLI_ASSOC);
+        $stmt = $conn->stmt_init();
+        $stmt->prepare("SELECT * FROM konobar WHERE IDRestoranFK = ? ");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        
     }
 
     /**
