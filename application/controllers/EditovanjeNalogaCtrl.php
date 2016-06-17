@@ -129,6 +129,8 @@ class EditovanjeNalogaCtrl extends CI_Controller {
                 $this->load->view('ProfilKonobaraView', $data);
             }
             else {
+                $this->load->model('BusinessLogic');
+                $data['user']=$this->BusinessLogic->getUser($this->session->userdata('userid'));
                 $this->load->view('EditNalogaKonobarView', $data);
             }
         }
@@ -148,6 +150,8 @@ class EditovanjeNalogaCtrl extends CI_Controller {
                 $this->load->view('ProfilAdminaView', $data);
             }
             else {
+                $this->load->model('BusinessLogic');
+                $data['user']=$this->BusinessLogic->getUser($this->session->userdata('userid'));
                 $this->load->view('EditNalogaAdminView', $data);
             }
         }

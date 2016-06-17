@@ -257,8 +257,8 @@ class UserValidationModel extends CI_Model {
 
         $this->form_validation->set_rules('kod', 'kod za registraciju konobara', 'is_unique[Restoran.KodKonobara]|trim|required|min_length[3]|max_length[10]');
         $this->form_validation->set_rules('lozinka', 'lozinka', 'trim|required|min_length[4]|max_length[49]');
-        $this->form_validation->set_rules('iobj', 'ime objekta', 'required|trim|min_length[4]|max_length[49]');
-        $this->form_validation->set_rules('ivlasnika', 'ime vlasnika', 'required|trim|min_length[4]|max_length[49]');
+        $this->form_validation->set_rules('iobj', 'ime objekta', 'required|trim|min_length[3]|max_length[49]');
+        $this->form_validation->set_rules('ivlasnika', 'ime vlasnika', 'required|trim|min_length[3]|max_length[49]');
         $this->form_validation->set_rules('pvlasnika', 'prezime vlasnika', 'required|trim|min_length[4]|max_length[49]');
         $this->form_validation->set_rules('email', 'email', 'required|valid_email|trim|min_length[4]|max_length[49]');
         $this->form_validation->set_rules('kuhinje', 'kuhinje', 'required|trim|min_length[4]|max_length[999]');
@@ -323,10 +323,11 @@ class UserValidationModel extends CI_Model {
         $this->load->database();
 
         $this->form_validation->set_rules('lozinka', 'lozinka', 'trim|required|min_length[4]|max_length[49]');
-        $this->form_validation->set_rules('iobj', 'ime objekta', 'required|trim|min_length[4]|max_length[49]');
-        $this->form_validation->set_rules('ivlasnika', 'ime vlasnika', 'required|trim|min_length[4]|max_length[49]');
+        $this->form_validation->set_rules('iobj', 'ime objekta', 'required|trim|min_length[3]|max_length[49]');
+        $this->form_validation->set_rules('ivlasnika', 'ime vlasnika', 'required|trim|min_length[3]|max_length[49]');
         $this->form_validation->set_rules('pvlasnika', 'prezime vlasnika', 'required|trim|min_length[4]|max_length[49]');
         $this->form_validation->set_rules('email', 'email', 'required|valid_email|trim|min_length[4]|max_length[49]');
+        $this->form_validation->set_rules('kod', 'kod za registraciju konobara', 'is_unique[Restoran.KodKonobara]|trim|required|min_length[3]|max_length[10]');
         $this->form_validation->set_rules('kuhinje', 'kuhinje', 'required|trim|min_length[4]|max_length[999]');
         $this->form_validation->set_rules('opis', 'opis restorana', 'required|trim|min_length[4]|max_length[2999]');
 
@@ -499,7 +500,7 @@ class UserValidationModel extends CI_Model {
         $this->load->database();
         $this->form_validation->set_rules('username', 'korisnicko ime', 'is_unique[Korisnik.KIme]|is_unique[Restoran.KIme]|is_unique[Konobar.KIme]|is_unique[Admin.KIme]|trim|required|min_length[4]|max_length[49]');
         $this->form_validation->set_rules('password', 'lozinka', 'trim|required|min_length[4]|max_length[49]');
-        $this->form_validation->set_rules('name', 'ime vlasnika', 'trim|required|min_length[4]|max_length[49]');
+        $this->form_validation->set_rules('name', 'ime vlasnika', 'trim|required|min_length[3]|max_length[49]');
         $this->form_validation->set_rules('lastname', 'prezime vlasnika', 'trim|required|min_length[4]|max_length[49]');
         $this->form_validation->set_rules('email', 'email', 'trim|required|min_length[4]|max_length[49]|valid_email');
 
@@ -533,7 +534,7 @@ class UserValidationModel extends CI_Model {
 
         $this->load->database();
         $this->form_validation->set_rules('password', 'lozinka', 'trim|required|min_length[4]|max_length[49]');
-        $this->form_validation->set_rules('name', 'ime vlasnika', 'trim|required|min_length[4]|max_length[49]');
+        $this->form_validation->set_rules('name', 'ime vlasnika', 'trim|required|min_length[3]|max_length[49]');
         $this->form_validation->set_rules('lastname', 'prezime vlasnika', 'trim|required|min_length[4]|max_length[49]');
         $this->form_validation->set_rules('email', 'email', 'trim|required|min_length[4]|max_length[49]|valid_email');
 
@@ -567,7 +568,7 @@ class UserValidationModel extends CI_Model {
         $this->load->database();
         $this->form_validation->set_rules('username', 'korisnicko ime', 'is_unique[Korisnik.KIme]|is_unique[Restoran.KIme]|is_unique[Konobar.KIme]|is_unique[Admin.KIme]|min_length[4]|max_length[49]|trim|required');
         $this->form_validation->set_rules('password', 'lozinka', 'trim|required|min_length[4]|max_length[49]');
-        $this->form_validation->set_rules('name', 'ime vlasnika', 'trim|required|min_length[4]|max_length[49]');
+        $this->form_validation->set_rules('name', 'ime vlasnika', 'trim|required|min_length[3]|max_length[49]');
         $this->form_validation->set_rules('lastname', 'prezime vlasnika', 'trim|required|min_length[4]|max_length[49]');
         $this->form_validation->set_rules('email', 'email', 'trim|required|min_length[4]|max_length[49]|valid_email');
         $this->form_validation->set_rules('kod', 'kod konobara', 'required|trim|min_length[3]|max_length[10]');
@@ -614,7 +615,7 @@ class UserValidationModel extends CI_Model {
         $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
         $this->load->database();
         $this->form_validation->set_rules('password', 'lozinka', 'trim|required|min_length[4]|max_length[49]');
-        $this->form_validation->set_rules('name', 'ime vlasnika', 'trim|required|min_length[4]|max_length[49]');
+        $this->form_validation->set_rules('name', 'ime vlasnika', 'trim|required|min_length[3]|max_length[49]');
         $this->form_validation->set_rules('lastname', 'prezime vlasnika', 'trim|required|min_length[4]|max_length[49]');
         $this->form_validation->set_rules('email', 'email', 'trim|required|min_length[4]|max_length[49]|valid_email');
 
@@ -648,7 +649,7 @@ class UserValidationModel extends CI_Model {
 
         $this->form_validation->set_rules('username', 'korisnicko ime', 'is_unique[Korisnik.KIme]|is_unique[Restoran.KIme]|is_unique[Konobar.KIme]|is_unique[Admin.KIme]|trim|required|min_length[4]|max_length[49]');
         $this->form_validation->set_rules('password', 'lozinka', 'trim|required|min_length[4]|max_length[49]');
-        $this->form_validation->set_rules('name', 'ime admina', 'trim|required|min_length[4]|max_length[49]');
+        $this->form_validation->set_rules('name', 'ime admina', 'trim|required|min_length[3]|max_length[49]');
         $this->form_validation->set_rules('lastname', 'prezime admina', 'trim|required|min_length[4]|max_length[49]');
         $this->form_validation->set_rules('email', 'email', 'trim|required|min_length[4]|max_length[49]|valid_email');
         $this->form_validation->set_rules('code', 'kod za admina', 'required|trim|min_length[3]|max_length[10]');
@@ -691,7 +692,7 @@ class UserValidationModel extends CI_Model {
 
         $this->load->database();
         $this->form_validation->set_rules('password', 'lozinka', 'trim|required|min_length[4]|max_length[49]');
-        $this->form_validation->set_rules('name', 'ime admina', 'trim|required|min_length[4]|max_length[49]');
+        $this->form_validation->set_rules('name', 'ime admina', 'trim|required|min_length[3]|max_length[49]');
         $this->form_validation->set_rules('lastname', 'prezime admina', 'trim|required|min_length[4]|max_length[49]');
         $this->form_validation->set_rules('email', 'email', 'trim|required|min_length[4]|max_length[49]|valid_email');
 
