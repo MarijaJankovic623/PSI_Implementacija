@@ -255,6 +255,7 @@ class UserValidationModel extends CI_Model {
         $this->load->database();
         $this->form_validation->set_rules('kime', 'korisnicko ime', 'is_unique[Korisnik.KIme]|is_unique[Restoran.KIme]|is_unique[Konobar.KIme]|trim|required');
 
+        $this->form_validation->set_rules('kod', 'kod za registraciju konobara', 'is_unique[Restoran.KodKonobara]|trim|required');
         $this->form_validation->set_rules('lozinka', 'lozinka', 'trim|required|min_length[4]|max_length[32]');
         $this->form_validation->set_rules('iobj', 'ime objekta', 'required');
         $this->form_validation->set_rules('ivlasnika', 'ime vlasnika', 'required|max_length[15]');
@@ -286,7 +287,7 @@ class UserValidationModel extends CI_Model {
                     $this->createSto(6, $restoranId) ? null : $ok = false;
                 }
             }
-            $this->uploadSlika($restoranId) ? null : $ok = false;
+           if(!( $this->uploadSlika($restoranId) == true)) $ok = false;
 
             if ($ok == false) {
                 $conn->rollback();
