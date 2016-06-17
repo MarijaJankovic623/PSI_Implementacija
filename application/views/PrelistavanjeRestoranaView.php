@@ -128,8 +128,7 @@
                                         <font size = '5'>Odaberite opštinu:</font>
 
                                         <select class="form-group"  name="opstina" style="background-color: hsla(35, 8%, 14%, 0.96); color: hsla(35, 84%, 51%, 0.96);">
-                                            <option selected>Sve opštine</option>
-                                            <option>Čukarica</option>
+                                            <option selected>Čukarica</option>
                                             <option>Novi Beograd</option>
                                             <option>Palilula</option>
                                             <option>Rakovica</option>

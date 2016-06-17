@@ -150,8 +150,7 @@
                                             <font size = '5'>Odaberite opštinu:</font>
 
                                             <select name = "opstina" class="form-group"  style="background-color: hsla(35, 8%, 14%, 0.96); color: hsla(35, 84%, 51%, 0.96);">
-                                                <option selected>Sve opštine</option>
-                                                <option >Čukarica</option>
+                                                <option selected >Čukarica</option>
                                                 <option>Novi Beograd</option>
                                                 <option>Palilula</option>
                                                 <option>Rakovica</option>
@@ -176,7 +175,7 @@
 
                                 </div>
                                 <label class="block" style="display:inline-block;">Dodajte slike</label></br>
-                                <input type="file" class="btn btn-file"  name="slike[]" multiple/></br>
+                                <input type="file" class="btn-file"  name="slike[]" multiple/></br>
                                 </br>
                                 <button type="submit" class="btn btn-primary" >Potvrdi</button>
                             </div>           

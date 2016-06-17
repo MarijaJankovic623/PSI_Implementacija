@@ -82,7 +82,7 @@ class BusinessLogic extends CI_Model {
 
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
          }
-         else return null;
+         else return Array();
     }
     
     /**
