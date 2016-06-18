@@ -141,7 +141,7 @@ padding: 8px 12px;
 }
 .form-control {
 	border: none;
-	padding: 22px 4px;
+	padding: 9px 4px;
 	outline: none;
 	color: #5A5A5A;
 	margin: 0;
@@ -153,6 +153,7 @@ padding: 8px 12px;
 	font-size: inherit;
 	border-radius: 0px !important;
 	width: 99%;
+        height: 44px;
 }
 .button-outline {
 	-webkit-font-smoothing: antialiased;
