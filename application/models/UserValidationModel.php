@@ -327,7 +327,7 @@ class UserValidationModel extends CI_Model {
         $this->form_validation->set_rules('ivlasnika', 'ime vlasnika', 'required|trim|min_length[3]|max_length[49]');
         $this->form_validation->set_rules('pvlasnika', 'prezime vlasnika', 'required|trim|min_length[4]|max_length[49]');
         $this->form_validation->set_rules('email', 'email', 'required|valid_email|trim|min_length[4]|max_length[49]');
-        $this->form_validation->set_rules('kod', 'kod za registraciju konobara', 'is_unique[Restoran.KodKonobara]|trim|required|min_length[3]|max_length[10]');
+       
         $this->form_validation->set_rules('kuhinje', 'kuhinje', 'required|trim|min_length[4]|max_length[999]');
         $this->form_validation->set_rules('opis', 'opis restorana', 'required|trim|min_length[4]|max_length[2999]');
 
@@ -336,8 +336,8 @@ class UserValidationModel extends CI_Model {
         } else {
             $conn = $this->my_database->conn;
             $stmt = $conn->stmt_init();
-            $stmt->prepare("UPDATE restoran SET Lozinka=?,ImeObjekta=?,ImeVlasnika=?,PrezimeVlasnika=?,Email=?,Opis=?,Kuhinja=?,Opstina=?,KodKonobara=? WHERE IDRestoran=?");
-            $stmt->bind_param("ssssssssii", $restoran['lozinka'], $restoran['iobj'], $restoran['ivlasnika'], $restoran['pvlasnika'], $restoran['email'], $restoran['opis'], $restoran['kuhinje'], $restoran['opstina'], $restoran['kod'], $id);
+            $stmt->prepare("UPDATE restoran SET Lozinka=?,ImeObjekta=?,ImeVlasnika=?,PrezimeVlasnika=?,Email=?,Opis=?,Kuhinja=?,Opstina=? WHERE IDRestoran=?");
+            $stmt->bind_param("ssssssssi", $restoran['lozinka'], $restoran['iobj'], $restoran['ivlasnika'], $restoran['pvlasnika'], $restoran['email'], $restoran['opis'], $restoran['kuhinje'], $restoran['opstina'], $id);
             $stmt->execute();
             $restoranId = $stmt->insert_id;
 

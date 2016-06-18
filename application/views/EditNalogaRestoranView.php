@@ -119,7 +119,7 @@
                                 <input type="text" name ="email" class="form-control"  placeholder="Unesite Vas email ovde" value = "<?php print $user['Email']; ?>">
                                 <label for="">Kod za registraciju konobara</label>
                                 <?php echo form_error('kod'); ?>
-                                <input type="text" name ="kod" class="form-control"  placeholder="Unesite Vas kod za konobare ovde" value = "<?php print $user['KodKonobara']; ?>" >
+                                <input type="text" name ="kod" class="form-control"  placeholder="Unesite Vas kod za konobare ovde" value = "<?php print $user['KodKonobara']; ?>"  disabled="">
                                 <label for="">Opis kuhinja</label>
                                 <?php echo form_error('kuhinje'); ?>
                                 <input type="text" name = "kuhinje" class="form-control"  placeholder="Unesite nazive kuhinja koje Vaš restoran nudi" value = "<?php print $user['Kuhinja']; ?>">
