@@ -110,7 +110,7 @@
                                     <div class="form-group">
                                         &nbsp;
                                         <label class="control-label">Unesite broj ljudi:</label><br />
-                                        <input type="number" name="brLjudi" />  
+                                        <input type="number" min="1" value="1" name="brLjudi" />  
                                     </div>
                                 </div>
                             </div>

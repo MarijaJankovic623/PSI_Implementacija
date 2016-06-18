@@ -116,7 +116,7 @@
                                 <input type="hidden" id="dtp_input1" value="" /><br/>
                             </div>
                             <label class="control-label">Unesite broj ljudi:</label><br />
-                            <input type="number" name="brLjudi" />
+                            <input type="number" min="1" value="1" name="brLjudi" />
                             <div>
                                 &nbsp;&nbsp;&nbsp;
                             </div>

@@ -16,5 +16,10 @@ class ErrorCtrl extends CI_Controller {
     public function index() {
         $this->load->view("errors/HackError");
     }
+    
+    public function errorBase() {
+        $this->load->view("errors/DatabaseError");
+    }
+
 
 }
