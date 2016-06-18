@@ -51,7 +51,9 @@ class User_test extends TestCase {
     public function testGetAllUsers() {
         $this->CI->load->model('BusinessLogic');
         $res=$this->CI->BusinessLogic->getAllUsers();
+        $res=array_reverse($res);
+       // var_dump($res);
+        $this->assertEquals(2001, $res[0]['IDKorisnik'], "Doslo je do greske u dohvatanju korisnika");
         $this->assertEquals(2000, $res[1]['IDKorisnik'], "Doslo je do greske u dohvatanju korisnika");
-        $this->assertEquals(2001, $res[2]['IDKorisnik'], "Doslo je do greske u dohvatanju korisnika");
     }
 }

@@ -97,7 +97,7 @@ class RezervacijaGradeCancelGetAll_test extends TestCase {
         $this->CI->load->model('BusinessLogic');
 
         $rez = $this->CI->BusinessLogic->getAllReservations(999);
-
+        //$rez=array_reverse($rez);
         $this->assertEquals(998, $rez[0]['IDRezervacija'], "Doslo je do greske pri dohvatanju rezervacije.");
         $this->assertEquals(999, $rez[1]['IDRezervacija'], "Doslo je do greske pri dohvatanju rezervacije.");
     }
