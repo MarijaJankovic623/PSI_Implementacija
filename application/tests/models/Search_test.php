@@ -78,7 +78,7 @@ class Search_test extends TestCase {
         $this->CI->load->model('BusinessLogic');
         $rez = $this->CI->BusinessLogic->getCriteriaRestaurants('Novi Beograd', 2, '2016-05-01 12:00', '2016-05-01 14:00');
 
-        $this->assertNull($rez, "Doslo je do greske pri vracanju restorana sa losim vremenom");
+        $this->assertEquals(Array(),$rez, "Doslo je do greske pri vracanju restorana sa losim vremenom");
     }
 
     /**
@@ -92,7 +92,7 @@ class Search_test extends TestCase {
 
         $this->CI->load->model('BusinessLogic');
         $rez = $this->CI->BusinessLogic->getCriteriaRestaurants('Novi Beograd', 2, '2016-10-01 12:00', '2016-09-01 14:00');
-        $this->assertNull($rez, "Doslo je do greske pri vracanju restorana sa losim vremenom");
+        $this->assertEquals(Array(),$rez, "Doslo je do greske pri vracanju restorana sa losim vremenom");
     }
 
     /**
